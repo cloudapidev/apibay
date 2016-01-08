@@ -1,0 +1,6 @@
+name,type,date_create,description,icon,background,no_user
+Whatsapp,Social,18/12/2015,development,fa-whatsapp,bg-green,"1,655,222"
+Amazon,E-Commerce,19/12/2015,staging,fa-amazon,bg-orange,"300,000,000"
+Uber,Transportation,20/12/2015,live,fa-car,bg-red,"689,999,666"
+SG Bus,Non profit,21/12/2015,testing,fa-bus,bg-blue,"512,000,000"
+AirTel,Telecommunication,22/12/2015,live,fa-sort-amount-asc,bg-maroon,"2,003"
