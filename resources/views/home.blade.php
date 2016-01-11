@@ -14,7 +14,7 @@
                 <div class="icon">
                   <i class="fa fa-phone-square"></i>
                 </div>
-                <a href="number-listing.php" class="small-box-footer" style="padding:10px;">Enter to manage <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="{{ url("numbers") }}" class="small-box-footer" style="padding:10px;">Enter to manage <i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div><!-- ./col -->
             <div class="col-lg-4 col-xs-6">
