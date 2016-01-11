@@ -72,13 +72,12 @@ if(!function_exists(openCSV))
 			
 			if(count($rowsWithKeys))
 	    return $rowsWithKeys;
-			echo "122";
 	}
 }
 if(!function_exists(getData))
 {
-	function getData($database,$id){
-		$data = openCSV($database,$id);
+	function getData($database,$id=1){
+		$data = openCSV($database);
 		return $data[$id];
 	
 }

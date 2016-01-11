@@ -34,6 +34,9 @@ Route::group(['middleware' => ['web']], function () {
 
 	Route::resource('numbers/buy', 'NumbersController@buy');
 	Route::resource('numbers', 'NumbersController');
+	
+	Route::get('users','UsersController@index');
+	Route::resource('users/add','UsersController@create');
 
 	Route::resource('documentation', 'DocumentationController');
 
