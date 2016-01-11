@@ -37,7 +37,7 @@
 				
         <p class="login-box-msg">Sign in to start your session</p>
         <form action="{{ url("login") }}" method="post">
-
+          <input type="hidden" name="_token" value="{{ csrf_token() }}">
           <div class="form-group has-feedback">
             <input type="email" class="form-control" placeholder="Email">
             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>

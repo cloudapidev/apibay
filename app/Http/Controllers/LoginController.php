@@ -32,10 +32,10 @@ class LoginController extends Controller {
 	//store
 	public function store()
 	{
-		Session::set('variableName', "aaa");
+		//Session::set('variableName', "aaa");
 		
 
-        return redirect()->action('HomeController@index')->with("success","value");
+        return redirect()->action('HomeController@index')->with("success","You have logged in succcessfully.");
 	}
 
 }
