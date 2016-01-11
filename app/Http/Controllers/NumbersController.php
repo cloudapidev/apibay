@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Http;
 
 class NumbersController extends Controller
 {
@@ -16,12 +17,13 @@ class NumbersController extends Controller
      */
     public function index()
     {
-        //
+     	$listData=openCSV("number-listing");
         return view("number/listing",array(
                 "active"=>"menu_number , menu_number_listing",
-                "pagetitle"=>"Numbers Listing"
+                "pagetitle"=>"Numbers Listing",
+        		'listDatas'=>$listData
             )
-        );
+        ); 
     }
 
     /**
@@ -108,5 +110,5 @@ class NumbersController extends Controller
         );
     }
 
-
+	
 }

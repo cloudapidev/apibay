@@ -1,6 +1,12 @@
 <?php
-function populate($formName,$data=false)
+function testwy()
 {
+	echo "testwy";
+}
+if(!function_exists(populate))
+{
+	function populate($formName,$data=false)
+	{
 			$data = (array)json_decode($data);
 			
 
@@ -38,37 +44,42 @@ function populate($formName,$data=false)
 		
 					echo $buff;
 				}
-};
+	};
 
-
-function openCSV($database){
-	//echo public_path();
-	$file = __DIR__."/database/{$database}.csv";
-	 $csv = array_map('str_getcsv', file($file));
-    $headers = $csv[0];
-    unset($csv[0]);
-    $rowsWithKeys = array();
-    foreach ($csv as $row) {
-        $newRow = array();
-				$id = "";
-        foreach ($headers as $k => $key) {
-
-						if($k == "id")
-							$id = $row[$k];
-							
-            $newRow[$key] = $row[$k];
-        }
-				
-        $rowsWithKeys[$id] = $newRow;
-    }
-		
-		if(count($rowsWithKeys))
-    return $rowsWithKeys;
-	}
-
-
-function getData($database,$id){
-	$data = openCSV($database,$id);
-	return $data[$id];
+}
+if(!function_exists(openCSV))
+{
+	function openCSV($database){
+// 		echo public_path();
+	 	$file = app_path()."/Http/database/{$database}.csv";
+		 $csv = array_map('str_getcsv', file($file));
+	    $headers = $csv[0];
+	    unset($csv[0]);
+	    $rowsWithKeys = array();
+	    foreach ($csv as $row) {
+	        $newRow = array();
+					$id = "";
+	        foreach ($headers as $k => $key) {
 	
+							if($k == "id")
+								$id = $row[$k];
+								
+	            $newRow[$key] = $row[$k];
+	        }
+					
+	        $rowsWithKeys[$id] = $newRow;
+	    }
+			
+			if(count($rowsWithKeys))
+	    return $rowsWithKeys;
+			echo "122";
+	}
+}
+if(!function_exists(getData))
+{
+	function getData($database,$id){
+		$data = openCSV($database,$id);
+		return $data[$id];
+	
+}
 }
