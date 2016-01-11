@@ -1,0 +1,6 @@
+id,name,termination,origination,channel,origination_ip,origination_port,origination_prefix
+1,kp home sip,skphome,sip:172.56.42.129,7,172.16.2.5,5506,x
+2,kp office ,skpoffice,sip:mysbc.com,5,192.4.6.2,8080,gr
+3,call center,callcenter,sip:pfingo.com,7,63.2.4.6,78,sd
+4,technical support,technica,sip:pfingo.com,10,10.2.3.4,2082,pf
+5,customer complaints,customer,sip:pfingo.com,1,22.146.7.8,9999,cs

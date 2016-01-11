@@ -1,0 +1,6 @@
+id,name,type,date_create,description,number_associated,,status,voice_script,sms_script
+1,Gnum IVR,Social,18-12-15,IVR flow for inhouse,60128708988,,Development,http://www.google.com/ivr.php,http://www.google.com/sms.php
+2,Pfingo IVR,E-Commerce,19-12-15,IVR apps,"6584983919 , 60128708988",,Production,http://www.google.com/ivr.php,http://www.google.com/sms.php
+3,Cmask  number masking,Transportation,20-12-15,patented number masking technogy,6584983917,,Development,http://www.google.com/ivr.php,http://www.google.com/sms.php
+4,Comfort Delgro anomymous call,Non profit,21-12-15,protect both drive and passenger phone number,6584983916,,Production,http://www.google.com/ivr.php,http://www.google.com/sms.php
+5,NUS Student SMS Survey,Telecommunication,22-12-15,sms survey for research study,1025698756,,Production,http://www.google.com/ivr.php,http://www.google.com/sms.php

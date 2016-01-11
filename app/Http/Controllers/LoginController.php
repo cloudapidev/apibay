@@ -1,5 +1,11 @@
 <?php namespace App\Http\Controllers;
 
+
+
+use Redirect;
+use Response;
+use Session;
+
 class LoginController extends Controller {
 
 	/*
@@ -21,11 +27,15 @@ class LoginController extends Controller {
 	{
 		return view('login');
 	}
-	
+
+
+	//store
 	public function store()
 	{
-		echo "a";
+		Session::set('variableName', "aaa");
+		
+
+        return redirect()->action('HomeController@index')->with("success","value");
 	}
-	
-	
+
 }

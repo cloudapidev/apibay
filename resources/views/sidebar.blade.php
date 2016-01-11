@@ -43,8 +43,8 @@
 								 <i class="fa fa-angle-left pull-right"></i>
               </a>
 							<ul class="treeview-menu">
-                <li class="menu_number_listing"><a href="number-listing.php">Listing</a></li>
-                <li class="menu_number_new"><a href="number-new.php">Buy Phone Number</a></li>
+                <li class="menu_number_listing"><a href="{{ url("numbers") }}">Listing</a></li>
+                <li class="menu_number_new"><a href="{{ url("numbers/buy") }}">Buy Phone Number</a></li>
               </ul>
             </li>
 						

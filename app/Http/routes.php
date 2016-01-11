@@ -11,48 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home',array(
-		"active"=>"dashboard",
-		"pagetitle"=>"Dashboard"
-	));
-});
 
 
 
-Route::get('documentation/{sec}', function ($sec) {
-
-	if($sec == "phonenumber"){
-		$active = "menu_documentation , menu_documentation_phonenumber";
-		$pagetitle = "Phone Number - REST API & SDK";
-	}
-
-	if($sec == "serverapp"){
-		$active = "menu_documentation , menu_documentation_serverapp";
-		$pagetitle = "Server Apps - REST API & SDK";
-	}
-
-	if($sec == "clientapp"){
-		$active = "menu_documentation , menu_documentation_clientapp";
-		$pagetitle = "Client Apps - REST API & SDK";
-	}
-
-	if($sec == "billing"){
-		$active = "menu_documentation , menu_documentation_billing";
-		$pagetitle = "Billing & Reports - REST API & SDK";
-	}
-
-	if($sec == "setting"){
-		$active = "menu_documentation , menu_documentation_setting";
-		$pagetitle = "Settings - REST API & SDK";
-	}
-
-	return view('documentation.page',array(
-		"sec"=>$sec,
-		"active"=>$active,
-		"pagetitle"=>$pagetitle
-	));
-});
 
 /*
 |--------------------------------------------------------------------------
@@ -67,4 +28,16 @@ Route::get('documentation/{sec}', function ($sec) {
 
 Route::group(['middleware' => ['web']], function () {
     //
+
+	Route::get('/index.php', 'HomeController@index');
+	Route::get('/', 'HomeController@index');
+
+	Route::resource('login', 'LoginController');
+
+	Route::resource('numbers/buy', 'NumbersController@buy');
+	Route::resource('numbers', 'NumbersController');
+
+	Route::resource('documentation', 'DocumentationController');
+
+
 });

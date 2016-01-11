@@ -1,0 +1,6 @@
+id,country,number,area,capability,date_purchase,date_expire,configure_with,configure_detail,sip_trunk,server_app,bind_number,bind_account,messaging_url,messaging_server,price
+1,Malaysia,60128708988,Johor,Voice + SMS,18/12/2015,18/12/2016,SIP Trunk,,kp.sip.twilio.com,,,,,Auto reply busy sms,$1.00
+2,Singapore,6584983919,-,Voice ,18/11/2015,18/11/2016,SIP Trunk,,globalroam.sip.twilio.com,,,,http://www.globalroam.com/api/sms,,$2.00
+3,Singapore,6584983917,-,Voice ,18/10/2015,18/10/2016,Server App,,,Number masking,,,,Survey sms,$2.20
+4,Singapore,6584983916,-,SMS,18/9/2015,18/9/2016,Forward to number,,,,6584983919,,http://www.google.com/sms.php,,$15.00
+5,United States,1025698756,San Francisco,Voice + SMS,18/8/2015,18/8/2016,Bind to user,,,,,iptr*test*cloudapi@pfingo,,Survey sms,$23.65

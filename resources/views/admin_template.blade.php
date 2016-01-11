@@ -77,6 +77,26 @@
         <!-- Main content -->
         <section class="content">
 
+          <!-- to echo success messages -->
+          @if (Session::has('success'))
+          <div class="alert alert-success alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <i class="icon fa fa-check"></i> <strong>{{ Session::get('success') }}</strong>
+          </div>
+          @endif
+            
+          <!-- to echo error messages -->
+          @if (isset($errors) && count($errors))
+            <div class="alert alert-danger">
+                <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                <ul>
+                  @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                  @endforeach
+                </ul>
+              </div>
+            @endif
+
            @yield('content')
  
         </section><!-- /.content -->
@@ -85,3 +105,6 @@
 
      <!-- footer -->
     @include('footer')
+
+
+    @yield('afterfooter')
