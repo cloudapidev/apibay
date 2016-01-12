@@ -65,8 +65,8 @@
 								<i class="fa fa-angle-left pull-right"></i>
               </a>
 							<ul class="treeview-menu">
-                <li class="menu_serverapp_listing"><a href="serverapp-listing.php">Listing</a></li>
-                <li class="menu_serverapp_new"><a href="serverapp-new.php">Create New</a></li>
+                <li class="menu_serverapp_listing"><a href="{{url("serverapps")}}">Listing</a></li>
+                <li class="menu_serverapp_new"><a href="{{url("serverapps/add")}}">Create New</a></li>
 							</ul>
             </li>
 						
@@ -76,8 +76,8 @@
 								<i class="fa fa-angle-left pull-right"></i>
               </a>
 							<ul class="treeview-menu">
-                <li class="menu_clientapp_listing"><a href="clientapp-listing.php">Listing</a></li>
-                <li class="menu_clientapp_new"><a href="clientapp-new.php">Create New</a></li>
+                <li class="menu_clientapp_listing"><a href="{{url("clientapps")}}">Listing</a></li>
+                <li class="menu_clientapp_new"><a href="{{url("clientapps/add")}}">Create New</a></li>
 							</ul>
             </li>
 						
@@ -86,7 +86,7 @@
                 <i class="fa fa-object-ungroup"></i> <span>Pricing</span>
 								<i class="fa fa-angle-left pull-right"></i>
 								<ul class="treeview-menu">
-									<li class="menu_pricing_rate"><a href="pricing-rate.php">Call / SMS Rates</a></li>
+									<li class="menu_pricing_rate"><a href="{{url("pricing")}}">Call / SMS Rates</a></li>
 								</ul>
               </a>
             </li>
@@ -96,8 +96,8 @@
                 <i class="fa fa-object-ungroup"></i> <span>Extras</span>
 								<i class="fa fa-angle-left pull-right"></i>
 								<ul class="treeview-menu">
-									<li class="menu_extra_call"><a href="extra-call.php">Make Call</a></li>
-									<li class="menu_extra_sms"><a href="extra-sms.php">Send SMS</a></li>
+									<li class="menu_extra_call"><a href="{{url("callout")}}">Make Call</a></li>
+									<li class="menu_extra_sms"><a href="{{url("sendsms")}}">Send SMS</a></li>
 								</ul>
               </a>
             </li>
@@ -107,10 +107,10 @@
                 <i class="fa fa-bar-chart"></i> <span>Billing & Reports</span>
 								<i class="fa fa-angle-left pull-right"></i>
 								<ul class="treeview-menu">
-									<li class="sssss"><a href="#">Call Logs</a></li>
-									<li class="sssss"><a href="#">SMS Logs</a></li>
-									<li class="sssss"><a href="#">Statements</a></li>
-									<li class="sssss"><a href="#">Topup & Payments History</a></li>		
+									<li class="sssss"><a href="{{url("calllogs")}}">Call Logs</a></li>
+									<li class="sssss"><a href="{{url("smslogs")}}">SMS Logs</a></li>
+									<li class="sssss"><a href="{{url("statements")}}">Statements</a></li>
+									<li class="sssss"><a href="{{url("topup")}}">Topup & Payments History</a></li>		
 								</ul>
               </a>
             </li>
@@ -120,9 +120,9 @@
                 <i class="fa fa-gear"></i> <span>Settings</span>
 								<i class="fa fa-angle-left pull-right"></i>
 								<ul class="treeview-menu">
-                <li class="menu_account"><a href="account.php">Account</a></li>
-                <li class="menu_siptrunk_listing"><a href="siptrunk-listing.php">SIP Trunk</a></li>
-                <li class="menu_channel_listing"><a href="channel-listing.php">Channel</a></li>
+                <li class="menu_account"><a href="{{url("account")}}">Account</a></li>
+                <li class="menu_siptrunk_listing"><a href="{{url("siptrunk")}}">SIP Trunk</a></li>
+                <li class="menu_channel_listing"><a href="{{url("channel")}}">Channel</a></li>
             
               </ul>
               </a>
