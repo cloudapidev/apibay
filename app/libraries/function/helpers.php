@@ -3,8 +3,7 @@ function testwy()
 {
 	echo "testwy";
 }
-if(!function_exists(populate))
-{
+
 	function populate($formName,$data=false)
 	{
 			$data = (array)json_decode($data);
@@ -46,9 +45,8 @@ if(!function_exists(populate))
 				}
 	};
 
-}
-if(!function_exists(openCSV))
-{
+
+
 	function openCSV($database){
 // 		echo public_path();
 	 	$file = app_path()."/Http/database/{$database}.csv";
@@ -73,12 +71,10 @@ if(!function_exists(openCSV))
 			if(count($rowsWithKeys))
 	    return $rowsWithKeys;
 	}
-}
-if(!function_exists(getData))
-{
+
+
 	function getData($database,$id=1){
 		$data = openCSV($database);
 		return $data[$id];
 	
-}
 }
