@@ -95,7 +95,7 @@
 																				<td><?=$item['tag']?></td>
 																				<td><?=$item['lastsignin']?></td>
 																				<td><?=$item['date_create']?></td>
-																				<td><a href='user-new.php?edit&id=<?=$item['id']?>' class="btn btn-block btn-default">Edit</a></td>
+																				<td><a href="{{url('users/edit',['id'=>$item['id']])}}" class="btn btn-block btn-default">Edit</a></td>
 																			</tr>
 																			<?php } ?>
 																		</tbody>
@@ -143,3 +143,14 @@
  
 
 @endsection
+@section('afterfooter')
+ <script>
+ 
+	$('.checkall').on('ifChecked', function(event){
+			$('input[type=checkbox]').iCheck('check');
+	});
+	$('.checkall').on('ifUnchecked', function(event){
+			$('input[type=checkbox]').iCheck('uncheck');
+	});
+ </script>
+ @endsection

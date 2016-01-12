@@ -218,7 +218,7 @@
 											<div class="col-sm-2"></div>
 												<div class="col-sm-10">
 												
-													<?php if(!isset($_GET['edit'])){ ?>
+													<?php if(!isset($edit)){ ?>
 									
 														<a href="clientapp-new.php?edit" class="btn btn-success" name="button" type="submit">Save</a>
 												

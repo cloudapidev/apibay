@@ -127,7 +127,7 @@
 																				<td><?=$item['description']?></td>
 																				<td><?=$item['number_associated']?></td>
 																				<td><?=$item['status']?></td>
-																				<td><a href='serverapp-new.php?edit&id=<?=$item['id']?>' class="btn btn-block btn-default">Edit</a></td>
+																				<td><a href='{{url("serverapps/edit",['id'=>$item['id']])}}' class="btn btn-block btn-default">Edit</a></td>
 																			</tr>
 																			<?php } ?>
 																		</tbody>

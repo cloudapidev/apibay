@@ -7,15 +7,9 @@
                <div class="box-header with-border">
 									<h3 class="box-title">Search & Filter</h3>
 								</div><!-- /.box-header -->
-								
-								
-								
-								<div class="box-body">
-								
-									<div class="row">
-									
-									
-									
+											
+						
+	
 										<div class="box-body">
 										
 												<label for="inputPassword3" class="col-md-1 control-label">Name</label>
@@ -26,40 +20,10 @@
 												</div>
 								
 		
-												<label for="inputPassword3" class="col-md-1 control-label">Type</label>
-												<div class="col-md-2">
-													<div class="input-group">
-															<select class="form-control" id="application_type" name="application[type]" required="required" aria-required="true"><option value="Other" selected="selected">Other</option>
-															<option value="Game">Game</option>
-															<option value="Fun">Fun</option>
-															<option value="Office">Office</option>
-															<option value="Productivity">Productivity</option>
-															<option value="Books">Books</option>
-															<option value="Business">Business</option>
-															<option value="Dining">Dining</option>
-															<option value="Education">Education</option>
-															<option value="Entertainment">Entertainment</option>
-															<option value="Finance">Finance</option>
-															<option value="Food">Food and Drink</option>
-															<option value="Gaming">Gaming</option>
-															<option value="Lifestyle">Lifestyle</option>
-															<option value="Local">Local</option>
-															<option value="Medical">Medical</option>
-															<option value="Music">Music</option>
-															<option value="News">News</option>
-															<option value="Photo">Photo &amp; Video</option>
-															<option value="Security">Security</option>
-															<option value="SocialNetworking">Social Networking</option>
-															<option value="SocialNetworkingDating">Social Networking (Dating)</option>
-															<option value="Sports">Sports</option>
-															<option value="Travel">Travel</option>
-															<option value="Utilities">Utilities</option></select>
-													</div>
-												</div>
-												
+											
 															
 												<label for="inputPassword3" class="col-md-2 control-label">Records per page</label>
-												<div class="col-md-1">
+												<div class="col-md-2">
 														<select class="form-control">
 															<option>- Select -</option>
 															<option>50</option>
@@ -74,8 +38,8 @@
 
 										</div>
 										
-									</div>
-								</div>
+						
+						
 							</div>
 							</form>
 							
@@ -86,7 +50,7 @@
        
         <div class="row">
 						<div class="pull-right">
-								<a href="clientapp-new.php" class="btn bg-maroon btn-flat margin ">Create New</a>
+								<a href="siptrunk-new.php" class="btn bg-maroon btn-flat margin ">Create New</a>
 						</div>
 						
 						
@@ -100,50 +64,39 @@
 																</div>
 														
 																<div class="box-body table-responsive">
-																	<table id="example1" class="datastable table table-bordered table-striped table-condensed cf">
+																	<table id="example1" class="datatable table table-bordered table-striped table-condensed cf">
 																		<thead>
 																			<tr>
 																				<th>#</th>
-																				<th>Icon</th>
 																				<th>Name</th>
-																				<th>Date create</th>
-																				<th>Type</th>
-																				<th>Description</th>
-																				<th>Total Users</th>
+																				<th>Termination URI</th>
+																				<th>Origination URI </th>
+																				<th>No. of Channel</th>
 																				<th></th>
 																			</tr>
 																		</thead>
 																		<tbody>
 																			
-																			<?php $cnt=0; foreach(openCSV("clientapp-listing") as $key=>$item){ ++$cnt;?>
+																			<?php $cnt=0; foreach(openCSV("siptrunk-listing") as $key=>$item){ ++$cnt;
+																			
+																			?>
 																			<tr>
-																				<td data-title="Monday"><?=$cnt ?></td>
-																				<td style="width:20px;" data-title="Monday">
-																					<div class="icon">
-																						<span class="info-box-icon <?=$item['background']?>"><i class="fa <?=$item['icon']?>"></i></span> 
-																					</div>
-																				</td>
-																				<td>
-																						<?=$item['name']?>
-																				</td>
-																				<td data-title="Monday"><?=$item['date_create']?></td>
-																				<td data-title="Monday"><?=$item['type']?></td>
-																				<td data-title="Monday"><?=$item['description']?></td>
-																				<td data-title="Monday"><?=$item['no_user']?></td>
-																				<td><a href='{{url('clientapps/edit')}}' class="btn btn-block btn-default">Edit</a></td>
+																				<td><?=$cnt ?></td>
+																				<td><?=$item['name']?></td>
+																				<td><?=$item['termination']?>.pstn.apibay.com</td>
+																				<td><?=$item['origination_ip']?> : <?=$item['origination_port']?> ( Prefix : <?=$item['origination_prefix']?> )</td>
+																				<td><?=$item['channel']?></td>
+																				<td><a href='{{url("siptrunk/edit",["id"=>$item["id"]])}}' class="btn btn-block btn-default">Edit</a></td>
 																			</tr>
 																			<?php } ?>
 																		</tbody>
 																		<tfoot>
 																			<tr>
 																				<th>#</th>
-																				<th>Icon</th>
 																				<th>Name</th>
-																				<th>Date create</th>
-																				<th>Type</th>
-																				<th>Description</th>
-																				<th>Total Users</th>
-																				<th></th>
+																				<th>Termination URI</th>
+																				<th>Origination URI</th>
+																				<th>No. of Channel</th>
 																				<th></th>
 																		 </tr>
 																		</tfoot>
@@ -172,10 +125,12 @@
 							</nav>
 						</div>
 					</div>
+
 @endsection
 @section('afterfooter')
  <script>
- 
+	
+	
 	$('.checkall').on('ifChecked', function(event){
 			$('input[type=checkbox]').iCheck('check');
 	});

@@ -78,7 +78,7 @@
 		<!-- End Filter -->
 <div class="row">
 	<div class="pull-right">
-		<a href="{{ url("numbers/buy") }}" class="btn bg-maroon btn-flat margin ">Buy Number</a>
+		<a href="{{ url('numbers/buy') }}" class="btn bg-maroon btn-flat margin ">Buy Number</a>
 	</div>
     <div class="col-xs-12">
 		<div class="box">
@@ -135,7 +135,7 @@
 									echo "<br /><b>Messaging :</b> <i>Server App</i> : {$item['messaging_server']}";
 								?>
 							</td>
-							<td><a href='numbers/<?=$item['id']?>/edit' class="btn btn-block btn-default">Edit</a></td>
+							<td><a href="{{url('numbers/edit',['id'=>$item['id']])}}" class="btn btn-block btn-default">Edit</a></td>
 							<!--<td>
 								<input type="checkbox">
 							</td>-->

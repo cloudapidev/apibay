@@ -19,7 +19,7 @@
 											<div class="form-group">
 												<label class="col-sm-3 control-label" for="application_title">Server App Name</label>
 												<div class="col-md-9">
-												<input class="form-control valid" focus="focus" id="application_title" name="application[title]" onfocus="this.value = this.value;" required="required" size="30" type="text" value="<?=$data['name']?>" aria-required="true" aria-invalid="false">
+												<input class="form-control valid" focus="focus" id="application_title" name="application[title]" onfocus="this.value = this.value;" required="required" size="30" type="text" value="<?=isset($data['name'])?$data['name']:null?>" aria-required="true" aria-invalid="false">
 												</div>
 												<div class='clearfix'></div>
 											</div>
@@ -68,21 +68,21 @@
 											<div class="form-group">
 												<label class="col-sm-3 control-label" for="application_description">Description</label>
 												<div class="col-md-8">
-													<textarea class="form-control" cols="40" id="application_description" name="application[description]" rows="4"><?=$data['description']?></textarea>
+													<textarea class="form-control" cols="40" id="application_description" name="application[description]" rows="4"><?=isset($data['description'])?$data['description']:null?></textarea>
 												</div>
 												<div class='clearfix'></div>
 											</div>
 											<div class="form-group">
 												<label class="col-sm-3 control-label" for="facebook_key">Voice Script URL</label>
 												<div class="col-md-6">
-													<input class="form-control" id="facebook_key" name="facebook[key]" size="30" type="text" value="<?=$data['voice_script']?>">
+													<input class="form-control" id="facebook_key" name="facebook[key]" size="30" type="text" value="<?=isset($data['voice_script'])?$data['voice_script']:null?>">
 												</div>
 												<div class='clearfix'></div>
 											</div>
 											<div class="form-group">
 												<label class="col-sm-3 control-label" for="facebook_secret">SMS Script URL</label>
 												<div class="col-md-6">
-													<input class="form-control" id="facebook_secret" name="facebook[secret]" size="30" type="text" value="<?=$data['sms_script']?>">
+													<input class="form-control" id="facebook_secret" name="facebook[secret]" size="30" type="text" value="<?=isset($data['sms_script'])?$data['sms_script']:null?>">
 												</div>
 												<div class='clearfix'></div>
 											</div>
@@ -95,7 +95,7 @@
 													<div class="col-sm-2"></div>
 														<div class="col-sm-10">
 														
-															<?php if(!isset($_GET['edit'])){ ?>
+															<?php if(!isset($edit)){ ?>
 											
 																<a href="serverapp-new.php?edit&id=1" class="btn btn-success" name="button" type="submit">Save</a>
 														
@@ -120,7 +120,7 @@
 						
 						
 						
-							<?php if(isset($_GET['edit'])){ ?>
+							<?php if(isset($edit)){ ?>
 									<div class="row">
 										<div class="col-md-8">
 											<div class="panel panel-default">
@@ -154,7 +154,7 @@
 																					<td><?=$item['date_expire']?></td>
 																					<td><?=$item['price']?></td>
 																					<td>
-																						<a href="number-edit.php?edit&id=<?=$item['id']?>" class="btn btn-default">Manage</a>
+																						<a href="{{url('serverapps/edit',['id'=>$item['id']])}}" class="btn btn-default">Manage</a>
 																					</td>
 																				
 																				</tr>
@@ -178,17 +178,11 @@
 																			 </tr>
 																			</tfoot>
 																		</table>
-												
-												
 												</div>
 											</div>
 										</div>
 									</div>
 							<?php } ?>
-						
-				
-				
-			
 			</div>
 	</div>
 					

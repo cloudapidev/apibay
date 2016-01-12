@@ -21,43 +21,43 @@
 		<div class="form-group">
 		<label class="control-label col-sm-3" for="user_full_name">Full Name</label>
 		<div class="col-sm-9">
-															<input class="form-control" id="user_full_name" name="user[full_name]" size="30" type="text" value="<?=$data['fullname']?>">
+															<input class="form-control" id="user_full_name" name="user[full_name]" size="30" type="text" value="<?=isset($data['fullname'])?$data['fullname']:null?>">
 																	</div>
 													</div>
 																	<div class="form-group">
 																	<label class="control-label col-sm-3" for="user_email">Email **</label>
 																	<div class="col-sm-9">
-																	<input class="form-control" id="user_email" name="user[email]" size="30" type="text" value="<?=$data['email']?>">
+																	<input class="form-control" id="user_email" name="user[email]" size="30" type="text" value="<?=isset($data['email'])?$data['email']:null?>">
 																			</div>
 																					</div>
 																					<div class="form-group">
 																					<label class="control-label col-sm-3" for="user_login">Login **</label>
 														<div class="col-sm-9">
-														<input class="form-control" id="user_login" name="user[login]" size="30" type="text" value="<?=$data['login']?>">
+														<input class="form-control" id="user_login" name="user[login]" size="30" type="text" value="<?=isset($data['login'])?$data['login']:null?>">
 																</div>
 																</div>
 																<div class="form-group">
 																<label class="control-label col-sm-3" for="user_password">Password</label>
 																<div class="col-sm-9">
-																<input class="form-control" id="user_password" name="user[password]" required="required" size="30" type="password" aria-required="true" value="<?=$data['password']?>">
+																<input class="form-control" id="user_password" name="user[password]" required="required" size="30" type="password" aria-required="true" value="<?=isset($data['password'])?$data['password']:null?>">
 																</div>
 																</div>
 																<div class="form-group">
 																<label class="control-label col-sm-3" for="user_password_confirmation">Confirm</label>
 																		<div class="col-sm-9">
-																		<input class="form-control" id="user_password_confirmation" name="user[password_confirmation]" size="30" type="password" value="<?=$data['password']?>">
+																		<input class="form-control" id="user_password_confirmation" name="user[password_confirmation]" size="30" type="password" value="<?=isset($data['password'])?$data['password']:null?>">
 																		</div>
 																		</div>
 																		<div class="form-group">
 																				<label class="control-label col-sm-3" for="user_phone">Phone</label>
 																				<div class="col-sm-9">
-																				<input class="form-control" id="user_phone" name="user[phone]" size="30" type="text" value="<?=$data['phone']?>">
+																				<input class="form-control" id="user_phone" name="user[phone]" size="30" type="text" value="<?=isset($data['phone'])?$data['phone']:null?>">
 																				</div>
 																				</div>
 																				<div class="form-group">
 														<label class="control-label col-sm-3" for="user_website">Website</label>
 																<div class="col-sm-9">
-																		<input class="form-control" id="user_website" name="user[website]" size="30" type="text" value="<?=$data['website']?>">
+																		<input class="form-control" id="user_website" name="user[website]" size="30" type="text" value="<?=isset($data['website'])?$data['website']:null?>">
 																		</div>
 																		</div>
 																		<div class="form-group">
@@ -75,13 +75,13 @@
 																														<div class="form-group">
 																														<label class="control-label col-sm-3" for="user_facebook_id">Facebook ID</label>
 																														<div class="col-sm-9">
-																														<input class="form-control" id="user_facebook_id" name="user[facebook_id]" size="30" type="text" value="<?=$data['facebook']?>">
+																														<input class="form-control" id="user_facebook_id" name="user[facebook_id]" size="30" type="text" value="<?=isset($data['facebook'])?$data['facebook']:null?>">
 																														</div>
 																														</div>
 													<div class="form-group">
 																														<label class="control-label col-sm-3" for="user_twitter_id">Twitter ID</label>
 																														<div class="col-sm-9">
-																														<input class="form-control" id="user_twitter_id" name="user[twitter_id]" size="30" type="text" value="<?=$data['twitter']?>">
+																														<input class="form-control" id="user_twitter_id" name="user[twitter_id]" size="30" type="text" value="<?=isset($data['twitter'])?$data['twitter']:null?>">
 																																</div>
 																																</div>
 

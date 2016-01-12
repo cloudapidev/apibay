@@ -12,11 +12,20 @@ class ServerappsController extends Controller
 	}
 	public function create()
 	{
-		$id=isset($_GET['id'])&& !empty($_GET['id'])?$_GET['id']:1;
-		$data=getData("serverapp-listing",$id);
 		return view('serverapps/newserverapp',array(
 				"active"=>"menu_serverapp , menu_serverapp_new",
+				"pagetitle"=>"Create Server App",
+		)
+		);
+	}
+	public function edit($id)
+	{
+		$data=getData("serverapp-listing",$id);
+		return view('serverapps/newserverapp',array(
+				"active"=>"menu_serverapp , menu_serverapp_edit",
 				"pagetitle"=>"Manage Server App",
+				"edit"=>true,
+				'id'=>$id,
 				'data'=>$data
 		)
 		);

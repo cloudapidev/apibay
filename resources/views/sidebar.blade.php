@@ -70,9 +70,22 @@
 							</ul>
             </li>
 						
-						<li class="treeview menu_clientapp">
+						<li class="treeview menu_siptrunk">
               <a href="index.php">
-                <i class="fa fa-whatsapp"></i> <span>Client Apps</span>
+                <i class="fa fa-whatsapp"></i> <span>Sip Trunk</span>
+								<i class="fa fa-angle-left pull-right"></i>
+              </a>
+							<ul class="treeview-menu">
+                <li class="menu_siptrunk_listing"><a href="{{url("siptrunk")}}">Listing</a></li>
+                <li class="menu_siptrunk_new"><a href="{{url("siptrunk/add")}}">Create New</a></li>
+							</ul>
+            </li>
+            
+            
+            
+            <li class="treeview menu_clientapp">
+              <a href="index.php">
+                <i class="fa fa-server"></i> <span>Client Apps</span>
 								<i class="fa fa-angle-left pull-right"></i>
               </a>
 							<ul class="treeview-menu">
@@ -121,7 +134,6 @@
 								<i class="fa fa-angle-left pull-right"></i>
 								<ul class="treeview-menu">
                 <li class="menu_account"><a href="{{url("account")}}">Account</a></li>
-                <li class="menu_siptrunk_listing"><a href="{{url("siptrunk")}}">SIP Trunk</a></li>
                 <li class="menu_channel_listing"><a href="{{url("channel")}}">Channel</a></li>
             
               </ul>

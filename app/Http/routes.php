@@ -34,21 +34,30 @@ Route::group(['middleware' => ['web']], function () {
 	Route::resource('login', 'LoginController');
 
 	//Number
-	Route::resource('numbers/buy', 'NumbersController@buy');
-	Route::resource('numbers', 'NumbersController');
+	Route::get('numbers', 'NumbersController@index');
+	Route::get('numbers/buy', 'NumbersController@buy');
+	Route::get('numbers/edit/{id}', 'NumbersController@edit');
 	
 	//User
 	Route::get('users','UsersController@index');
 	Route::get('users/add','UsersController@create');
+	Route::get('users/edit/{id}','UsersController@edit');
 	
 	//Serverapps
 	Route::get('serverapps','ServerappsController@index');
 	Route::get('serverapps/add','ServerappsController@create');
+	Route::get('serverapps/edit/{id}','ServerappsController@edit');
 	
 	//Clientapps
 	Route::get('clientapps','ClientappsController@index');
 	Route::get('clientapps/add','ClientappsController@create');
+	Route::get('clientapps/edit','ClientappsController@edit');
 
+	//Siptrunk
+	Route::get('siptrunk','SiptrunkController@index');
+	Route::get('siptrunk/add','SiptrunkController@add');
+	Route::get('siptrunk/edit/{id}','SiptrunkController@edit');
+	
 	//Pricing
 	Route::get('pricing','PricingController@index');
 	
@@ -64,8 +73,9 @@ Route::group(['middleware' => ['web']], function () {
 	
 	//Settings
 	Route::get('account','SettingsController@account');
-	Route::get('siptrunk','SettingsController@siptrunk');
 	Route::get('channel','SettingsController@channel');
+	
+
 	
 	//System
 	Route::get('managenumber','SystemController@managenumber');
