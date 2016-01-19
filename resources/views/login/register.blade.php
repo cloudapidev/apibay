@@ -83,11 +83,12 @@
 							<?php } ?>
 							
 							-->
-            </div><!-- /.col -->
-          </div>
-       		<div>
+            </div>
+            <div class="col-xs-4">
        			<input type="submit" class="btn btn-primary btn-block btn-flat" value='Register'>
        		</div>
+          </div>
+       		
         </form>
 
         <div class="social-auth-links text-center">
@@ -101,11 +102,11 @@
     </div><!-- /.register-box -->
 
     <!-- jQuery 2.1.4 -->
-    <script src="./plugins/jQuery/jQuery-2.1.4.min.js"></script>
+    <script src="{{ asset("/bower_components/admin-lte/plugins/jQuery/jQuery-2.1.4.min.js")}}"></script>
     <!-- Bootstrap 3.3.5 -->
-    <script src="./bootstrap/js/bootstrap.min.js"></script>
+    <script src="{{ asset("/bower_components/admin-lte/bootstrap/js/bootstrap.min.js")}}"></script>
     <!-- iCheck -->
-    <script src="./plugins/iCheck/icheck.min.js"></script>
+    <script src="{{ asset("/bower_components/admin-lte/plugins/iCheck/icheck.min.js")}}"></script>
     <script>
       $(function () {
         $('input').iCheck({
