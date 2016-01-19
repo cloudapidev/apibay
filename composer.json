@@ -6,7 +6,10 @@
     "type": "project",
     "require": {
         "php": ">=5.5.9",
-        "laravel/framework": "5.2.*"
+        "laravel/framework": "5.2.*",
+        "guzzlehttp/guzzle": "~6.0",
+        "symfony/psr-http-message-bridge": "^0.2.0",
+        "zendframework/zend-diactoros": "^1.3"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -28,7 +31,8 @@
     },
     "autoload-dev": {
         "classmap": [
-            "tests/TestCase.php"
+            "tests/TestCase.php",
+            "app/libraries/classes"
         ]
     },
     "scripts": {

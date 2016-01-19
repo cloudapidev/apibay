@@ -15,24 +15,24 @@
 										<div class="col-md-8">
 											<div class="box box-solid box-default">
 												<div class="box-header with-border">
-													<h3 class="box-title">Details</h3>
+													<h3 class="box-title">{{trans('numbers.Details')}}</h3>
 												</div><!-- /.box-header -->
 												<div class="box-body">
 													<dl class="dl-horizontal">
-														<dt>Phone Number</dt>
+														<dt>{{trans('Phone Number')}}</dt>
 														<dd><?=$data['number']?></dd>
-														<dt>Country</dt>
+														<dt>{{trans('numbers.Country')}}</dt>
 														<dd><?=$data['country']?></dd>
-														<dt>Capabilities</dt>
+														<dt>{{trans('numbers.Capabilities')}}</dt>
 														<dd><?=$data['capability']?></dd>
-														<dt>Price</dt>
+														<dt>{{trans('numbers.Price')}}</dt>
 														<dd><?=$data['price']?> per month</dd>
-														<dt>Date Purchased</dt>
+														<dt>{{trans('numbers.Date Purchased')}}</dt>
 														<dd><?=$data['date_purchase']?></dd>
-														<dt>Date Expired</dt>
+														<dt>{{trans('numbers.Date Expired')}}</dt>
 														<dd><?=$data['date_expire']?></dd>
-														<dt>Configure With</dt>
-														<dd>SIP Trunking</dd>
+														<dt>{{trans('numbers.Configure With')}}</dt>
+														<dd>{{trans('numbers.SIP Trunking')}}</dd>
 														<dd>sip:kp@sip.com</dd>
 													</dl>
 												</div><!-- /.box-body -->
@@ -44,19 +44,19 @@
 										<div class="col-md-8">
 												<div class="box box-solid">
 													<div class="box-header with-border">
-														<h3 class="box-title">Voice</h3>
+														<h3 class="box-title">{{trans('numbers.Voice')}}</h3>
 													</div><!-- /.box-header -->
 												
 												<div class="box-body">	
 													<div class="row">
-																					<h4 class="col-sm-8"><i class="fa fa-gear"></i> Configure with</h4>
+																					<h4 class="col-sm-8"><i class="fa fa-gear"></i>{{trans('numbers.Configure With')}} </h4>
 																				</div>
 																				
 																				<div class="row">
 																					<div class="col-sm-2">
 																						<div class="radio">
 																							<label>
-																								<input type="radio" name="check[]" value="server"> Server App
+																								<input type="radio" name="check[]" value="server"> {{trans('numbers.Server App')}}
 																							</label>
 																						</div>
 																					</div>
@@ -64,7 +64,7 @@
 																					<div class="col-sm-3">
 																						<div class="radio">
 																							<label>
-																								<input type="radio" name="check[]" value="pstn"> Forward to phone number
+																								<input type="radio" name="check[]" value="pstn"> {{trans('numbers.Forward to phone number')}}
 																							</label>
 																						</div>
 																					</div>
@@ -72,7 +72,7 @@
 																					<div class="col-sm-3">
 																						<div class="radio">
 																							<label>
-																								<input type="radio" name="check[]" value="account"> Bind to User
+																								<input type="radio" name="check[]" value="account">{{trans('numbers.Bind to User')}} 
 																							</label>
 																						</div>
 																					</div>
@@ -80,7 +80,7 @@
 																					<div class="col-sm-2">
 																						<div class="radio">
 																							<label>
-																								<input type="radio" name="check[]" value="sip"> SIP Trunk
+																								<input type="radio" name="check[]" value="sip"> {{trans('numbers.SIP Trunk')}}
 																							</label>
 																						</div>
 																					</div>
@@ -93,7 +93,7 @@
 														
 																		<div class="box-body">		
 																			<div class="form-group">
-																				<label>Select a SIP Trunk Profile</label>
+																				<label>{{trans('numbers.Select a SIP Trunk Profile')}}</label>
 																				
 																
 																					<select id="select-sip" class="form-control">
@@ -116,7 +116,7 @@
 														
 																		<div class="box-body">		
 																			<div class="form-group">
-																				<label>Enter a phone number to forward</label>
+																				<label>{{trans('numbers.Enter a phone number to forward')}}</label>
 																					<input type="text" class="form-control" placeholder="Enter ...">
 																			</div>
 																		</div>
@@ -129,7 +129,7 @@
 														
 																		<div class="box-body">		
 																			<div class="form-group">
-																				<label>Select a user to bind</label>
+																				<label>{{trans('numbers.Select a user to bind')}}</label>
 																					<select class="form-control">
 																						<option> - Select - </option>
 																						<option>Globalroam HQ</option>
@@ -148,7 +148,7 @@
 															<div class="col-md-6">
 																	<div class="box-body">		
 																		<div class="form-group">
-																				<label>Select a server app</label>
+																				<label>{{trans('numbers.Select a server app')}}</label>
 																				<select id='select-server' class="form-control">
 																					<option value="">- Select -</option>
 																					<option value="1">GR IVR</option>
@@ -174,19 +174,19 @@
 										
 												<div class="box box-solid">
 													<div class="box-header with-border">
-														<h3 class="box-title">Messaging</h3>
+														<h3 class="box-title">{{trans('numbers.Messaging')}}</h3>
 													</div><!-- /.box-header -->
 												
 												<div class="box-body">	
 														<div class="row">
-															<h4 class="col-sm-8"><i class="fa fa-gear"></i> Configure with</h4>
+															<h4 class="col-sm-8"><i class="fa fa-gear"></i>{{trans('numbers.Configure With')}} </h4>
 														</div>
 														
 														<div class="row">
 															<div class="col-sm-2">
 																<div class="radio">
 																	<label>
-																		<input type="radio" name="checks[]" value="url"> URL
+																		<input type="radio" name="checks[]" value="url">{{trans('numbers.URL')}} 
 																	</label>
 																</div>
 															</div>
@@ -194,7 +194,7 @@
 															<div class="col-sm-3">
 																<div class="radio">
 																	<label>
-																		<input type="radio" name="checks[]" value="server_sms"> Server App
+																		<input type="radio" name="checks[]" value="server_sms"> {{trans('numbers.Server App')}}
 																	</label>
 																	
 																</div>
@@ -209,7 +209,7 @@
 														
 																		<div class="box-body">		
 																			<div class="form-group">
-																				<label>Enter a url</label>
+																				<label>{{trans('numbers.Enter a url')}}</label>
 																				<input type="text" class="form-control" placeholder="Enter ...">
 																	
 																				
@@ -225,7 +225,7 @@
 														
 																		<div class="box-body">		
 																			<div class="form-group">
-																				<label>Select a server app</label>
+																				<label>{{trans('numbers.Select a server app')}}</label>
 																				<select id='select-server' class="form-control">
 																					<option value="">- Select -</option>
 																					<option value="1">GR IVR</option>
@@ -249,11 +249,11 @@
 													
 						
 														<div class="pull-left">
-																<a href="number-listing.php" class="btn bg-maroon btn-flat margin">Save</a>
+																<a href="number-listing.php" class="btn bg-maroon btn-flat margin">{{trans('numbers.Save')}}</a>
 														</div>	
 														
 														<div class="pull-right">
-																<a href="number-listing.php" class="btn btn-danger margin">Release Number</a>
+																<a href="number-listing.php" class="btn btn-danger margin">{{trans('numbers.Release Number')}}</a>
 														</div>
 								
 													

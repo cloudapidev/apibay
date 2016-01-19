@@ -1,5 +1,5 @@
 <?php
-
+use Psr\Http\Message\ServerRequestInterface;
 /*
 |--------------------------------------------------------------------------
 | Routes File
@@ -27,11 +27,14 @@
 Route::group(['middleware' => ['web']], function () {
     
 
-	Route::get('/index.php', 'HomeController@index');
-	Route::get('/', 'HomeController@index');
-
 	//Login
 	Route::resource('login', 'LoginController');
+	Route::resource('register', 'LoginController@register');
+	Route::post('postregister', 'LoginController@postregister');
+
+	//Home
+	Route::get('/index.php', 'HomeController@index');
+	Route::get('/', 'HomeController@index');
 
 	//Number
 	Route::get('numbers', 'NumbersController@index');

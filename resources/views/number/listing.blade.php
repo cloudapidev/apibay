@@ -8,37 +8,37 @@
 		<form class="form-horizontal" onsubmit="return false;">
 			<div class="box box-solid box-default">
       			 <div class="box-header with-border">
-						<h3 class="box-title">Search & Filter</h3>
+						<h3 class="box-title">{{trans('numbers.Search & Filter')}}</h3>
 				</div><!-- /.box-header -->
 				<div class="box-body">
           			<div class="row">
-						<label for="inputPassword3" class="col-md-1 control-label">Country</label>
+						<label for="inputPassword3" class="col-md-1 control-label">{{trans('numbers.Search')}}Country</label>
             			<div class="col-md-2">
              				 <select class="form-control">
 								<option>(+1) United States</option>
 								<option>(+65) Singapore</option>
 							</select>
             			</div>
-						<label for="inputPassword3" class="col-md-1 control-label">Area</label>
+						<label for="inputPassword3" class="col-md-1 control-label">{{trans('numbers.Area')}}</label>
          				<div class="col-md-2">
               				<input type="text" class="form-control">
            				</div>
-						<label for="inputPassword3" class="col-md-1 control-label">Number</label>
+						<label for="inputPassword3" class="col-md-1 control-label">{{trans('numbers.Number')}}</label>
 						<div class="col-md-2">
              				<input type="text" class="form-control">
             			</div>
-						<label for="inputPassword3" class="col-md-1 control-label">Capabilities</label>
+						<label for="inputPassword3" class="col-md-1 control-label">{{trans('numbers.Capabilities')}}</label>
 						<div class="col-md-2">
 							<select class="form-control">
-									<option>Voice</option>
-									<option>SMS</option>
-									<option>Voice + SMS</option>
+									<option>{{trans('numbers.Voice')}}</option>
+									<option>{{trans('numbers.SMS')}}</option>
+									<option>{{trans('numbers.Voice + SMS')}}</option>
 							</select>
 						</div>
 					</div>
 					<div class="row">
 						<div class="box-body">
-							<label for="inputPassword3" class="col-md-1 control-label">Date Purchased</label>
+							<label for="inputPassword3" class="col-md-1 control-label">{{trans('numbers.Date Purchased')}}</label>
 							<div class="col-md-2">
 								<div class="input-group">
 									<div class="input-group-addon">
@@ -47,7 +47,7 @@
 									<input type="text" class="form-control" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask="">
 								</div>
 							</div>
-							<label for="inputPassword3" class="col-md-1 control-label">Date Expired</label>
+							<label for="inputPassword3" class="col-md-1 control-label">{{trans('numbers.Date Expired')}}</label>
 							<div class="col-md-2">
 								<div class="input-group">
 									<div class="input-group-addon">
@@ -56,7 +56,7 @@
 									<input type="text" class="form-control" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask="">
 								</div>
 							</div>
-							<label for="inputPassword3" class="col-md-1 control-label">Records per page</label>
+							<label for="inputPassword3" class="col-md-1 control-label">{{trans('numbers.Records per page')}}</label>
 							<div class="col-md-2">
 								<select class="form-control">
 										<option>- Select -</option>
@@ -66,7 +66,7 @@
 								</select>
 							</div>
 							<div class="pull-right col-xm-1">
-								<a href="#" class="btn bg-maroon btn-flat margin ">Search</a>
+								<a href="#" class="btn bg-maroon btn-flat margin ">{{trans('numbers.Search')}}Search</a>
 							</div>
 						</div>
 					</div>
@@ -78,12 +78,12 @@
 		<!-- End Filter -->
 <div class="row">
 	<div class="pull-right">
-		<a href="{{ url('numbers/buy') }}" class="btn bg-maroon btn-flat margin ">Buy Number</a>
+		<a href="{{ url('numbers/buy') }}" class="btn bg-maroon btn-flat margin ">{{trans('numbers.Buy Number')}}</a>
 	</div>
     <div class="col-xs-12">
 		<div class="box">
 			<div class="box-header">
-				<h3 class="box-title">Results</h3>
+				<h3 class="box-title">{{trans('numbers.Results')}}</h3>
 			</div><!-- /.box-header -->
 		<div class="box-body table-responsive">
 		
@@ -93,14 +93,14 @@
 				<thead>
 					<tr>
 						<th>#</th>
-						<th>Number</th>
-						<th>Country</th>
-						<th>Area</th>
-						<th>Capabilities</th>
-						<th>Date Purchased</th>
-						<th>Date Expired</th>
-						<th>Price ( Monthly )</th>
-						<th>Configuration</th>
+						<th>{{trans('numbers.Number')}}</th>
+						<th>{{trans('numbers.Country')}}</th>
+						<th>{{trans('numbers.Area')}}</th>
+						<th>{{trans('numbers.Capabilities')}}</th>
+						<th>{{trans('numbers.Date Purchased')}}</th>
+						<th>{{trans('numbers.Date Expired')}}</th>
+						<th>{{trans('numbers.Price ( Monthly )')}}</th>
+						<th>{{trans('numbers.Configuration')}}</th>
 						<th></th>
 						<!--<th>
 								<input type="checkbox" class="checkall" >
@@ -135,7 +135,7 @@
 									echo "<br /><b>Messaging :</b> <i>Server App</i> : {$item['messaging_server']}";
 								?>
 							</td>
-							<td><a href="{{url('numbers/edit',['id'=>$item['id']])}}" class="btn btn-block btn-default">Edit</a></td>
+							<td><a href="{{url('numbers/edit',['id'=>$item['id']])}}" class="btn btn-block btn-default">{{trans('numbers.Edit')}}</a></td>
 							<!--<td>
 								<input type="checkbox">
 							</td>-->
@@ -145,14 +145,14 @@
 					<tfoot>
 						<tr>
 							<th>#</th>
-							<th>Number</th>
-							<th>Country</th>
-							<th>Area</th>
-							<th>Capabilities</th>
-							<th>Date Purchased</th>
-							<th>Date Expired</th>
-							<th>Price ( Monthly )</th>
-							<th>Configuration</th>
+							<th>{{trans('numbers.Number')}}</th>
+							<th>{{trans('numbers.Country')}}</th>
+							<th>{{trans('numbers.Area')}}</th>
+							<th>{{trans('numbers.Capabilities')}}</th>
+							<th>{{trans('numbers.Date Purchased')}}</th>
+							<th>{{trans('numbers.Date Expired')}}</th>
+							<th>{{trans('numbers.Price ( Monthly )')}}</th>
+							<th>{{trans('numbers.Configuration')}}</th>
 							<th></th>
 							<!--<th></th>-->
 						</tr>

@@ -8,13 +8,13 @@
 						<div class="box box-default box-solid">
                
                 <div class="box-header with-border">
-                  <h3 class="box-title">Search new Number</h3>
+                  <h3 class="box-title">{{trans('numbers.Search new Number')}}</h3>
                 </div><!-- /.box-header -->
 								
 								<form class="form-horizontal" onsubmit="return false;">
 										<div class="box-body">
 											<div class="form-group">
-												<label for="inputPassword3" class="col-sm-1 control-label">Country</label>
+												<label for="inputPassword3" class="col-sm-1 control-label">{{trans('numbers.Country')}}</label>
 												
 												<div class="col-sm-2">
 													<select class="form-control">
@@ -23,23 +23,23 @@
 													</select>
 												</div>
 												
-												<label for="inputPassword3" class="col-sm-1 control-label">Area</label>
+												<label for="inputPassword3" class="col-sm-1 control-label">{{trans('numbers.Area')}}</label>
 												<div class="col-sm-1">
 													<input type="text" class="form-control">
 												</div>
 													
 								
-												<label for="inputPassword3" class="col-sm-1 control-label">Number</label>
+												<label for="inputPassword3" class="col-sm-1 control-label">{{trans('numbers.Number')}}</label>
 												<div class="col-sm-2">
 													<input type="text" class="form-control">
 												</div>
 								
-												<label for="inputPassword3" class="col-sm-1 control-label">Capabilities</label>
+												<label for="inputPassword3" class="col-sm-1 control-label">{{trans('numbers.Capabilities')}}</label>
 												<div class="col-sm-1">
 													<div class="radio">
 														<label>
 															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
-															Voice
+															{{trans('numbers.Voice')}}
 														</label>
 													</div>
 												</div>
@@ -47,7 +47,7 @@
 													<div class="radio">
 														<label>
 															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
-															SMS
+															{{trans('numbers.SMS')}}
 														</label>
 													</div>
 												</div>
@@ -55,15 +55,15 @@
 													<div class="radio">
 														<label>
 															<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
-															Voice + SMS
+															{{trans('numbers.Voice + SMS')}}
 														</label>
 													</div>
 												</div>
 											</div>
 									</div>
 									<div class="box-footer">
-                    <button type="submit" class="kpsubmit btn btn-primary pull-right">Search</button>
-                    <button type="submit" class="btn btn-default">Reset</button>
+                    <button type="submit" class="kpsubmit btn btn-primary pull-right">{{trans('numbers.Search')}}</button>
+                    <button type="submit" class="btn btn-default">{{trans('numbers.Reset')}}</button>
                   </div>
 								</form>
 								
@@ -79,18 +79,18 @@
 							<div class="box box-solid container-fluid">
 						 
 							<div class="box-header with-border">
-								<h3 class="box-title">Search Results</h3>
+								<h3 class="box-title">{{trans('numbers.Search Results')}}</h3>
 							</div><!-- /.box-header -->
 								<div class="box-body buytable table-responsive" >
 									<table class="table kptable table-striped datastable" style="display:none;">
 										<thead>
 											<tr>
-												<th>No</th>
-												<th>Country</th>
-												<th>Area</th>
-												<th>Number</th>
-												<th>Capabilities</th>
-												<th>Price</th>
+												<th>{{trans('numbers.No')}}</th>
+												<th>{{trans('numbers.Country')}}</th>
+												<th>{{trans('numbers.Area')}}</th>
+												<th>{{trans('numbers.Number')}}</th>
+												<th>{{trans('numbers.Capabilities')}}</th>
+												<th>{{trans('numbers.Price')}}</th>
 												<th></th>
 											</tr>
 										</thead>
@@ -353,7 +353,7 @@
 							<div class="row">
 								<div class="col-xs-12">
 									<h2 class="page-header">
-										<i class="fa fa-globe"></i> Purchase total
+										<i class="fa fa-globe"></i> {{trans('numbers.Purchase total')}}
 										<small class="pull-right">Date: <?=date("d/m/Y")?></small>
 									</h2>
 								</div><!-- /.col -->
@@ -365,16 +365,16 @@
           <div class="row">
             <!-- accepted payments column -->
             <div class="col-xs-6 table-responsive">
-							 <p class="lead">Item</p>
+							 <p class="lead">{{trans('numbers.Item')}}</p>
 							<table class="table table-striped table-condensed cf">
                 <thead>
                   <tr>
-                    <th>No</th>
-                    <th>Country</th>
-                    <th>Area</th>
-                    <th>Number</th>
-                    <th>Capabilities</th>
-                    <th>Subtotal</th>
+                    <th>{{trans('numbers.No')}}</th>
+                    <th>{{trans('numbers.Country')}}</th>
+                    <th>{{trans('numbers.Area')}}</th>
+                    <th>{{trans('numbers.Number')}}</th>
+                    <th>{{trans('numbers.Capabilities')}}</th>
+                    <th>{{trans('numbers.Subtotal')}}</th>
                   </tr>
                 </thead>
                 <tbody class="kpselectedtable">
@@ -383,30 +383,30 @@
               </table>
             </div><!-- /.col -->
             <div class="col-xs-6">
-              <p class="lead">Amount Due 2/22/2014</p>
+              <p class="lead">{{trans('numbers.Amount')}} Due 2/22/2014</p>
               <div class="table-responsive">
                 <table class="table">
                   <tbody><tr>
-                    <th style="width:50%">Subtotal:</th>
+                    <th style="width:50%">{{trans('numbers.Subtotal')}}:</th>
                     <td>$250.30</td>
                   </tr>
                   <tr>
-                    <th>Tax (9.3%)</th>
+                    <th>{{trans('numbers.Tax')}} (9.3%)</th>
                     <td>$10.34</td>
                   </tr>
          
                   <tr>
-                    <th>Total:</th>
+                    <th>{{trans('numbers.Total')}}:</th>
                     <td>$265.24</td>
                   </tr>
 									
 									 <tr>
-                    <th>Your current available credit:</th>
+                    <th>{{trans('numbers.Your current available credit')}}:</th>
                     <td>$300.00</td>
                   </tr>
 									
 									<tr>
-                    <th>Your Available Credit After checkout:</th>
+                    <th>{{trans('numbers.Your Available Credit After checkout')}}:</th>
                     <td>$34.76</td>
                   </tr>
 									
@@ -423,14 +423,14 @@
 					
 					<div class="row no-print kpconfirm-purchase">
             <div class="col-xs-12">
-              <a href="number-listing.php?success" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Confirm Purchase</a>
+              <a href="number-listing.php?success" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> {{trans('numbers.Comfirm Purchase')}}</a>
             </div>
           </div>
 
           <!-- this row will not appear when printing -->
           <div class="row no-print kp-topup" style="display:none;">
             <div class="col-xs-12">
-              <a href="number-confirm.php" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Topup Balance</a>
+              <a href="number-confirm.php" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i>{{trans('numbers.Topup Balance')}} </a>
             </div>
           </div>
         </section>

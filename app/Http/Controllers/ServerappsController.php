@@ -10,6 +10,10 @@ class ServerappsController extends Controller
 				);
 		
 	}
+	/**
+	 * show the create page.
+	 * @return view
+	 */
 	public function create()
 	{
 		return view('serverapps/newserverapp',array(
@@ -18,6 +22,11 @@ class ServerappsController extends Controller
 		)
 		);
 	}
+	/**
+	 * show the edit page
+	 * @param string $id
+	 * @return view
+	 */
 	public function edit($id)
 	{
 		$data=getData("serverapp-listing",$id);

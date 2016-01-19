@@ -3,6 +3,11 @@
 use Redirect;
 use Response;
 use Session;
+use Illuminate\Http\Request;
+use App\Libraries\Classes\Mycurl;
+use App\Libraries\Classes\Telapi;
+use Illuminate\Http\Illuminate\Http;
+use App\Libraries\Classes\Telaapi;
 
 class HomeController extends Controller {
 
@@ -36,11 +41,13 @@ class HomeController extends Controller {
 	 */
 	public function index()
 	{
-
-		return view('home',array(
+		/* $tela=new Telaapi();
+		$listData=$tela->getListData();
+		var_dump($listData); */
+		 return view('home',array(
 			"active"=>"dashboard",
 			"pagetitle"=>"Dashboard"
-		));
+		)); 
 	}
 
 }

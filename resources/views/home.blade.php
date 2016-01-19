@@ -9,12 +9,12 @@
               <div class="small-box bg-red">
                 <div class="inner">
                   <h3>65</h3>
-                  <p>Phone Numbers</p>
+                  <p>{{ trans('home.Phone Numbers')}}</p>
                 </div>
                 <div class="icon">
                   <i class="fa fa-phone-square"></i>
                 </div>
-                <a href="{{ url("numbers") }}" class="small-box-footer" style="padding:10px;">Enter to manage <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="{{ url("numbers") }}" class="small-box-footer" style="padding:10px;">{{ trans('home.Enter to manage')}} <i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div><!-- ./col -->
             <div class="col-lg-4 col-xs-6">
@@ -22,12 +22,12 @@
               <div class="small-box bg-aqua">
                 <div class="inner">
                   <h3>150</h3>
-                  <p>Server Apps </p>
+                  <p>{{ trans('home.Server Apps')}} </p>
                 </div>
                 <div class="icon">
                   <i class="fa fa-server"></i>
                 </div>
-                <a href="#" class="small-box-footer" style="padding:10px;">Enter to manage <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="{{url("serverapps")}}" class="small-box-footer" style="padding:10px;">{{ trans('home.Enter to manage')}} <i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div><!-- ./col -->
             <div class="col-lg-4 col-xs-6">
@@ -35,12 +35,12 @@
               <div class="small-box bg-green">
                 <div class="inner">
                   <h3>53</h3>
-                  <p>Client Apps </p>
+                  <p>{{ trans('home.Client Apps')}} </p>
                 </div>
                 <div class="icon">
                   <i class="fa fa-whatsapp"></i>
                 </div>
-                <a href="#" class="small-box-footer" style="padding:10px;">Enter to manage <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="{{url("clientapps")}}" class="small-box-footer" style="padding:10px;">{{ trans('home.Enter to manage')}} <i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div><!-- ./col -->
             <div class="col-lg-4 col-xs-6">
@@ -48,12 +48,12 @@
               <div class="small-box bg-yellow">
                 <div class="inner">
                   <h3>44</h3>
-                  <p>User Registrations</p>
+                  <p>{{ trans('home.User Registrations')}}</p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-person-add"></i>
                 </div>
-                <a href="#" class="small-box-footer" style="padding:10px;">Enter to manage <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="{{url("users")}}" class="small-box-footer" style="padding:10px;">{{ trans('home.Enter to manage')}} <i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div><!-- ./col -->
            
@@ -62,12 +62,12 @@
               <div class="small-box bg-maroon">
                 <div class="inner">
                   <h3>&nbsp; </h3>
-                  <p>Settings</p>
+                  <p>{{ trans('home.Settings')}}</p>
                 </div>
                 <div class="icon">
                   <i class="fa fa-gear"></i>
                 </div>
-                <a href="#" class="small-box-footer" style="padding:10px;">Enter to manage <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="{{url("account")}}" class="small-box-footer" style="padding:10px;">{{ trans('home.Enter to manage')}} <i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div><!-- ./col -->
 						 <div class="col-lg-4 col-xs-6">
@@ -75,12 +75,12 @@
               <div class="small-box bg-purple">
                 <div class="inner">
                   <h3>&nbsp;</h3>
-                  <p>Billing & Reports</p>
+                  <p>{{ trans('home.Billing & Reports')}}</p>
                 </div>
                 <div class="icon">
                   <i class="fa fa-bar-chart"></i>
                 </div>
-                <a href="#" class="small-box-footer" style="padding:10px;">Enter to manage <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="{{url("calllogs")}}" class="small-box-footer" style="padding:10px;">{{ trans('home.Enter to manage')}} <i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div><!-- ./col -->
           </div><!-- /.row -->
@@ -94,7 +94,7 @@
 						<div class="col-md-12">
 								<div class="box">
 									<div class="box-header with-border">
-										<h3 class="box-title">Monthly Recap Report</h3>
+										<h3 class="box-title">{{ trans('home.Monthly Recap Report')}}</h3>
 										<div class="box-tools pull-right">
 											<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
 											<div class="btn-group">

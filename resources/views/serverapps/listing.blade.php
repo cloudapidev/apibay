@@ -87,7 +87,7 @@
        
         <div class="row">
 						<div class="pull-right">
-								<a href="serverapp-new.php" class="btn bg-maroon btn-flat margin ">Create New</a>
+								<a href="{{url('serverapps/add')}}" class="btn bg-maroon btn-flat margin ">Create New</a>
 						</div>
 						
 						

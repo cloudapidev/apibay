@@ -18,66 +18,66 @@
             <li class="header">MAIN NAVIGATION</li>
             <li class="treeview dashboard">
               <a href="{{ url("/") }}">
-                <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                <i class="fa fa-dashboard"></i> <span>{{ trans('layout.Dashboard') }}</span>
               </a>
             </li>
 						<li class="treeview menu_documentation">
               <a href="number-listing.php">
                 <i class="fa fa fa-book"></i>
-                <span>Documentation</span>
+                <span>{{ trans('layout.Documentation') }}</span>
 				 <i class="fa fa-angle-left pull-right"></i>
               </a>
 				<ul class="treeview-menu">
-					<li class="menu_documentation_phonenumber"><a href="{{ url("documentation/phonenumber") }}">Phone Numbers</a></li>
-					<li class="menu_documentation_serverapp"><a href="{{ url("documentation/serverapp") }}">Server Apps</a></li>
-					<li class="menu_documentation_clientapp"><a href="{{ url("documentation/clientapp") }}">Client Apps</a></li>
-					<li class="menu_documentation_billing"><a href="{{ url("documentation/billing") }}">Billing & Reports</a></li>
-					<li class="menu_documentation_setting"><a href="{{ url("documentation/setting") }}">Settings</a></li>
+					<li class="menu_documentation_phonenumber"><a href="{{ url("documentation/phonenumber") }}">{{ trans('layout.Phone Numbers') }}</a></li>
+					<li class="menu_documentation_serverapp"><a href="{{ url("documentation/serverapp") }}">{{ trans('layout.Server Apps') }}</a></li>
+					<li class="menu_documentation_clientapp"><a href="{{ url("documentation/clientapp") }}">{{ trans('layout.Client Apps') }}</a></li>
+					<li class="menu_documentation_billing"><a href="{{ url("documentation/billing") }}">{{ trans('layout.Billing & Reports') }}</a></li>
+					<li class="menu_documentation_setting"><a href="{{ url("documentation/setting") }}">{{ trans('layout.Settings') }}</a></li>
 				</ul>
               </a>
             </li>
 						<li class="treeview menu_number">
               <a href="number-listing.php">
                 <i class="fa fa fa-phone-square"></i>
-                <span>Phone Numbers</span>
+                <span>{{ trans('layout.Phone Numbers') }}</span>
 								 <i class="fa fa-angle-left pull-right"></i>
               </a>
 							<ul class="treeview-menu">
-                <li class="menu_number_listing"><a href="{{ url("numbers") }}">Listing</a></li>
-                <li class="menu_number_new"><a href="{{ url("numbers/buy") }}">Buy Phone Number</a></li>
+                <li class="menu_number_listing"><a href="{{ url("numbers") }}">{{ trans('layout.Listing') }}</a></li>
+                <li class="menu_number_new"><a href="{{ url("numbers/buy") }}">{{ trans('layout.Buy Phone Number') }}</a></li>
               </ul>
             </li>
 						
 						<li class="treeview menu_user">
               <a href="index.php">
-                <i class="fa fa-user-plus"></i> <span>Users</span>
+                <i class="fa fa-user-plus"></i> <span>{{ trans('layout.Users') }}</span>
 								<i class="fa fa-angle-left pull-right"></i>
               </a>
 							<ul class="treeview-menu">
-                <li class="menu_user_listing"><a href="{{ url("users") }}">Listing</a></li>
-                <li class="menu_user_new"><a href="{{ url("users/add") }}">Create new user</a></li>
+                <li class="menu_user_listing"><a href="{{ url("users") }}">{{ trans('layout.Listing') }}</a></li>
+                <li class="menu_user_new"><a href="{{ url("users/add") }}">{{ trans('layout.Create New') }}</a></li>
               </ul>
             </li>
 						
 						<li class="treeview menu_serverapp">
               <a href="index.php">
-                <i class="fa fa-server"></i> <span>Server Apps</span>
+                <i class="fa fa-server"></i> <span>{{ trans('layout.Server Apps') }}</span>
 								<i class="fa fa-angle-left pull-right"></i>
               </a>
 							<ul class="treeview-menu">
-                <li class="menu_serverapp_listing"><a href="{{url("serverapps")}}">Listing</a></li>
-                <li class="menu_serverapp_new"><a href="{{url("serverapps/add")}}">Create New</a></li>
+                <li class="menu_serverapp_listing"><a href="{{url("serverapps")}}">{{ trans('layout.Listing') }}</a></li>
+                <li class="menu_serverapp_new"><a href="{{url("serverapps/add")}}">{{ trans('layout.Create New') }}</a></li>
 							</ul>
             </li>
 						
 						<li class="treeview menu_siptrunk">
               <a href="index.php">
-                <i class="fa fa-whatsapp"></i> <span>Sip Trunk</span>
+                <i class="fa fa-whatsapp"></i> <span>{{ trans('layout.Sip Trunk') }}</span>
 								<i class="fa fa-angle-left pull-right"></i>
               </a>
 							<ul class="treeview-menu">
-                <li class="menu_siptrunk_listing"><a href="{{url("siptrunk")}}">Listing</a></li>
-                <li class="menu_siptrunk_new"><a href="{{url("siptrunk/add")}}">Create New</a></li>
+                <li class="menu_siptrunk_listing"><a href="{{url("siptrunk")}}">{{ trans('layout.Listing') }}</a></li>
+                <li class="menu_siptrunk_new"><a href="{{url("siptrunk/add")}}">{{ trans('layout.Create New') }}</a></li>
 							</ul>
             </li>
             
@@ -85,56 +85,56 @@
             
             <li class="treeview menu_clientapp">
               <a href="index.php">
-                <i class="fa fa-server"></i> <span>Client Apps</span>
+                <i class="fa fa-server"></i> <span>{{ trans('layout.Client Apps') }}</span>
 								<i class="fa fa-angle-left pull-right"></i>
               </a>
 							<ul class="treeview-menu">
-                <li class="menu_clientapp_listing"><a href="{{url("clientapps")}}">Listing</a></li>
-                <li class="menu_clientapp_new"><a href="{{url("clientapps/add")}}">Create New</a></li>
+                <li class="menu_clientapp_listing"><a href="{{url("clientapps")}}">{{ trans('layout.Listing') }}</a></li>
+                <li class="menu_clientapp_new"><a href="{{url("clientapps/add")}}">{{ trans('layout.Create New') }}</a></li>
 							</ul>
             </li>
 						
 						<li class="treeview menu_pricing">
               <a href="index.php">
-                <i class="fa fa-object-ungroup"></i> <span>Pricing</span>
+                <i class="fa fa-object-ungroup"></i> <span>{{ trans('layout.Pricing') }}</span>
 								<i class="fa fa-angle-left pull-right"></i>
 								<ul class="treeview-menu">
-									<li class="menu_pricing_rate"><a href="{{url("pricing")}}">Call / SMS Rates</a></li>
+									<li class="menu_pricing_rate"><a href="{{url("pricing")}}">{{ trans('layout.Call/SMS Rates') }}</a></li>
 								</ul>
               </a>
             </li>
 						
 						<li class="treeview menu_extra">
               <a href="index.php">
-                <i class="fa fa-object-ungroup"></i> <span>Extras</span>
+                <i class="fa fa-object-ungroup"></i> <span>{{ trans('layout.Extras') }}</span>
 								<i class="fa fa-angle-left pull-right"></i>
 								<ul class="treeview-menu">
-									<li class="menu_extra_call"><a href="{{url("callout")}}">Make Call</a></li>
-									<li class="menu_extra_sms"><a href="{{url("sendsms")}}">Send SMS</a></li>
+									<li class="menu_extra_call"><a href="{{url("callout")}}">{{ trans('layout.Make Call') }}</a></li>
+									<li class="menu_extra_sms"><a href="{{url("sendsms")}}">{{ trans('layout.Send SMS') }}</a></li>
 								</ul>
               </a>
             </li>
 						
 						<li class="treeview">
               <a href="index.php">
-                <i class="fa fa-bar-chart"></i> <span>Billing & Reports</span>
+                <i class="fa fa-bar-chart"></i> <span>{{ trans('layout.Billing & Reports') }}</span>
 								<i class="fa fa-angle-left pull-right"></i>
 								<ul class="treeview-menu">
-									<li class="sssss"><a href="{{url("calllogs")}}">Call Logs</a></li>
-									<li class="sssss"><a href="{{url("smslogs")}}">SMS Logs</a></li>
-									<li class="sssss"><a href="{{url("statements")}}">Statements</a></li>
-									<li class="sssss"><a href="{{url("topup")}}">Topup & Payments History</a></li>		
+									<li class="sssss"><a href="{{url("calllogs")}}">{{ trans('layout.Call Logs') }}</a></li>
+									<li class="sssss"><a href="{{url("smslogs")}}">{{ trans('layout.SMS Logs') }}</a></li>
+									<li class="sssss"><a href="{{url("statements")}}">{{ trans('layout.Statements') }}</a></li>
+									<li class="sssss"><a href="{{url("topup")}}">{{ trans('layout.Topup & Payments History') }}</a></li>		
 								</ul>
               </a>
             </li>
 						
 						<li class="treeview menu_setting">
               <a href="index.php">
-                <i class="fa fa-gear"></i> <span>Settings</span>
+                <i class="fa fa-gear"></i> <span>{{ trans('layout.Settings') }}</span>
 								<i class="fa fa-angle-left pull-right"></i>
 								<ul class="treeview-menu">
-                <li class="menu_account"><a href="{{url("account")}}">Account</a></li>
-                <li class="menu_channel_listing"><a href="{{url("channel")}}">Channel</a></li>
+                <li class="menu_account"><a href="{{url("account")}}">{{ trans('layout.Account') }}</a></li>
+                <li class="menu_channel_listing"><a href="{{url("channel")}}">{{ trans('layout.Channel') }}</a></li>
             
               </ul>
               </a>
@@ -142,17 +142,17 @@
 						
 						<li class="treeview">
               <a href="index.php">
-                <i class="fa fa-gears"></i> <span>System ( Admin Only )</span>
+                <i class="fa fa-gears"></i> <span>{{ trans('layout.System(Admin Only)') }}</span>
 								<i class="fa fa-angle-left pull-right"></i>
               </a>
 							<ul class="treeview-menu">
-                <li class="aaaa"><a href="index.php">Manage Numbers</a></li>
-                <li class="aaaa"><a href="index.php">Manage User Accounts</a></li>
-                <li class="aaaa"><a href="index.php">Manage Administrators</a></li>
-                <li class="aaaa"><a href="index.php">Manage Countries</a></li>
-                <li class="aaaa"><a href="index.php">Manage Topups</a></li>
-                <li class="aaaa"><a href="index.php">Manage SIP Trunks</a></li>
-                <li class="aaaa"><a href="index.php">Manage Rate Table</a></li>
+                <li class="aaaa"><a href="index.php">{{ trans('layout.Manage Numbers') }}</a></li>
+                <li class="aaaa"><a href="index.php">{{ trans('layout.Manage User Accounts') }}</a></li>
+                <li class="aaaa"><a href="index.php">{{ trans('layout.Manage Administrators') }}</a></li>
+                <li class="aaaa"><a href="index.php">{{ trans('layout.Manage Countries') }}</a></li>
+                <li class="aaaa"><a href="index.php">{{ trans('layout.Manage Topups') }}</a></li>
+                <li class="aaaa"><a href="index.php">{{ trans('layout.Manage SIP Trunks') }}</a></li>
+                <li class="aaaa"><a href="index.php">{{ trans('layout.Manage Rate Table') }}</a></li>
               </ul>
             </li>
 						
