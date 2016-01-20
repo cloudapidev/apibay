@@ -29,6 +29,7 @@ Route::group(['middleware' => ['web']], function () {
 
 	//Login
 	Route::resource('login', 'LoginController');
+	Route::post('postlogin', 'LoginController@postLogin');
 	Route::resource('register', 'LoginController@register');
 	Route::post('postregister', 'LoginController@postregister');
 

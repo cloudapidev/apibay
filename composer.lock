@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "8754ea558d1c6631645c59b92bdc0e8b",
+    "hash": "3687aa48b7ad7db2e45f9e6d311150aa",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -687,6 +687,50 @@
                 "storage"
             ],
             "time": "2015-12-19 20:16:43"
+        },
+        {
+            "name": "mashape/unirest-php",
+            "version": "v2.6.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Mashape/unirest-php.git",
+                "reference": "da71f063cfd1ef2e07769aac7a9af66379ef3361"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Mashape/unirest-php/zipball/da71f063cfd1ef2e07769aac7a9af66379ef3361",
+                "reference": "da71f063cfd1ef2e07769aac7a9af66379ef3361",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "codeclimate/php-test-reporter": "0.1.*",
+                "phpunit/phpunit": "~4.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Unirest": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Unirest PHP",
+            "homepage": "https://github.com/Mashape/unirest-php",
+            "keywords": [
+                "client",
+                "curl",
+                "http",
+                "https",
+                "rest"
+            ],
+            "time": "2015-12-15 22:22:11"
         },
         {
             "name": "monolog/monolog",

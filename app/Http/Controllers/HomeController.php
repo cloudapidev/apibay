@@ -4,10 +4,7 @@ use Redirect;
 use Response;
 use Session;
 use Illuminate\Http\Request;
-use App\Libraries\Classes\Mycurl;
-use App\Libraries\Classes\Telapi;
 use Illuminate\Http\Illuminate\Http;
-use App\Libraries\Classes\Telaapi;
 
 class HomeController extends Controller {
 
@@ -28,11 +25,11 @@ class HomeController extends Controller {
 	 * @return void
 	 */
 
-	/*
-	public function __construct()
+	
+	/* public function __construct()
 	{
 		$this->middleware('auth');
-	}*/
+	} */
 
 	/**
 	 * Show the application dashboard to the user.
@@ -41,9 +38,7 @@ class HomeController extends Controller {
 	 */
 	public function index()
 	{
-		/* $tela=new Telaapi();
-		$listData=$tela->getListData();
-		var_dump($listData); */
+		 
 		 return view('home',array(
 			"active"=>"dashboard",
 			"pagetitle"=>"Dashboard"

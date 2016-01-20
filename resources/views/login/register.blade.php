@@ -48,14 +48,15 @@
 			<?php } ?>
 			
         <p class="login-box-msg">Register a new membership</p>
-        <form action="{{url('postregister')}}" method="post">
+        <form id='registerForm' action="{{url('postregister')}}" method="post">
 					<input type="hidden" name="failregister" value="1">
+					<input type="hidden" name="_token"         value="{{csrf_token()}}"/>
           <div class="form-group has-feedback">
-            <input type="text" class="form-control" placeholder="Full name" name='username'>
+            <input type="text" class="form-control" placeholder="Full name" name='full_name' value='{{old("full_name")}}'>
             <span class="glyphicon glyphicon-user form-control-feedback"></span>
           </div>
           <div class="form-group has-feedback">
-            <input type="email" class="form-control" placeholder="Email" name='email' >
+            <input type="email" class="form-control" placeholder="Email" name='email' value='{{old("email")}}' >
             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
           </div>
           <div class="form-group has-feedback">
@@ -70,7 +71,7 @@
             <div class="col-xs-8">
               <div class="checkbox icheck">
                 <label>
-                  <input type="checkbox" name='except'> I agree to the <a href="#">terms</a>
+                  <input type="checkbox" name='accept'> I agree to the <a href="#">terms</a>
                 </label>
               </div>
             </div><!-- /.col -->
@@ -107,13 +108,15 @@
     <script src="{{ asset("/bower_components/admin-lte/bootstrap/js/bootstrap.min.js")}}"></script>
     <!-- iCheck -->
     <script src="{{ asset("/bower_components/admin-lte/plugins/iCheck/icheck.min.js")}}"></script>
+    <script src="{{ asset("/bower_components/admin-lte/plugins/validate/jquery.validate.min.js")}}"></script>
+    <script src="{{ asset("/bower_components/admin-lte/myjs/login.js")}}"></script>
     <script>
       $(function () {
         $('input').iCheck({
           checkboxClass: 'icheckbox_square-blue',
           radioClass: 'iradio_square-blue',
           increaseArea: '20%' // optional
-        });
+        });        
       });
     </script>
   </body>

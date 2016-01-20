@@ -36,14 +36,14 @@
 				
 				
         <p class="login-box-msg">{{ trans('login.Sign in to start your session') }}</p>
-        <form action="{{ url("login") }}" method="post">
+        <form id="loginForm" action="{{ url("postlogin") }}" method="post">
           <input type="hidden" name="_token" value="{{ csrf_token() }}">
           <div class="form-group has-feedback">
-            <input type="email" class="form-control" placeholder="Email">
+            <input type="email" class="form-control" placeholder="Email" name='loginId' value="{{ old('loginId') }} " >
             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
           </div>
           <div class="form-group has-feedback">
-            <input type="password" class="form-control" placeholder="Password">
+            <input type="password" class="form-control" placeholder="Password" name="password">
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
           </div>
           <div class="row">
@@ -80,6 +80,8 @@
     <script src="{{ asset("/bower_components/admin-lte/bootstrap/js/bootstrap.min.js") }}"></script>
     <!-- iCheck -->
     <script src="{{ asset("/bower_components/admin-lte/plugins/iCheck/icheck.min.js") }}"></script>
+     <script src="{{ asset("/bower_components/admin-lte/plugins/validate/jquery.validate.min.js")}}"></script>
+    <script src="{{ asset("/bower_components/admin-lte/myjs/login.js")}}"></script>
     <script>
       $(function () {
         $('input').iCheck({

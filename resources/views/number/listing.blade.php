@@ -95,7 +95,6 @@
 						<th>#</th>
 						<th>{{trans('numbers.Number')}}</th>
 						<th>{{trans('numbers.Country')}}</th>
-						<th>{{trans('numbers.Area')}}</th>
 						<th>{{trans('numbers.Capabilities')}}</th>
 						<th>{{trans('numbers.Date Purchased')}}</th>
 						<th>{{trans('numbers.Date Expired')}}</th>
@@ -108,34 +107,34 @@
 						</tr>
 					</thead>
 					<tbody>
-						<?php $cnt=0; //$listData=openCSV("number-listing");
+						<?php $cnt=0; 
+						var_dump($listDatas[0]);
 						foreach($listDatas as $key=>$item){ ++$cnt;?>
 						<tr>
 							<td><?=$cnt ?></td>
-							<td><?=$item['number']?></td>
-							<td><?=$item['country']?></td>
-							<td><?=$item['area']?></td>
-							<td><?=$item['capability']?></td>
-							<td><?=$item['date_purchase']?></td>
-							<td><?=$item['date_expire']?></td>
-							<td><?=$item['price']?></td>
+							<td><?=$item->number?></td>
+							<td><?=$item->country?></td>
+							<td><?=$item->capabilities?></td>
+							<td><?=$item->purchased_date?></td>
+							<td><?=$item->expired_date?></td>
+							<td><?=$item->price?></td>
 							<td>
 								<?php 
-									if($item['configure_with'] == "Forward to number")
-										echo "<b>Voice</b> : <i>Forward to number :</i> {$item['bind_number']}";
-									if($item['configure_with'] == "SIP Trunk")
-										echo "<b>Voice</b> : <i>Sip Trunk :</i> {$item['sip_trunk']}";
-									if($item['configure_with'] == "Server App")
-										echo "<b>Voice</b> : <i>Server App :</i> {$item['server_app']}";
-									if($item['configure_with'] == "Bind to user")
-										echo "<b>Voice</b> : <i>Bind to user :</i> {$item['bind_account']}";
-									if($item['messaging_url'])
-									echo "<br /><b>Messaging :</b> <i>URL</i>: {$item['messaging_url']}";
-									if($item['messaging_server'])
-									echo "<br /><b>Messaging :</b> <i>Server App</i> : {$item['messaging_server']}";
+									/* if($item->configure_with == "Forward to number")
+										echo "<b>Voice</b> : <i>Forward to number :</i> {$item->bind_number}";
+									if($item->configure_with == "SIP Trunk")
+										echo "<b>Voice</b> : <i>Sip Trunk :</i> {$item->sip_trunk}";
+									if($item->configure_with == "Server App")
+										echo "<b>Voice</b> : <i>Server App :</i> {$item->server_app}";
+									if($item->configure_with == "Bind to user")
+										echo "<b>Voice</b> : <i>Bind to user :</i> {$item->bind_account}";
+									if($item->messaging_url)
+									echo "<br /><b>Messaging :</b> <i>URL</i>: {$item->messaging_url}";
+									if($item->messaging_server)
+									echo "<br /><b>Messaging :</b> <i>Server App</i> : {$item->messaging_server}"; */
 								?>
-							</td>
-							<td><a href="{{url('numbers/edit',['id'=>$item['id']])}}" class="btn btn-block btn-default">{{trans('numbers.Edit')}}</a></td>
+							</td> 
+							<td><a href="{{url('numbers/edit',['id'=>$item->id])}}" class="btn btn-block btn-default">{{trans('numbers.Edit')}}</a></td>
 							<!--<td>
 								<input type="checkbox">
 							</td>-->
@@ -155,7 +154,7 @@
 							<th>{{trans('numbers.Configuration')}}</th>
 							<th></th>
 							<!--<th></th>-->
-						</tr>
+						</tr> 
 					</tfoot>
 				</table>
 				
