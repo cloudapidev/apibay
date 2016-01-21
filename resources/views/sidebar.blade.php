@@ -147,7 +147,7 @@
               </a>
 							<ul class="treeview-menu">
                 <li class="aaaa"><a href="index.php">{{ trans('layout.Manage Numbers') }}</a></li>
-                <li class="aaaa"><a href="index.php">{{ trans('layout.Manage User Accounts') }}</a></li>
+                <li class="aaaa"><a href="index.php">{{ trans('layout.Manage Accounts') }}</a></li>
                 <li class="aaaa"><a href="index.php">{{ trans('layout.Manage Administrators') }}</a></li>
                 <li class="aaaa"><a href="index.php">{{ trans('layout.Manage Countries') }}</a></li>
                 <li class="aaaa"><a href="index.php">{{ trans('layout.Manage Topups') }}</a></li>

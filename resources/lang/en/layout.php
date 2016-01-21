@@ -26,7 +26,7 @@ return array(
 		"Channel"=>"Channel",
 		"System(Admin Only)"=>"System(Admin Only)",
 		"Manage Numbers"=>"Manage Numbers",
-		"Manage User Accounts"=>"Manage User Accounts",
+		"Manage Accounts"=>"Manage Accounts",
 		"Manage Administrators"=>"Manage Adminstrators",
 		"Manage Countries"=>"Manage Countries",
 		"Manage Topups"=>"Manage Topups",

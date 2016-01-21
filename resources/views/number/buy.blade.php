@@ -103,7 +103,7 @@
 												<td>Voice</td>
 												<td>$64.50</td>
 												<td>
-													<a class="btn btn-default">Buy</a>
+													<a href="#" data-toggle="modal" data-target="#myModal" href="#"  class="btn btn-default">Buy</a>
 												</td>
 											</tr>
 											<tr>
@@ -114,7 +114,7 @@
 												<td>SMS</td>
 												<td>$50.00</td>
 												<td>
-													<a  class="btn btn-default">Buy</a>
+													<a href="#" data-toggle="modal" data-target="#myModal" class="btn btn-default">Buy</a>
 												</td>
 											</tr>
 											<tr>
@@ -125,7 +125,7 @@
 												<td>Voice+SMS</td>
 												<td>$10.70</td>
 												<td>
-													<a  class="btn btn-default">Buy</a>
+													<a href="#" data-toggle="modal" data-target="#myModal" class="btn btn-default">Buy</a>
 												</td>
 											</tr>
 											<tr>
@@ -136,7 +136,7 @@
 												<td>Voice</td>
 												<td>$25.99</td>
 												<td>
-													<a  class="btn btn-default">Buy</a>
+													<a href="#" data-toggle="modal" data-target="#myModal" class="btn btn-default">Buy</a>
 												</td>
 											</tr>
 											<tr>
@@ -147,7 +147,7 @@
 												<td>Voice</td>
 												<td>$64.50</td>
 												<td>
-													<a class="btn btn-default">Buy</a>
+													<a href="#" data-toggle="modal" data-target="#myModal" href="#"  class="btn btn-default">Buy</a>
 												</td>
 											</tr>
 											<tr>
@@ -158,7 +158,7 @@
 												<td>SMS</td>
 												<td>$50.00</td>
 												<td>
-													<a  class="btn btn-default">Buy</a>
+													<a href="#" data-toggle="modal" data-target="#myModal" class="btn btn-default">Buy</a>
 												</td>
 											</tr>
 											<tr>
@@ -169,7 +169,7 @@
 												<td>Voice+SMS</td>
 												<td>$10.70</td>
 												<td>
-													<a  class="btn btn-default">Buy</a>
+													<a href="#" data-toggle="modal" data-target="#myModal" class="btn btn-default">Buy</a>
 												</td>
 											</tr>
 											<tr>
@@ -180,7 +180,7 @@
 												<td>Voice</td>
 												<td>$25.99</td>
 												<td>
-													<a  class="btn btn-default">Buy</a>
+													<a href="#" data-toggle="modal" data-target="#myModal" class="btn btn-default">Buy</a>
 												</td>
 											</tr>
 											<tr>
@@ -202,7 +202,7 @@
 												<td>SMS</td>
 												<td>$50.00</td>
 												<td>
-													<a  class="btn btn-default">Buy</a>
+													<a href="#" data-toggle="modal" data-target="#myModal" class="btn btn-default">Buy</a>
 												</td>
 											</tr>
 											<tr>
@@ -213,7 +213,7 @@
 												<td>Voice+SMS</td>
 												<td>$10.70</td>
 												<td>
-													<a  class="btn btn-default">Buy</a>
+													<a href="#" data-toggle="modal" data-target="#myModal" class="btn btn-default">Buy</a>
 												</td>
 											</tr>
 											<tr>
@@ -224,7 +224,7 @@
 												<td>Voice</td>
 												<td>$25.99</td>
 												<td>
-													<a  class="btn btn-default">Buy</a>
+													<a href="#" data-toggle="modal" data-target="#myModal" class="btn btn-default">Buy</a>
 												</td>
 											</tr>
 											<tr>
@@ -246,7 +246,7 @@
 												<td>SMS</td>
 												<td>$50.00</td>
 												<td>
-													<a  class="btn btn-default">Buy</a>
+													<a href="#" data-toggle="modal" data-target="#myModal" class="btn btn-default">Buy</a>
 												</td>
 											</tr>
 											<tr>
@@ -257,7 +257,7 @@
 												<td>Voice+SMS</td>
 												<td>$10.70</td>
 												<td>
-													<a  class="btn btn-default">Buy</a>
+													<a href="#" data-toggle="modal" data-target="#myModal" class="btn btn-default">Buy</a>
 												</td>
 											</tr>
 											<tr>
@@ -268,7 +268,7 @@
 												<td>Voice</td>
 												<td>$25.99</td>
 												<td>
-													<a  class="btn btn-default">Buy</a>
+													<a href="#" data-toggle="modal" data-target="#myModal" class="btn btn-default">Buy</a>
 												</td>
 											</tr>
 											<tr>
@@ -290,7 +290,7 @@
 												<td>SMS</td>
 												<td>$50.00</td>
 												<td>
-													<a  class="btn btn-default">Buy</a>
+													<a href="#" data-toggle="modal" data-target="#myModal" class="btn btn-default">Buy</a>
 												</td>
 											</tr>
 											<tr>
@@ -301,7 +301,7 @@
 												<td>Voice+SMS</td>
 												<td>$10.70</td>
 												<td>
-													<a  class="btn btn-default">Buy</a>
+													<a href="#" data-toggle="modal" data-target="#myModal" class="btn btn-default">Buy</a>
 												</td>
 											</tr>
 											<tr>
@@ -312,7 +312,7 @@
 												<td>Voice</td>
 												<td>$25.99</td>
 												<td>
-													<a  class="btn btn-default">Buy</a>
+													<a href="#" data-toggle="modal" data-target="#myModal" class="btn btn-default">Buy</a>
 												</td>
 											</tr>
 										</tbody>
@@ -440,6 +440,81 @@
 						
 						</div>
 					</div>
+
+
+
+		<!-- Modal manage channel -->
+					<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									<h4 class="modal-title" id="myModalLabel">Purchase number's detail</h4>
+								</div>
+								<div class="modal-body">
+								
+									<form class="form-horizontal">
+
+											<div class="box-body">
+											
+												<dl class="dl-horizontal">
+													<dt>Country</dt>
+													<dd>Malaysia</dd>
+													<dt>Area</dt>
+													<dd>Johor</dd>
+													<dt>Number</dt>
+													<dd>+6584983919</dd>
+													<dt>Capabilities</dt>
+													<dd>Voie + SMS</dd>
+													<dt>Price</dt>
+													<dd>$2.10 per month</dd>
+												</dl>
+													
+												<hr />
+
+												<div class="form-group margin">
+													<label class="control-label col-xs-5">Months of subscription</label>
+													
+													<div class="col-xs-4">
+														<select class="form-control">
+															<?php for($i=1;$i<=24;$i++){ ?>
+																<option><?=$i?></option>
+															<?php } ?>
+														</select>
+													</div>
+													
+												</div>
+												
+												<div class="form-group margin">
+													<label class="control-label col-xs-5">Auto topup</label>
+													
+													<div class="col-xs-4">
+														<label for="auto" class="control-label">Yes</label>
+														<input id="auto" type="checkbox">
+													</div>
+													
+												</div>
+
+											</div>
+					
+							
+								</form>
+	
+								</div>
+
+								<div class="modal-footer">
+										<div class="pull-left">
+												<a href="#" class="btn bg-maroon btn-flat margin" data-dismiss="modal">Select</a>
+										</div>	
+										
+										<div class="pull-right">
+												<a href="#" class="btn btn-default margin" data-dismiss="modal">Cancel</a>
+										</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- End manage channel -->
 
 
   @endsection
