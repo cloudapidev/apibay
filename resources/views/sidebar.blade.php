@@ -134,8 +134,8 @@
 								<i class="fa fa-angle-left pull-right"></i>
 								<ul class="treeview-menu">
                 <li class="menu_account"><a href="{{url("account")}}">{{ trans('layout.Account') }}</a></li>
-                <li class="menu_channel_listing"><a href="{{url("channel")}}">{{ trans('layout.Channel') }}</a></li>
-            
+                <li class="menu_channel_listing"><a href="{{url("channel")}}">{{ trans('layout.Channel ( SIP Trunk )') }}</a></li>
+                <li class="menu_channel_listing"><a href="{{url("channel")}}">{{ trans('layout.Channel ( Number )') }}</a></li>
               </ul>
               </a>
             </li>
