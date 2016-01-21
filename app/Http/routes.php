@@ -31,7 +31,7 @@
 	Route::get('/register', 'Auth\AuthController@getRegister');
 	Route::post('/postregister', 'Auth\AuthController@postRegister');
 	
-	Route::group(['middleware' => ['grauth']], function () {
+	Route::group(['middleware' => ['web']], function () {
 	//Home
  	 Route::get('/index.php', 'HomeController@index');
 	 Route::get('/', 'HomeController@index');  
