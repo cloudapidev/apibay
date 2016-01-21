@@ -24,73 +24,76 @@
 |
 */
 
-	//Login
-	Route::get('/login', 'Auth\AuthController@getLogin');
-	Route::post('/postlogin', 'Auth\AuthController@postLogin');
-	Route::get('/logout', 'Auth\AuthController@getLogout');
-	Route::get('/register', 'Auth\AuthController@getRegister');
-	Route::post('/postregister', 'Auth\AuthController@postRegister');
+
 	
 	Route::group(['middleware' => ['web']], function () {
-	//Home
- 	 Route::get('/index.php', 'HomeController@index');
-	 Route::get('/', 'HomeController@index');  
+	
+		//Login
+		Route::get('login', 'Auth\AuthController@getLogin');
+		Route::post('/postlogin', 'Auth\AuthController@postLogin');
+		Route::get('/logout', 'Auth\AuthController@getLogout');
+		Route::get('/register', 'Auth\AuthController@getRegister');
+		Route::post('/postregister', 'Auth\AuthController@postRegister');
+			
+		//Home
+		 Route::get('/index.php', 'HomeController@index');
+		 Route::get('/', 'HomeController@index');  
 
-	//Number
-	Route::get('numbers', 'NumbersController@index');
-	Route::get('numbers/buy', 'NumbersController@buy');
-	Route::get('numbers/edit/{id}', 'NumbersController@edit');
-	
-	//User
-	Route::get('users','UsersController@index');
-	Route::get('users/add','UsersController@create');
-	Route::get('users/edit/{id}','UsersController@edit');
-	
-	//Serverapps
-	Route::get('serverapps','ServerappsController@index');
-	Route::get('serverapps/add','ServerappsController@create');
-	Route::get('serverapps/edit/{id}','ServerappsController@edit');
-	
-	//Clientapps
-	Route::get('clientapps','ClientappsController@index');
-	Route::get('clientapps/add','ClientappsController@create');
-	Route::get('clientapps/edit','ClientappsController@edit');
+		//Number
+		Route::get('numbers', 'NumbersController@index');
+		Route::get('numbers/buy', 'NumbersController@buy');
+		Route::get('numbers/edit/{id}', 'NumbersController@edit');
+		
+		//User
+		Route::get('users','UsersController@index');
+		Route::get('users/add','UsersController@create');
+		Route::get('users/edit/{id}','UsersController@edit');
+		
+		//Serverapps
+		Route::get('serverapps','ServerappsController@index');
+		Route::get('serverapps/add','ServerappsController@create');
+		Route::get('serverapps/edit/{id}','ServerappsController@edit');
+		
+		//Clientapps
+		Route::get('clientapps','ClientappsController@index');
+		Route::get('clientapps/add','ClientappsController@create');
+		Route::get('clientapps/edit','ClientappsController@edit');
 
-	//Siptrunk
-	Route::get('siptrunk','SiptrunkController@index');
-	Route::get('siptrunk/add','SiptrunkController@add');
-	Route::get('siptrunk/edit/{id}','SiptrunkController@edit');
-	
-	//Pricing
-	Route::get('pricing','PricingController@index');
-	
-	//Extras
-	Route::get('callout','ExtrasController@callout');
-	Route::get('sendsms','ExtrasController@sendsms');
-	
-	//Billing
-	Route::get('calllogs','BillingController@calllogs');
-	Route::get('smslogs','BillingController@smslogs');
-	Route::get('statements','BillingController@statements');
-	Route::get('topup','BillingController@topup');
-	
-	//Settings
-	Route::get('account','SettingsController@account');
-	Route::get('channel','SettingsController@channel');
-	
+		//Siptrunk
+		Route::get('siptrunk','SiptrunkController@index');
+		Route::get('siptrunk/add','SiptrunkController@add');
+		Route::get('siptrunk/edit/{id}','SiptrunkController@edit');
+		
+		//Pricing
+		Route::get('pricing','PricingController@index');
+		
+		//Extras
+		Route::get('callout','ExtrasController@callout');
+		Route::get('sendsms','ExtrasController@sendsms');
+		
+		//Billing
+		Route::get('calllogs','BillingController@calllogs');
+		Route::get('smslogs','BillingController@smslogs');
+		Route::get('statements','BillingController@statements');
+		Route::get('topup','BillingController@topup');
+		
+		//Settings
+		Route::get('account','SettingsController@account');
+		Route::get('channel','SettingsController@channel');
+		
 
-	
-	//System
-	Route::get('managenumber','SystemController@managenumber');
-	Route::get('manageaccount','SystemController@manageaccount');
-	Route::get('manageadmin','SystemController@manageadmin');
-	Route::get('managecountry','SystemController@managecountry');
-	Route::get('managetopup','SystemController@managetopup');
-	Route::get('managesiptrunk','SystemController@managesiptrunk');
-	Route::get('managerate','SystemController@managerate');
-	
-	//Documentation
-	Route::resource('documentation', 'DocumentationController');
+		
+		//System
+		Route::get('managenumber','SystemController@managenumber');
+		Route::get('manageaccount','SystemController@manageaccount');
+		Route::get('manageadmin','SystemController@manageadmin');
+		Route::get('managecountry','SystemController@managecountry');
+		Route::get('managetopup','SystemController@managetopup');
+		Route::get('managesiptrunk','SystemController@managesiptrunk');
+		Route::get('managerate','SystemController@managerate');
+		
+		//Documentation
+		Route::resource('documentation', 'DocumentationController');
 
 
 });

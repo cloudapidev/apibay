@@ -205,14 +205,14 @@
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <img src="{{ asset ("/bower_components/admin-lte/dist/img/user2-160x160.jpg") }}" class="user-image" alt="User Image">
-                  <span class="hidden-xs">Alexander Pierce</span>
+                  <span class="hidden-xs">{{Session::get("account_info")->full_name}}</span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
                     <img src="{{ asset ("/bower_components/admin-lte/dist/img/user2-160x160.jpg") }}" class="img-circle" alt="User Image">
                     <p>
-                      Alexander Pierce - Web Developer
+                      {{Session::get("account_info")->full_name}} - Web Developer
                       <small>Member since Nov. 2012</small>
                     </p>
                   </li>
@@ -234,7 +234,7 @@
                       <a href="account.php" class="btn btn-default btn-flat">Account</a>
                     </div>
                     <div class="pull-right">
-                      <a href="login.php?logout=true" class="btn btn-default btn-flat">Sign out</a>
+                      <a href="{{ url("logout") }}" class="btn btn-default btn-flat">Sign out</a>
                     </div>
                   </li>
                 </ul>

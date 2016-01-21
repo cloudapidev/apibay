@@ -4,7 +4,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Login Language Lines
+    | Success code / Error Lines
     |--------------------------------------------------------------------------
     |
     | The following language lines are used during authentication for various
@@ -13,8 +13,6 @@ return [
     |
     */
 
-    'Sign in to start your session' => 'Sign in to start your session',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-    'Please Login' => 'Please Login',
+    '401' => 'Invalid Credentials',
 
 ];
