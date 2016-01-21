@@ -34,7 +34,7 @@
 	Route::group(['middleware' => ['grauth']], function () {
 	//Home
  	 Route::get('/index.php', 'HomeController@index');
-	Route::get('/', 'HomeController@index');  
+	 Route::get('/', 'HomeController@index');  
 
 	//Number
 	Route::get('numbers', 'NumbersController@index');

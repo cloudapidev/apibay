@@ -104,11 +104,11 @@ class AuthController extends Controller
     	$res=$this->UnirestapiLogin($inputs);
     	if($res)
     	{
-			session('account_sid', $res->id);
+			Session::put('account_sid', $res->id);
     		return redirect('/'); 
     	}else
     	{
-    		return redirect("/login")->withInput();
+    		return redirect("/login")->withInput()->with('error','email or password is error');
     	}
     }
     public function getRegister()
