@@ -62,7 +62,7 @@
 											</div>
 									</div>
 									<div class="box-footer">
-                    <button type="submit" class="kpsubmit btn btn-primary pull-right">{{trans('numbers.Search')}}</button>
+                    <button type="submit" class="kpsubmit bg-maroon btn-flat margin btn pull-right">{{trans('numbers.Search')}}</button>
                     <button type="submit" class="btn btn-default">{{trans('numbers.Reset')}}</button>
                   </div>
 								</form>
