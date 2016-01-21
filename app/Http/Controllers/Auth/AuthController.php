@@ -9,9 +9,10 @@ use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Redirect;
 use Response;
-use Session;
 use Illuminate\Http\Request;
 use Unirest;
+use Illuminate\Http\Illuminate\Http;
+use Session;
 class AuthController extends Controller
 {
     /*
@@ -67,14 +68,14 @@ class AuthController extends Controller
      * @param  array  $data
      * @return User
      */
-    protected function create(array $data)
+ /*    protected function create(array $data)
     {
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
-    }
+    } */
     public function register()
     {
     	return view("auth/register");
@@ -103,12 +104,7 @@ class AuthController extends Controller
     	$res=$this->UnirestapiLogin($inputs);
     	if($res)
     	{
-    		// 触发一个事件
-//     		event(new \App\Events\UserLogin($user,$req->ip()));
-    		//重定向到想要访问的页面
-    	/* 	return redirect()->intended('/');
-    		 $request->session()->put("userInfo", $res);
-    		$request->session()->put("account_sid", $res->id); */
+			session('account_sid', $res->id);
     		return redirect('/'); 
     	}else
     	{
