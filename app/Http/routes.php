@@ -24,18 +24,21 @@
 |
 */
 
-Route::group(['middleware' => ['web']], function () {
-    
-
 	//Login
-	Route::resource('login', 'LoginController');
-	Route::post('postlogin', 'LoginController@postLogin');
-	Route::resource('register', 'LoginController@register');
-	Route::post('postregister', 'LoginController@postregister');
-
+	Route::get('/login', 'Auth\AuthController@getLogin');
+	Route::post('/postlogin', 'Auth\AuthController@postLogin');
+	Route::get('/logout', 'Auth\AuthController@getLogout');
+	Route::get('/register', 'Auth\AuthController@getRegister');
+	Route::post('/postregister', 'Auth\AuthController@postRegister');
+Route::group(['middleware' => ['grauth']], function () {
+	
+	
+	
 	//Home
-	Route::get('/index.php', 'HomeController@index');
-	Route::get('/', 'HomeController@index');
+ 	 Route::get('/index.php', 'HomeController@index');
+	Route::get('/', 'HomeController@index');  
+//  	Route::get('/index.php', ['middleware' => 'auth','uses' => 'HomeController@index']);
+// 	Route::get('/', ['middleware' => 'auth','uses' => 'HomeController@index']); 
 
 	//Number
 	Route::get('numbers', 'NumbersController@index');

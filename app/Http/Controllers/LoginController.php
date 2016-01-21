@@ -128,5 +128,17 @@ class LoginController extends Controller {
 		return false;
 	
 	}
-
+	/**
+	 * 检测用户是否登录
+	 * @return integer 0-未登录，大于0-当前登录用户ID
+	 * @author Abyssh <huyangin2006@126.com>
+	 */
+	public static function isLogin(){
+		$user = Session::get('account_sid');
+		if (empty($user)) {
+			return 0;
+		} else {
+			return 1;
+		}
+	}
 }

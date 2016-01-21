@@ -7,7 +7,11 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
-
+use Redirect;
+use Response;
+use Session;
+use Illuminate\Http\Request;
+use Unirest;
 class AuthController extends Controller
 {
     /*
@@ -28,8 +32,10 @@ class AuthController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
-
+//     protected $redirectTo = '/home';
+    protected $redirectPath="/";
+    protected $loginPath = '/login';
+    protected $_apiUrl="http://122.248.203.206:8080/RestCoreApi";
     /**
      * Create a new authentication controller instance.
      *
@@ -68,5 +74,126 @@ class AuthController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+    public function register()
+    {
+    	return view("auth/register");
+    }
+    public function getLogin()
+    {
+    	return view('auth/login');
+    }
+    public function postLogin(Request $request)
+    {
+    	$inputs=$request->only("loginId","password");
+    	$validator = Validator::make($inputs, [
+    			'loginId' => 'required',
+    			'password' => 'required',
+    	]);
+    
+    	if($validator->fails())
+    	{
+    		return redirect('/login')
+    		->withErrors($validator)
+    		->withInput();
+    
+    	}
+    	$inputs['password']=md5($inputs['password']);
+    	$inputs['loginMode']='WEB';
+    	$res=$this->UnirestapiLogin($inputs);
+    	if($res)
+    	{
+    		// 触发一个事件
+//     		event(new \App\Events\UserLogin($user,$req->ip()));
+    		//重定向到想要访问的页面
+    	/* 	return redirect()->intended('/');
+    		 $request->session()->put("userInfo", $res);
+    		$request->session()->put("account_sid", $res->id); */
+    		return redirect('/'); 
+    	}else
+    	{
+    		return redirect("/login")->withInput();
+    	}
+    }
+    public function getRegister()
+    {
+    	return view("auth.register");
+    }
+    /**
+     * @param Request $request
+     * @return Ambigous
+     */
+    public function postregister(Request $request)
+    {
+    	$inputs=$request->all();
+    	$inputs=$request->only("full_name","email","password");
+    	$inputs['password']=md5($inputs['password']);
+    	$doUrl="/register";
+    	$res=$this->UnirestapiRegister($inputs);
+    	if($res)
+    	{
+    		return redirect("/login");
+    	}else
+    	{
+    		return redirect("/register")->withInput();
+    	}
+    }
+  
+    /**
+     * @param array $content
+     * @return object|boolean
+     */
+    protected function UnirestapiRegister($content)
+    {
+    
+    	$apiUrl =$this->_apiUrl;
+    	$url = $apiUrl."/register";
+    	$headers=array( "Content-Type" => "application/json",
+    			"Accept" => "application/json");
+    	$response = Unirest\Request::post($url,$headers,json_encode($content));
+    	if($response->code == '201')
+    	{
+    		$res['code']=200;
+    		$res['body']=$response->body;
+    		return $res;
+    	}elseif($response->code == '403')
+    	{
+    		$res['code']=403;
+    		$res['body']="This email has exist.";
+    		return $res;
+    	}
+    	return false;
+    
+    }
+    /**
+     * 
+     * @param array $content
+     * @return boolean or object
+     */
+    protected function UnirestapiLogin($content)
+    {
+    
+    	$apiUrl =$this->_apiUrl;
+    	$url = $apiUrl."/login";
+    	$headers=array( "Content-Type" => "application/x-www-form-urlencoded;",
+    			"Accept" => "application/json");
+    	$response = Unirest\Request::get($url,$headers,$content);
+    	if($response->code == '200')
+    		return $response->body;
+    	return false;
+    
+    }
+    /**
+     * 检测用户是否登录
+     * @return integer 0-未登录，大于0-当前登录用户ID
+     * @author Abyssh <huyangin2006@126.com>
+     */
+    public static function check(){
+    	$user = Session::get('account_sid');
+    	if (empty($user)) {
+    		return 0;
+    	} else {
+    		return 1;
+    	}
     }
 }
