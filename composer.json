@@ -33,7 +33,7 @@
         "classmap": [
             "tests/TestCase.php",
             "app/libraries/classes",
-            "app/model"
+            "app/Model"
         ]
     },
     "scripts": {
