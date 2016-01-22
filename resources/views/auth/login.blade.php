@@ -24,12 +24,28 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body class="hold-transition login-page">
+  <body class="hold-transition login-page">	
     <div class="login-box">
       <div class="login-logo">
         <a href="index.php"><b>API</b>Bay</a>
       </div><!-- /.login-logo -->
       <div class="login-box-body">
+				
+				@if (Session::has('success'))
+				<div class="alert alert-success alert-dismissable">
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+          <i class="icon fa fa-cross"></i> <strong>{{ Session::get('success') }}</strong>
+				</div>
+				@endif
+			
+				
+				@if (Session::has('error'))
+				<div class="alert alert-danger alert-dismissable">
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+          <i class="icon fa fa-cross"></i> <strong>{{ Session::get('error') }}</strong>
+				</div>
+				@endif
+			
         <p class="login-box-msg">{{ trans('login.Sign in to start your session') }}</p>
         <form id="loginForm" action="{{ url("/postlogin") }}" method="post">
           <input type="hidden" name="_token" value="{{ csrf_token() }}">

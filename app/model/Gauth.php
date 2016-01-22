@@ -1,25 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Model;
 
-use App\User;
-use Validator;
-use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\ThrottlesLogins;
-use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Redirect;
 use Response;
 use Illuminate\Http\Request;
 use Unirest;
 use Illuminate\Http\Illuminate\Http;
 use Session;
-<<<<<<< .merge_file_a80236
-use Illuminate\Support\Facades\Config;
-=======
 
-
->>>>>>> .merge_file_a81368
-class AuthController extends Controller
+class Gauth 
 {
     /*
     |--------------------------------------------------------------------------
@@ -32,8 +22,6 @@ class AuthController extends Controller
     |
     */
 
-    use AuthenticatesAndRegistersUsers, ThrottlesLogins;
-
     /**
      * Where to redirect users after login / registration.
      *
@@ -42,23 +30,13 @@ class AuthController extends Controller
 //     protected $redirectTo = '/home';
     protected $redirectPath="/";
     protected $loginPath = '/login';
-    protected $_apiUrl="";
+    protected $_apiUrl="http://122.248.203.206:8080/RestCoreApi";
     /**
      * Create a new authentication controller instance.
      *
      * @return void
      */
-      public function __construct()
-    {
-<<<<<<< .merge_file_a80236
-        $this->_apiUrl =config('api.apiUrl');
-        $this->middleware('guest', ['except' => 'logout']);
-    }
-=======
-        //$this->middleware('guest', ['except' => 'logout']);
-       // $this->middleware('web');
-    }  
->>>>>>> .merge_file_a81368
+
 
     /**
      * Get a validator for an incoming registration request.
@@ -97,20 +75,6 @@ class AuthController extends Controller
     {
     	return view('auth/login');
     }
-		
-		 public function getLogout()
-    {
-
-			//clear session
-			Session::flush();
-			
-			//regenerate new session
-			Session::regenerate();
-			
-
-			return redirect("/login")->with('success','You have logged out successfully');
-    }
-		
     public function postLogin(Request $request)
     {
     	$inputs=$request->only("loginId","password");
@@ -118,35 +82,25 @@ class AuthController extends Controller
     			'loginId' => 'required',
     			'password' => 'required',
     	]);
+    
     	if($validator->fails())
     	{
     		return redirect('/login')
     		->withErrors($validator)
     		->withInput();
+    
     	}
     	$inputs['password']=md5($inputs['password']);
     	$inputs['loginMode']='WEB';
     	$res=$this->UnirestapiLogin($inputs);
-
-			if($res->code == '200'){
-				$accountinfo = json_decode($res->raw_body);
-		
-				Session::put('account_info', $accountinfo);
-				Session::put('account_sid', $accountinfo->id);
-		
-				return redirect('/')->with('success',"Login successfully"); 
-			}else{
-				return redirect("/login")->withInput()->with('error',trans("error_code.".$res->code));
-			}
-			
-   /*  	if($res)
+    	if($res)
     	{
 			Session::put('account_sid', $res->id);
     		return redirect('/'); 
     	}else
     	{
     		return redirect("/login")->withInput()->with('error','email or password is error');
-    	} */
+    	}
     }
     public function getRegister()
     {
@@ -179,7 +133,7 @@ class AuthController extends Controller
     protected function UnirestapiRegister($content)
     {
     
-    	$apiUrl =$this->_apiUrl;    	
+    	$apiUrl =$this->_apiUrl;
     	$url = $apiUrl."/register";
     	$headers=array( "Content-Type" => "application/json",
     			"Accept" => "application/json");
@@ -211,10 +165,9 @@ class AuthController extends Controller
     	$headers=array( "Content-Type" => "application/x-www-form-urlencoded;",
     			"Accept" => "application/json");
     	$response = Unirest\Request::get($url,$headers,$content);
-    	/* if($response->code == '200')
-    		return $response->body; */
-			
-    	return $response;
+    	if($response->code == '200')
+    		return $response->body;
+    	return false;
     
     }
     /**
@@ -224,6 +177,7 @@ class AuthController extends Controller
      */
     public static function check(){
     	$user = Session::get('account_sid');
+		
     	if (empty($user)) {
     		return 0;
     	} else {

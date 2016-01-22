@@ -86,14 +86,10 @@
           @endif
             
           <!-- to echo error messages -->
-          @if (isset($errors) && count($errors))
+          @if (Session::has('error'))
             <div class="alert alert-danger">
-                <strong>Whoops!</strong> There were some problems with your input.<br><br>
-                <ul>
-                  @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                  @endforeach
-                </ul>
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+								<i class="icon fa fa-check"></i> <strong>{{ Session::get('error') }}</strong>
               </div>
             @endif
 
