@@ -13,12 +13,8 @@ use Illuminate\Http\Request;
 use Unirest;
 use Illuminate\Http\Illuminate\Http;
 use Session;
-<<<<<<< .merge_file_a80236
 use Illuminate\Support\Facades\Config;
-=======
 
-
->>>>>>> .merge_file_a81368
 class AuthController extends Controller
 {
     /*
@@ -50,15 +46,10 @@ class AuthController extends Controller
      */
       public function __construct()
     {
-<<<<<<< .merge_file_a80236
+
         $this->_apiUrl =config('api.apiUrl');
         $this->middleware('guest', ['except' => 'logout']);
     }
-=======
-        //$this->middleware('guest', ['except' => 'logout']);
-       // $this->middleware('web');
-    }  
->>>>>>> .merge_file_a81368
 
     /**
      * Get a validator for an incoming registration request.

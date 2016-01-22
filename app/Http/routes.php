@@ -25,7 +25,6 @@
 */
 
 
-<<<<<<< HEAD
 	//Number
 	Route::get('numbers/{page?}', 'NumbersController@index');
 	Route::get('numbers/buy', 'NumbersController@buy');
@@ -35,8 +34,6 @@
 	Route::get('users','UsersController@index');
 	Route::get('users/add','UsersController@create');
 	Route::get('users/edit/{id}','UsersController@edit');
-=======
->>>>>>> 8e318f5c297314fe3fea628a5ae72fc3b212f68c
 	
 	Route::group(['middleware' => ['web']], function () {
 	
