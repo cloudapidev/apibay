@@ -1,40 +1,43 @@
 <?php
 namespace App\Model;
 use Unirest;
+use Config;
+use App\Libraries\Classes\Ossbss;
 class Numberapi{
 	// 	protected $_baseurl="192.168.2.244";
-	protected $_apiUrl="http://122.248.203.206:8080/RestCoreApi";
+	protected $_apiUrl="";
 	protected $_authorization='';
+	protected $_numberUrl="/v2/developer_numbers";
 	public function __construct()
 	{
-		$this->setAuthorization();
+		if(empty($this->_authorization))
+		{
+			$ossbss=new Ossbss();
+			$this->_authorization=$ossbss->getAuthorization();
+		}
+		if(empty($this->_apiUrl))
+			$this->_apiUrl=Config("api.apiUrl");
 	}
 	
-	protected function setAuthorization()
-	{
-		$apikey="oS3W4emReR55Ie9XI0mIC1fehANMlHXx";
-		$secretkey="9EdYm8_o3nJE1Ne4";
-		$ts=date('Y-m-d H:i:s O',time());
-		$str="abcdefghijklmnopqrstuvwxyz0123456789";
-		$nonce=substr(str_shuffle($str),10);
-		$hash=base64_encode(md5($apikey.$secretkey.$ts.$nonce));
-		$this->_authorization="api_key=$apikey,ts=$ts,nonce=$nonce, X-Security-Sign=$hash";
-	}
+	
 	public function numberlist($offset=0,$limit=10)
 	{
 		$apiUrl =$this->_apiUrl;
-		$doUrl ="/v2/developer_numbers";
-		$doUrl .= "?offset=".$offset
+		$doUrl = $this->_numberUrl."?offset=".$offset
 		."&limit=".$limit;
 		$url = $apiUrl.$doUrl;
 		$header = array(
 				"Content-Type"	=>"application/x-www-form-urlencoded;charset=UTF-8",
 				"Authorization"=>$this->_authorization
 		);
+		
 		$response = Unirest\Request::get($url,$header);
 		if($response->code == '200')
 		{
-			return $response->body->data;
+			
+			$result['paging']=$response->body->paging;
+			$result['data']=empty($response->body->data)?array():$response->body->data;
+			return $result;
 		}
 		return false;
 	}

@@ -107,8 +107,10 @@
 						</tr>
 					</thead>
 					<tbody>
-						<?php $cnt=0; 
-						var_dump($listDatas[0]);
+						<?php 
+						if(!empty($listDatas)):
+						$cnt=0; 
+						//var_dump($listDatas[0]);
 						foreach($listDatas as $key=>$item){ ++$cnt;?>
 						<tr>
 							<td><?=$cnt ?></td>
@@ -119,6 +121,8 @@
 							<td><?=$item->expired_date?></td>
 							<td><?=$item->price?></td>
 							<td>
+								<?php echo "<b>Voice</b> : <i>Forward to number :</i> ";
+									echo "<br /><b>Messaging :</b> <i>URL</i>: ";?>
 								<?php 
 									/* if($item->configure_with == "Forward to number")
 										echo "<b>Voice</b> : <i>Forward to number :</i> {$item->bind_number}";
@@ -139,7 +143,7 @@
 								<input type="checkbox">
 							</td>-->
 						</tr>
-						<?php } ?>
+						<?php } endif; ?>
 					</tbody>
 					<tfoot>
 						<tr>
@@ -166,21 +170,8 @@
 		</div><!-- /.box -->
     </div><!-- /.col -->
   </div><!-- /.row -->
-<div class="row">
-	<div class="col-xs-12">
-		<nav class="pull-right">
-			<ul class="pagination">
-				<li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-				<li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-				<li class="default"><a href="#">2 <span class="sr-only">(current)</span></a></li>
-				<li class="default"><a href="#">3 <span class="sr-only">(current)</span></a></li>
-				<li class="default"><a href="#">4 <span class="sr-only">(current)</span></a></li>
-				<li class="default"><a href="#">5 <span class="sr-only">(current)</span></a></li>
-				<li class="default"><a href="#">6 <span class="sr-only">(current)</span></a></li>
-			</ul>
-		</nav>
-	</div>
-</div>
-
-
+<?=$pagelist ?>
+  @endsection
+  @section('afterfooter')
+<script type="text/javascript" src="{{ asset("/bower_components/admin-lte/myjs/page.js") }}"></script> 
   @endsection

@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http;
 use App\Model;
 use App\Model\Numberapi;
+use App\Libraries\Classes\Ossbss;
 class NumbersController extends Controller
 {
     /**
@@ -16,15 +17,21 @@ class NumbersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+	protected $_perNums=1;
+    public function index(Request $request,$page=1)
     {
+//     	var_dump($request);
     	$numberapi=new Numberapi();
-    	$listData=$numberapi->numberlist();
+    	$res=$numberapi->numberlist($page-1,$this->_perNums);
+    	$Ossbss=new Ossbss();
+//     	$url=url('/numbers');
+    	$pagelist=$Ossbss->createPage("/numbers",$res['paging']->total,$page,$this->_perNums);
 //     	dd($listData);
         return view("number/listing",array(
                 "active"=>"menu_number , menu_number_listing",
                 "pagetitle"=>"Numbers Listing",
-        		'listDatas'=>$listData
+        		'listDatas'=>$res['data'],
+        		'pagelist'=>$pagelist
             )
         ); 
     }

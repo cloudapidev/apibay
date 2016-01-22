@@ -2,136 +2,79 @@
 namespace App\Libraries\Classes;
 use Config,Session,Log;
 class Ossbss {
-	
 	/**
-	 * 
-	 * @author abyssh <yingchun@globalroam.com>
+	 * create the authorizataion
+	 * @return string
 	 */
-	public static function setBaseConfig(){				
-		$file = "public/app/base/config.txt";
-		if(is_file($file) !== false){
-			$baseConfig = file_get_contents($file);	
-			$config = json_decode($baseConfig,true);
-			Config::set('base::app',$config);
-		}
-	}
-	
-	public static function setConfig(){			
-		$config = self::getConfigFiles();
-		//$config list
-		Log::info("set config");
-		
-		foreach ($config as $key=>$val){
-			$ones = json_decode($val,true);
-			if(is_array($ones)){
-				foreach ($ones as $k=>$one){
-					Config::set(strtolower($ones['name']).'::app.'.$k,$one);
-				}
-			}
-		}		
-		//var_dump(Config::get('sms::channels'));
-	}
-	
-	public static function getConfigFiles(){
-
-		$config = array();
-		$dir = "public/app/config/";
-		//$dir = "/www/UserFiles/caas/script-php/PhpAppSample/public/app/config/";
-		// Open a known directory, and proceed to read its contents
-		$files=@scandir($dir);		
-		if(is_array($files)){
-			foreach ($files as $key=>$val){
-				if(is_file($dir.$val) !== false)
-				{
-					$config[count($config)] = file_get_contents($dir.$val);
-				}
-			}
-		}		
-		return $config;		
-	}
-
-	/**
-	 * 检测用户是否登录
-	 * @return integer 0-未登录，大于0-当前登录用户ID
-	 * @author Abyssh <huyangin2006@126.com>
-	 */
-	public static function isLogin(){
-		$user = Session::get('account_sid');
-		if (empty($user)) {
-			return 0;
-		} else {
-			return 1;
-		}
-	}
-	
-	public static function getValidate($user){
-		
-		//$apiUrl = "http://api.cloudapi.com/";
-		$apiUrl = Config::get("usages::app.apiurl");
-		$doUrl = "/v1/login/?login_id=".$user['username']."&password=".$user['password'];
-		$url = $apiUrl.$doUrl;
-		
-		//Log::info("login url :".$url);
-		$Authorization = self::getAuthorization();
-		//var_dump($Authorization);
-		
-		$header = array(
-			"Authorization"=> $Authorization,
-			"Content-Type" =>"application/json",		
-		);		
-
-		
-		$browser = new \Buzz\Browser();
-		$response = $browser->get($url,$header);
-		$content = $response->getContent();		
-		$res = self::dealContent($content);
-		return $res;
-		
-	}
-	
-	public static function dealContent($content){
-		Log::info("in the dealContent,the content is :".$content);
-		$pattern="/<pre>(.*?)<\/pre>/si";
-		preg_match_all ($pattern, $content, $matches);
-		//Log::info("matches is ".json_encode($matches));
-		//Log::info("mathches[1][0] is :".$matches[1][0]);
-		Log::info("in the dealContent,the matches is ".json_encode($matches));
-		Log::info("in the dealContent,the matches is ".$matches[1][0]);
-		return $matches[1][0];
-	}
-	
-	public static function getAuthorization(){
-		
-		$api_key =  "D3pNjr5R010E6Gi6L1z9v11ox33KzpjI";
-		$secret_key = "H92-VNN11!mmu7Zz";
-		$time = date('Y-m-d H:i:s O',time());
-		var_dump($time);
-		$randStr = str_shuffle('1234567890abcdefghijklmnopqrstuvwxyz');
-		$random = substr($randStr,0,6);
-		$str = $api_key.$secret_key.$time.$random;
-		$x_security_sign = base64_encode(md5($str));
-		
-		$Authorization = "api_key=".$api_key.",ts=".$time.",nonce=".$random.",x_security_sign=".$x_security_sign;
-		var_dump($Authorization);
-		return $Authorization;
-	}
-	public static function objectToArray($stdclassobject)
+	protected $_pageLimit=10;
+	protected $_showpage=5;
+	public function getAuthorization()
 	{
-		$_array = is_object($stdclassobject) ? get_object_vars($stdclassobject) : $stdclassobject;
-		foreach ($_array as $key => $value) {
-			$value = (is_array($value) || is_object($value)) ? std_class_object_to_array($value) : $value;
-			$array[$key] = $value;
+		$apikey="oS3W4emReR55Ie9XI0mIC1fehANMlHXx";
+		$secretkey="9EdYm8_o3nJE1Ne4";
+		$ts=date('Y-m-d H:i:s O',time());
+		$str="abcdefghijklmnopqrstuvwxyz0123456789";
+		$nonce=substr(str_shuffle($str),10);
+		$hash=base64_encode(md5($apikey.$secretkey.$ts.$nonce));
+		return "api_key=$apikey,ts=$ts,nonce=$nonce, X-Security-Sign=$hash";
+	}
+	public function createPage($url,$totalCount,$page,$limit=10,$showpage=5)
+	{
+		$limit=empty($limit)?$this->_pageLimit:$limit;
+		$countPages=ceil($totalCount/$limit);
+		if($countPages <=1) return false;
+		$showpage=empty($showpage)?$this->_showpage:$showpage;
+		
+		$startp=1;
+		$flag=floor($showpage/2);
+		if($countPages <= $showpage)
+		{
+			$startp=1;$endP=$countPages;
+		}elseif($countPages >$showpage )
+		{
+			if($page <= $flag)
+			{
+				$startp=1;$endP=5;
+			}elseif($page > $countPages-$flag)
+			{
+				$startp=$countPages-4;
+				$endP=$countPages;
+			}else
+			{
+				$startp=$page-2;
+				$endP=$page+2;
+			}
+				
 		}
-		return $array;
+		$last=$startp-1;
+		$last =($last<1)?1:$last;
+		$next=$endP+1;
+		$next =($next>$countPages)?$countPages:$next;
+	ob_start()	
+	?>
+	<div class="row">
+		<div class="col-xs-12">
+		<nav class="pull-right">
+			<ul class="pagination" id='creatpage'>
+			<!--  <li style="display: none"><?=$url;?></li>-->
+				<?php if($last !=$page ): ?>
+					<li class="disabled"><a name="<?=$last?>" href="<?=url($url,array('page'=>$last))?>" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+				<?php endif;?>
+				<?php 
+					for($i=$startp;$i<=$endP;$i++)
+					{
+						$class=($page == $i)?"active":"default";
+						echo '	<li class="'.$class.'"><a href="'.url($url,array('page'=>$i)).'" name="'.$i.'">'.$i.'<span class="sr-only">(current)</span></a></li>';
+					}
+				?>
+				<?php if($next != $page):?>
+					<li class="disabled"><a name="<?=$next?>" href="<?=url($url,array('page'=>$next))?>" aria-label="Next"><span aria-hidden="false">&raquo;</span></a></li>
+				<?php endif;?>
+			</ul>
+		</nav>
+	</div>
+</div>
+		<?php 
+		return ob_get_clean();
 	}
-
-	public static function localtime($time){		
-		date_default_timezone_set("PRC");
-		return $time;
-	}
-	public static function gmtime($time){
-		date_default_timezone_set("UTC");
-		return $time;
-	}
-	
 }

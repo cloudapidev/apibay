@@ -37,7 +37,7 @@
 	 Route::get('/', 'HomeController@index');  
 
 	//Number
-	Route::get('numbers', 'NumbersController@index');
+	Route::get('numbers/{page?}', 'NumbersController@index');
 	Route::get('numbers/buy', 'NumbersController@buy');
 	Route::get('numbers/edit/{id}', 'NumbersController@edit');
 	

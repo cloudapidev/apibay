@@ -1,11 +1,8 @@
 <?php
 
 namespace App\Events;
-class UserLogin
+class Event
 {
     //
-  public  function __construct()
-    {
-    	
-    }
+ 
 }

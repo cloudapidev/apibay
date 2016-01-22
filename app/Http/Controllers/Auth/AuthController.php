@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Unirest;
 use Illuminate\Http\Illuminate\Http;
 use Session;
+use Illuminate\Support\Facades\Config;
 class AuthController extends Controller
 {
     /*
@@ -36,7 +37,7 @@ class AuthController extends Controller
 //     protected $redirectTo = '/home';
     protected $redirectPath="/";
     protected $loginPath = '/login';
-    protected $_apiUrl="http://122.248.203.206:8080/RestCoreApi";
+    protected $_apiUrl="";
     /**
      * Create a new authentication controller instance.
      *
@@ -44,6 +45,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
+        $this->_apiUrl =config('api.apiUrl');
         $this->middleware('guest', ['except' => 'logout']);
     }
 
@@ -91,13 +93,11 @@ class AuthController extends Controller
     			'loginId' => 'required',
     			'password' => 'required',
     	]);
-    
     	if($validator->fails())
     	{
     		return redirect('/login')
     		->withErrors($validator)
     		->withInput();
-    
     	}
     	$inputs['password']=md5($inputs['password']);
     	$inputs['loginMode']='WEB';
@@ -142,7 +142,7 @@ class AuthController extends Controller
     protected function UnirestapiRegister($content)
     {
     
-    	$apiUrl =$this->_apiUrl;
+    	$apiUrl =$this->_apiUrl;    	
     	$url = $apiUrl."/register";
     	$headers=array( "Content-Type" => "application/json",
     			"Accept" => "application/json");
