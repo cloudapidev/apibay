@@ -25,7 +25,7 @@
 */
 
 
-	//Number
+/* 	//Number
 	Route::get('numbers/{page?}', 'NumbersController@index');
 	Route::get('numbers/buy', 'NumbersController@buy');
 	Route::get('numbers/edit/{id}', 'NumbersController@edit');
@@ -33,7 +33,7 @@
 	//User
 	Route::get('users','UsersController@index');
 	Route::get('users/add','UsersController@create');
-	Route::get('users/edit/{id}','UsersController@edit');
+	Route::get('users/edit/{id}','UsersController@edit'); */
 	
 	Route::group(['middleware' => ['web']], function () {
 	

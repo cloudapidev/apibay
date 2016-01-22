@@ -129,15 +129,7 @@ class AuthController extends Controller
 			}else{
 				return redirect("/login")->withInput()->with('error',trans("error_code.".$res->code));
 			}
-			
-   /*  	if($res)
-    	{
-			Session::put('account_sid', $res->id);
-    		return redirect('/'); 
-    	}else
-    	{
-    		return redirect("/login")->withInput()->with('error','email or password is error');
-    	} */
+
     }
     public function getRegister()
     {
@@ -202,9 +194,6 @@ class AuthController extends Controller
     	$headers=array( "Content-Type" => "application/x-www-form-urlencoded;",
     			"Accept" => "application/json");
     	$response = Unirest\Request::get($url,$headers,$content);
-    	/* if($response->code == '200')
-    		return $response->body; */
-			
     	return $response;
     
     }

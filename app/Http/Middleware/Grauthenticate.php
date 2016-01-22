@@ -37,7 +37,6 @@ class Grauthenticate
                 return redirect()->guest('/login');
             }
         }
-        var_dump(session('account_sid'));
         return $next($request);
     }
 }

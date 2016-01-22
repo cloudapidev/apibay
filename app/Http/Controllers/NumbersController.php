@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Session;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http;
@@ -20,13 +20,10 @@ class NumbersController extends Controller
 	protected $_perNums=1;
     public function index(Request $request,$page=1)
     {
-//     	var_dump($request);
     	$numberapi=new Numberapi();
     	$res=$numberapi->numberlist($page-1,$this->_perNums);
     	$Ossbss=new Ossbss();
-//     	$url=url('/numbers');
     	$pagelist=$Ossbss->createPage("/numbers",$res['paging']->total,$page,$this->_perNums);
-//     	dd($listData);
         return view("number/listing",array(
                 "active"=>"menu_number , menu_number_listing",
                 "pagetitle"=>"Numbers Listing",
