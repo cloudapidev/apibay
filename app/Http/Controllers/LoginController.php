@@ -7,7 +7,7 @@ use Unirest;
 use Validator;
 
 
-class LoginController extends Controller {
+class LoginController  {
 
 	/*
 	|--------------------------------------------------------------------------

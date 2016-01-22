@@ -9,6 +9,8 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Session;
 
 use Redirect;
+use Request;
+use Route;
 use App\Model;
 use App\Model\Gauth;
 
