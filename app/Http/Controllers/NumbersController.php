@@ -7,9 +7,9 @@ use Session;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http;
-use App\Model;
 use App\Model\Numberapi;
 use App\Libraries\Classes\Ossbss;
+use App\Model\App\Model;
 class NumbersController extends Controller
 {
     /**
@@ -18,8 +18,9 @@ class NumbersController extends Controller
      * @return \Illuminate\Http\Response
      */
 	protected $_perNums=1;
-    public function index(Request $request,$page=1)
+    public function index(Request $request)
     {
+    	$page=1;
     	$numberapi=new Numberapi();
     	$res=$numberapi->numberlist($page-1,$this->_perNums);
     	$Ossbss=new Ossbss();
@@ -107,6 +108,10 @@ class NumbersController extends Controller
     }
 
 
+     /**
+      * show the buy numbers page
+      * @return View
+      */
      public function buy()
     {
         //
@@ -116,6 +121,40 @@ class NumbersController extends Controller
             )
         );
     }
-
-	
+	public function buySearch(Request $requst)
+	{
+		$inputs=$requst->except("_token");
+		if(empty($inputs['number'])) unset($inputs['number']);
+		$numberApi=new Numberapi();
+		$result=$numberApi->buySearch($inputs);
+		$data=$result->body->data;
+		return json_encode($data);
+	}
+	public function setNumberSelected(Request $requst,$number)
+	{
+		
+		$inputs['number']=$number;
+		if(empty($inputs['number'])) return false;
+		$inputs['developer_id']=Session::get('account_id');
+		$numberApi=new Numberapi();
+		$result=$numberApi->setNumberSelected($inputs);
+		return $result;
+		
+	}
+	public function showSelectedNumbers()
+	{
+		$numberApi=new Numberapi();
+		$inputs['developer_id']=Session::get('account_id');
+		$result=$numberApi->showSelectedNumbers($inputs);
+		return $result;
+	}
+	public function removeSelectedNumber(Request $request,$number)
+	{
+		$inputs['number']=$number;
+		if(empty($inputs['number'])) return false;
+		$inputs['developer_id']=Session::get('account_sid');
+		$numberApi=new Numberapi();
+		$result=$numberApi->removeSeletectedNumber($inputs);
+		return $result;
+	}
 }

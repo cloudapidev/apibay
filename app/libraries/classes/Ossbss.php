@@ -10,8 +10,8 @@ class Ossbss {
 	protected $_showpage=5;
 	public function getAuthorization()
 	{
-		$apikey="oS3W4emReR55Ie9XI0mIC1fehANMlHXx";
-		$secretkey="9EdYm8_o3nJE1Ne4";
+		$apikey="D3pNjr5R010E6Gi6L1z9v11ox33KzpjI";
+		$secretkey="H92-VNN11!mmu7Zz";
 		$ts=date('Y-m-d H:i:s O',time());
 		$str="abcdefghijklmnopqrstuvwxyz0123456789";
 		$nonce=substr(str_shuffle($str),10);

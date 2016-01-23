@@ -49,9 +49,13 @@
 		 Route::get('/', 'HomeController@index');  
 
 		//Number
-		Route::get('numbers/{page?}', 'NumbersController@index');
+		Route::get('numbers', 'NumbersController@index');
 		Route::get('numbers/buy', 'NumbersController@buy');
-		Route::get('numbers/edit/{id}', 'NumbersController@edit');
+		Route::post('numbers/sbuy', 'NumbersController@buySearch');
+		Route::get('numbers/selected/{number}', 'NumbersController@setNumberSelected');
+		Route::get('numbers/selectedlist', 'NumbersController@showSelectedNumbers');
+		Route::get('numbers/remove/{number}', 'NumbersController@removeSelectedNumber');
+		Route::get('numbers/edit/{id}', 'NumbersController@edit'); 
 		
 		//User
 		Route::get('users','UsersController@index');
