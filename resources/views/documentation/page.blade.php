@@ -11,7 +11,7 @@
 							<div class="nav-tabs-custom">
 								<ul class="nav nav-tabs">
 									<li class="active"><a href="#tab_1" data-toggle="tab"><i class="fa fa-info-circle"></i> {{trans('documentation.Documentation')}}</a></li>
-									<li><a href="#tab_2" data-toggle="tab"><i class="fa fa-bars"></i>{{trans('documentation.API Explorer')}} </a></li>
+									<li><a href="#tab_2" data-toggle="tab"><i class="fa fa-bars"></i> {{trans('documentation.API Explorer')}} </a></li>
 									<li><a href="#tab_3" data-toggle="tab"><i class="fa fa-cube"></i> {{trans('documentation.SDK')}}</a></li>
 								</ul>
 								

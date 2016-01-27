@@ -28,6 +28,9 @@
 				 <i class="fa fa-angle-left pull-right"></i>
               </a>
 				<ul class="treeview-menu">
+					<li class="menu_documentation_accounts"><a href="{{ url("documentation/accounts") }}">{{ trans('layout.Accounts') }}</a></li>
+					<li class="menu_documentation_users"><a href="{{ url("documentation/users") }}">{{ trans('layout.Users') }}</a></li>
+					<li class="menu_documentation_siptrunks"><a href="{{ url("documentation/siptrunks") }}">{{ trans('layout.Sip Trunks') }}</a></li>
 					<li class="menu_documentation_phonenumber"><a href="{{ url("documentation/phonenumber") }}">{{ trans('layout.Phone Numbers') }}</a></li>
 					<li class="menu_documentation_serverapp"><a href="{{ url("documentation/serverapp") }}">{{ trans('layout.Server Apps') }}</a></li>
 					<li class="menu_documentation_clientapp"><a href="{{ url("documentation/clientapp") }}">{{ trans('layout.Client Apps') }}</a></li>
