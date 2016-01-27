@@ -1,8 +1,59 @@
 <?php
-function testwy()
-{
-	echo "testwy";
-}
+ function pagesLink($totalCount,$page,$limit=10,$showpage=5)
+	{
+		$countPages=ceil($totalCount/$limit);
+		if($countPages <=1) return false;
+		$startp=1;
+		$flag=floor($showpage/2);
+		if($countPages <= $showpage)
+		{
+			$startp=1;$endP=$countPages;
+		}elseif($countPages >$showpage )
+		{
+			if($page <= $flag)
+			{
+				$startp=1;$endP=5;
+			}elseif($page > $countPages-$flag)
+			{
+				$startp=$countPages-4;
+				$endP=$countPages;
+			}else
+			{
+				$startp=$page-2;
+				$endP=$page+2;
+			}
+				
+		}
+		$last=$startp-1;
+		$last =($last<1)?1:$last;
+		$next=$endP+1;
+		$next =($next>$countPages)?$countPages:$next;
+	ob_start()	
+	?>
+	
+		<div class="col-xs-12">
+		<nav class="pull-right">
+			<ul class="pagination" id='creatpage'>
+				<?php if($last !=$page ): ?>
+					<li class="disabled"><a name="<?=$last?>" href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+				<?php endif;?>
+				<?php 
+					for($i=$startp;$i<=$endP;$i++)
+					{
+						$class=($page == $i)?"active":"default";
+						echo '	<li class="'.$class.'"><a href="#"  name="'.$i.'">'.$i.'<span class="sr-only">(current)</span></a></li>';
+					}
+				?>
+				<?php if($next != $page):?>
+					<li class="disabled"><a name="<?=$next?>" href="#"  aria-label="Next"><span aria-hidden="false">&raquo;</span></a></li>
+				<?php endif;?>
+			</ul>
+		</nav>
+	</div>
+
+		<?php 
+		return ob_get_clean();
+	}
 
 	function populate($formName,$data=false)
 	{

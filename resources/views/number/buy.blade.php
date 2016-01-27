@@ -1,4 +1,9 @@
 @extends('admin_template') @section('content')
+<div class="alert alert-success alert-dismissable" style="display: none">
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+					<h4><i class="icon fa fa-info"></i> Notice</h4>
+					
+</div>
 <div class="row">
 	<div class="col-md-12">
 
@@ -106,7 +111,7 @@
 				<i class="fa fa-refresh fa-spin"></i>
 			</div>
 
-			<div class="row">
+	<!-- 	<div class="row">
 				<div class="col-md-12">
 					<nav class="pull-right">
 						<ul class="pagination">
@@ -123,18 +128,17 @@
 					</nav>
 				</div>
 			</div>
-
+ 	-->	
 
 		</div>
 	</div>
 </div>
-
-
-
-<div class="row kpbuysummary" >
+<div class="row kpbuysummary" <?=$style?> >
 	<div class="col-md-12">
 
 		<section class="invoice" style=''>
+			<form id="purchaseForm" action="#" method='post' >
+			<input type="hidden" name="_token" value="{{ csrf_token() }}" >
 			<!-- title row -->
 			<div class="row">
 				<div class="col-xs-12">
@@ -169,7 +173,20 @@
 							</tr>
 						</thead>
 						<tbody class="kpselectedtable">
-
+						<?php if(!empty($selectedNumbers)):?>
+						<?php foreach ($selectedNumbers as $k => $numbers):?>
+							<tr>
+								<td>{{$k+1}}</td>
+								<td><?=$numbers->country?></td>
+								<td><?=$numbers->number?></td>
+								<td><input readonly name='type[<?=$numbers->number?>]' value="<?=$numbers->capabilities?>" ></td>
+								<td><?=$numbers->price?></td>
+								<td><input type='number' name='month[<?=$numbers->number?>]' class='totalmonth' min='1' max='12' value=1></td>
+								<td name='subtotal'><span class='subtotal' ><?="$".$numbers->price?></span></td>
+								<td><a name='<?=$numbers->number?>'  class="removebtn btn btn-default">Remove</a></td>
+							</tr>
+						<?php endforeach;?>
+						<?php endif?>
 						</tbody>
 					</table>
 				</div>
@@ -180,27 +197,17 @@
 						<table class="table">
 							<tbody>
 								<tr>
-									<th style="width: 50%">Subtotal:</th>
-									<td>$250.30</td>
+									<th  style="width: 50%">Total:</th>
+									<td id='total' ></td>
 								</tr>
-								<tr>
-									<th>Tax (9.3%)</th>
-									<td>$10.34</td>
-								</tr>
-
-								<tr>
-									<th>Total:</th>
-									<td>$265.24</td>
-								</tr>
-
 								<tr>
 									<th>Your current available credit:</th>
-									<td>$300.00</td>
+									<td id='curCredit'>$10.00</td>
 								</tr>
 
 								<tr>
 									<th>Your Available Credit After checkout:</th>
-									<td>$34.76</td>
+									<td id='afterCredit'></td>
 								</tr>
 
 							</tbody>
@@ -224,19 +231,19 @@
 
 			<div class="row no-print kpconfirm-purchase">
 				<div class="col-xs-12">
-					<a href="number-listing.php?success"
-						class="btn btn-success pull-right"><i class="fa fa-credit-card"></i>
-						Confirm Purchase</a>
+					<span  class="comPurchase btn btn-success pull-right"><i class="fa fa-credit-card"></i>
+					Comfirm Purchase	</span>
 				</div>
 			</div>
 
 			<!-- this row will not appear when printing -->
 			<div class="row no-print kp-topup" style="display: none;">
 				<div class="col-xs-12">
-					<a href="number-confirm.php" class="btn btn-success pull-right"><i
+					<a href="#" class="btn btn-success pull-right"><i
 						class="fa fa-credit-card"></i> Topup Balance</a>
 				</div>
 			</div>
+			</form>
 		</section>
 
 

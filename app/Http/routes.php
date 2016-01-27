@@ -50,12 +50,19 @@
 
 		//Number
 		Route::get('numbers', 'NumbersController@index');
+		Route::post('numbers/search', 'NumbersController@searchNumbers');
+		Route::get('numbers/list/{page}', 'NumbersController@getNumberList');
+		
 		Route::get('numbers/buy', 'NumbersController@buy');
 		Route::post('numbers/sbuy', 'NumbersController@buySearch');
 		Route::get('numbers/selected/{number}', 'NumbersController@setNumberSelected');
 		Route::get('numbers/selectedlist', 'NumbersController@showSelectedNumbers');
 		Route::get('numbers/remove/{number}', 'NumbersController@removeSelectedNumber');
-		Route::get('numbers/edit/{id}', 'NumbersController@edit'); 
+		Route::post('numbers/purchase', 'NumbersController@comfirmPurchase');
+
+		Route::get('numbers/edit/{number}', 'NumbersController@edit'); 
+		Route::get('numbers/release/{number}/{type}', 'NumbersController@release'); 
+		Route::post('numbers/save', 'NumbersController@saveConfig'); 
 		
 		//User
 		Route::get('users','UsersController@index');

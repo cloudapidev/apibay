@@ -3,36 +3,38 @@
 @section('content')
 
 <!-- Filter -->
+<span style="display: none" id="sbuyUrl">{{url('/')}}</span>
 <div class="row">
 	<div class="col-md-12">
-		<form class="form-horizontal" onsubmit="return false;">
+		<form id="searchForm" class="form-horizontal" onsubmit="return false;">
+			<input type="hidden" name="_token" value="{{ csrf_token() }}">
 			<div class="box box-solid box-default">
       			 <div class="box-header with-border">
 						<h3 class="box-title">{{trans('numbers.Search & Filter')}}</h3>
 				</div><!-- /.box-header -->
 				<div class="box-body">
           			<div class="row">
-						<label for="inputPassword3" class="col-md-1 control-label">{{trans('numbers.Search')}}Country</label>
+					<!-- <label for="inputPassword3" class="col-md-1 control-label">{{trans('numbers.Search')}}Country</label>
             			<div class="col-md-2">
              				 <select class="form-control">
 								<option>(+1) United States</option>
 								<option>(+65) Singapore</option>
 							</select>
-            			</div>
+            			</div> 	
 						<label for="inputPassword3" class="col-md-1 control-label">{{trans('numbers.Area')}}</label>
          				<div class="col-md-2">
               				<input type="text" class="form-control">
-           				</div>
+           				</div>-->
 						<label for="inputPassword3" class="col-md-1 control-label">{{trans('numbers.Number')}}</label>
 						<div class="col-md-2">
-             				<input type="text" class="form-control">
+             				<input type="text" class="form-control" id='number' name='number'>
             			</div>
 						<label for="inputPassword3" class="col-md-1 control-label">{{trans('numbers.Capabilities')}}</label>
 						<div class="col-md-2">
-							<select class="form-control">
-									<option>{{trans('numbers.Voice')}}</option>
-									<option>{{trans('numbers.SMS')}}</option>
-									<option>{{trans('numbers.Voice + SMS')}}</option>
+							<select class="form-control" id="capabilities" name="capabilities">
+									<option value="VOICE">{{trans('numbers.Voice')}}</option>
+									<option value="SMS">{{trans('numbers.SMS')}}</option>
+									<option value="VOICE_SMS">{{trans('numbers.Voice + SMS')}}</option>
 							</select>
 						</div>
 					</div>
@@ -44,7 +46,7 @@
 									<div class="input-group-addon">
 											<i class="fa fa-calendar"></i>
 									</div>
-									<input type="text" class="form-control" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask="">
+									<input type="text" id="purchasedDate" name="purchasedDate" class="datepicker form-control" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask="">
 								</div>
 							</div>
 							<label for="inputPassword3" class="col-md-1 control-label">{{trans('numbers.Date Expired')}}</label>
@@ -53,20 +55,20 @@
 									<div class="input-group-addon">
 										<i class="fa fa-calendar"></i>
 									</div>
-									<input type="text" class="form-control" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask="">
+									<input type="text" name="expiredDate" id="expiredDate" class="datepicker form-control" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask="">
 								</div>
 							</div>
 							<label for="inputPassword3" class="col-md-1 control-label">{{trans('numbers.Records per page')}}</label>
 							<div class="col-md-2">
-								<select class="form-control">
-										<option>- Select -</option>
-										<option>50</option>
-										<option>100</option>
-										<option>150</option>
+								<select class="form-control" name="limit" id="limit">
+										<option value="10">10</option>
+										<option value="50">50</option>
+										<option value="100">100</option>
+										<option value="150">150</option>
 								</select>
 							</div>
 							<div class="pull-right col-xm-1">
-								<a href="#" class="btn bg-maroon btn-flat margin ">{{trans('numbers.Search')}}Search</a>
+								<span class="searchbtn btn bg-maroon btn-flat margin ">{{trans('numbers.Search')}}Search</span>
 							</div>
 						</div>
 					</div>
@@ -76,7 +78,7 @@
 	</div>
 </div>
 		<!-- End Filter -->
-<div class="row">
+<div class="row numberList">
 	<div class="pull-right">
 		<a href="{{ url('numbers/buy') }}" class="btn bg-maroon btn-flat margin ">{{trans('numbers.Buy Number')}}</a>
 	</div>
@@ -138,7 +140,7 @@
 									echo "<br /><b>Messaging :</b> <i>Server App</i> : {$item->messaging_server}"; */
 								?>
 							</td> 
-							<td><a href="{{url('numbers/edit',['id'=>$item->id])}}" class="btn btn-block btn-default">{{trans('numbers.Edit')}}</a></td>
+							<td><a href="{{url('numbers/edit',['number'=>$item->number])}}" class="btn btn-block btn-default">{{trans('numbers.Edit')}}</a></td>
 							<!--<td>
 								<input type="checkbox">
 							</td>-->
@@ -150,7 +152,6 @@
 							<th>#</th>
 							<th>{{trans('numbers.Number')}}</th>
 							<th>{{trans('numbers.Country')}}</th>
-							<th>{{trans('numbers.Area')}}</th>
 							<th>{{trans('numbers.Capabilities')}}</th>
 							<th>{{trans('numbers.Date Purchased')}}</th>
 							<th>{{trans('numbers.Date Expired')}}</th>
@@ -170,8 +171,11 @@
 		</div><!-- /.box -->
     </div><!-- /.col -->
   </div><!-- /.row -->
-<?=$pagelist ?>
+<div class="pageLink row">
+	<?=$pagelist ?>
+</div>
   @endsection
   @section('afterfooter')
 <script type="text/javascript" src="{{ asset("/bower_components/admin-lte/myjs/page.js") }}"></script> 
+<script type="text/javascript" src="{{ asset("/bower_components/admin-lte/myjs/numbers/listNumber.js") }}"></script> 
   @endsection
