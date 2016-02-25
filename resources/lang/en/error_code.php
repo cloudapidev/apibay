@@ -14,5 +14,6 @@ return [
     */
 
     '401' => 'Invalid Credentials',
+    '404' => 'Invalid Credentials',
 
 ];

@@ -11,6 +11,8 @@ return array(
 		"Listing"=>"Listing",
 		"Buy Phone Number"=>"Buy Phone Number",
 		"Users"=>"Users",
+		"Accounts"=>"Accounts",
+		"Sip Trunks"=>"Sip Trunks",
 		"Create New"=>'Create New',
 		"Sip Trunk"=>"Sip Trunk",
 		"Pricing"=>"Pricing",

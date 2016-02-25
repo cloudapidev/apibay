@@ -50,7 +50,22 @@ class DocumentationController extends Controller
     public function show($sec)
     {
         //
+				
+				 if($sec == "accounts"){
+            $active = "menu_documentation , menu_documentation_accounts";
+            $pagetitle = "Accounts - REST API & SDK";
+        }
 
+        if($sec == "users"){
+            $active = "menu_documentation , menu_documentation_users";
+            $pagetitle = "User - REST API & SDK";
+        }
+
+				 if($sec == "siptrunks"){
+            $active = "menu_documentation , menu_documentation_siptrunks";
+            $pagetitle = "SIP Trunks - REST API & SDK";
+        }
+				
         if($sec == "phonenumber"){
             $active = "menu_documentation , menu_documentation_phonenumber";
             $pagetitle = "Phone Number - REST API & SDK";
