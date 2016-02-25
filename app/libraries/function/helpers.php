@@ -1,4 +1,95 @@
 <?php
+function getAuthorization()
+{
+	/* $apikey="otbw53s4dlg9uA7op2PTtzeOiyIE4S19";
+		$secretkey="H92-VNN11!mmu7Zz"; */
+
+	$apikey=Session::get('api_key');
+	$secretkey=Session::get('secret_key');
+	// 		dd(Session::info());
+	$ts=date('Y-m-d H:i:s O',time());
+	$str="abcdefghijklmnopqrstuvwxyz0123456789";
+	$nonce=substr(str_shuffle($str),10);
+	$hash=base64_encode(md5($apikey.$secretkey.$ts.$nonce));
+	return  "api_key=$apikey,ts=$ts,nonce=$nonce, X-Security-Sign=$hash";
+	// 		dd($tes);
+}
+function setApiUrl($doUrl,$params=null)
+{
+	$apiUrl=Config('api.apiUrl');
+	$url=Config("api.".$doUrl);
+	if($url)
+	{
+		
+	
+		if(is_string($params))
+		{
+			$url .=$params;
+		}elseif(is_array($params))
+		{
+			foreach ($params as $k=>$v)
+			{
+				$find="{".$k."}";
+				$url=str_replace($find,$v,$url);
+			}
+		}
+		return $apiUrl.$url;
+	}
+		//clear session
+		Session::flush();
+		//regenerate new session
+		Session::regenerate();
+		return redirect("/login")->with('error',"the url is forbidden");
+}
+
+function dealResponse($response)
+{
+	$data=array();
+	if(empty($response))
+	{
+		$data['flag']="error";
+		$data['msg']='result is null';
+		return $data;
+	}
+	if(in_array($response->code,Config('codes.success') ))
+	{
+// 		dd($response);
+		$data['flag']="success";
+		$data['paging']=isset($response->body->paging)?$response->body->paging:array();
+		$data['data']=isset($response->body->data)?$response->body->data:$response->body;
+		$data['msg']="Successfully";
+		return $data;
+	}
+	else 
+	{
+		$data['flag']='error';
+		$data['msg']=isset($response->body->message)?$response->body->message:"error code is :".$response->code;
+		return $data;
+	}
+}
+function dealResData($data)
+{
+	if($data['flag'] == 'success')
+	{
+		unset($data['paging']);
+	}
+	return $data;
+}
+function unsetParam()
+{
+	$params=func_get_args();
+	$data=array_shift($params);
+	if($data['flag'] == 'success')
+	{
+		if(empty($params)) return $data;
+		foreach($params as $v)
+		{
+			if(isset($data[$v])) unset($data[$v]);
+		}
+	}
+	return $data;
+}
+//create pageLink
  function pagesLink($totalCount,$page,$limit=10,$showpage=5)
 	{
 		$countPages=ceil($totalCount/$limit);

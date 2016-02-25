@@ -1,9 +1,5 @@
 @extends('admin_template') @section('content')
-<div class="alert alert-success alert-dismissable" style="display: none">
-					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-					<h4><i class="icon fa fa-info"></i> Notice</h4>
-					
-</div>
+
 <div class="row">
 	<div class="col-md-12">
 
@@ -65,7 +61,7 @@
 				</div>
 				<div class="box-footer">
 					<button type="submit" class="kpsubmit btn btn-primary pull-right">Search</button>
-					<button type="submit" class="btn btn-default">Reset</button>
+				<!-- 	<button type="submit" class="btn btn-default">Reset</button> -->
 				</div>
 			</form>
 		</div>
@@ -93,17 +89,6 @@
 						</tr>
 					</thead>
 					<tbody>
-				  	<tr>
-							<td>1</td>
-							<td>Malaysia</td>
-							<td>+6012345664</td>
-							<td>Voice</td>
-							<td>$64.50</td>
-							<td>
-								<a class="buy btn btn-default">Buy</a>
-							</td>
-						</tr>
-										
 					</tbody>
 				</table>
 			</div>
@@ -180,7 +165,7 @@
 								<td><?=$numbers->country?></td>
 								<td><?=$numbers->number?></td>
 								<td><input readonly name='type[<?=$numbers->number?>]' value="<?=$numbers->capabilities?>" ></td>
-								<td><?=$numbers->price?></td>
+								<td name='price'>$<?=$numbers->price?></td>
 								<td><input type='number' name='month[<?=$numbers->number?>]' class='totalmonth' min='1' max='12' value=1></td>
 								<td name='subtotal'><span class='subtotal' ><?="$".$numbers->price?></span></td>
 								<td><a name='<?=$numbers->number?>'  class="removebtn btn btn-default">Remove</a></td>
@@ -202,7 +187,7 @@
 								</tr>
 								<tr>
 									<th>Your current available credit:</th>
-									<td id='curCredit'>$10.00</td>
+									<td id='curCredit'>${{$blance}}</td>
 								</tr>
 
 								<tr>
@@ -218,7 +203,7 @@
 			</div>
 			<!-- /.row -->
 
-			<div class="alert alert-danger alert-dismissable"
+			<div id="alertDanger" class="alert alert-danger alert-dismissable"
 				style="display: none;">
 				<button type="button" class="close" data-dismiss="alert"
 					aria-hidden="true">×</button>
@@ -251,7 +236,19 @@
 
 	</div>
 </div>
-
+<div class="alert alert-success alert-dismissable" style="display: none" >
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+				<h4><i class="icon fa fa-info"></i> Notice</h4>
+				<p></p>
+</div>
+<div id="error" class="alert  alert-danger alert-dismissable" style="display: none" >
+				<button type="button" class="close" data-dismiss="alert"
+					aria-hidden="true">×</button>
+				<h4>
+					<i class="icon fa fa-ban"></i> Notice !
+				</h4>
+				<p></p>
+</div>
 
 @endsection @section('afterfooter')
 <script type="text/javascript" src="{{ asset("/bower_components/admin-lte/myjs/numbers/buyNumber.js") }}"></script> 

@@ -1,6 +1,8 @@
 <?php
 namespace App\Libraries\Classes;
 use Config,Session,Log;
+use Unirest;
+use App\Libraries\Functions;
 class Ossbss {
 	/**
 	 * create the authorizataion
@@ -8,15 +10,41 @@ class Ossbss {
 	 */
 	protected $_pageLimit=10;
 	protected $_showpage=5;
-	public function getAuthorization()
+	protected $_headers=array();
+	public function __construct()
 	{
-		$apikey="D3pNjr5R010E6Gi6L1z9v11ox33KzpjI";
-		$secretkey="H92-VNN11!mmu7Zz";
-		$ts=date('Y-m-d H:i:s O',time());
-		$str="abcdefghijklmnopqrstuvwxyz0123456789";
-		$nonce=substr(str_shuffle($str),10);
-		$hash=base64_encode(md5($apikey.$secretkey.$ts.$nonce));
-		return "api_key=$apikey,ts=$ts,nonce=$nonce, X-Security-Sign=$hash";
+		if(empty($this->_authorization))
+		{
+			$this->_authorization=getAuthorization();
+		}
+		if(empty($this->_headers))
+			$this->_headers=array(
+					"Content-Type"	=>"application/json;charset=UTF-8",
+					"Authorization"=>$this->_authorization
+			);
 	}
-	
+	public function getInfo($url,$inputs=null,$param=null)
+	{
+		$url=setApiUrl($url,$param);
+		$response=Unirest\Request::get($url,$this->_headers,$inputs);
+		return dealResponse($response);
+	}
+	public function deleteInfo($url,$inputs=null,$param=null)
+	{
+		$url=setApiUrl($url,$param);
+		$response=Unirest\Request::delete($url,$this->_headers,json_encode($inputs));
+		return dealResponse($response);
+	}
+	public function postInfo($url,$inputs=null,$param=null)
+	{
+		$url=setApiUrl($url,$param);
+		$response=Unirest\Request::post($url,$this->_headers,json_encode($inputs));
+		return dealResponse($response);
+	}
+	public function putInfo($url,$inputs=null,$param=null)
+	{
+		$url=setApiUrl($url,$param);
+		$response=Unirest\Request::put($url,$this->_headers,json_encode($inputs));
+		return dealResponse($response);
+	}
 }

@@ -118,16 +118,16 @@ class AuthController extends Controller
     	$inputs['password']=md5($inputs['password']);
     	$inputs['loginMode']='WEB';
     	$res=$this->UnirestapiLogin($inputs);
-
 			if($res->code == '200'){
 				$accountinfo = json_decode($res->raw_body);
 		
 				Session::put('account_info', $accountinfo);
 				Session::put('account_sid', $accountinfo->id);
-		
+				Session::put('api_key',$accountinfo->api_key);
+				Session::put('secret_key',$accountinfo->secret_key);
 				return redirect('/')->with('success',"Login successfully"); 
 			}else{
-				return redirect("/login")->withInput()->with('error',trans("error_code.".$res->code));
+				return redirect("/login")->withInput()->with('error',trans("Your email or password is error"));
 			}
 
     }
@@ -148,7 +148,7 @@ class AuthController extends Controller
     	$res=$this->UnirestapiRegister($inputs);
     	if($res)
     	{
-    		return redirect("/login");
+    		return redirect("/login")->with('success',"Register successfully.");
     	}else
     	{
     		return redirect("/register")->withInput();

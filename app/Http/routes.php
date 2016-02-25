@@ -45,7 +45,7 @@
 		Route::post('/postregister', 'Auth\AuthController@postRegister');
 			
 		//Home
-		 Route::get('/index.php', 'HomeController@index');
+// 		 Route::get('/index.php', 'HomeController@index');
 		 Route::get('/', 'HomeController@index');  
 
 		//Number
@@ -83,6 +83,26 @@
 		Route::get('siptrunk','SiptrunkController@index');
 		Route::get('siptrunk/add','SiptrunkController@add');
 		Route::get('siptrunk/edit/{id}','SiptrunkController@edit');
+		Route::post('siptrunk/search','SiptrunkController@searchTrunks');
+		Route::post('siptrunk/create','SiptrunkController@create');
+		Route::post('siptrunk/saveInfo','SiptrunkController@saveInfo');
+		
+		 //auth
+		Route::post('siptrunk/createauth','SiptrunkController@createAndAddAuthentication');
+		Route::get('siptrunk/removeAuth/{sipTrunkId}/{sipTrunkAuthId}','SiptrunkController@removeAuthentication');
+		Route::post('siptrunk/editeauth','SiptrunkController@editAuthentication');
+		Route::get('siptrunk/selectedauthlist/{sipTrunkId}','SiptrunkController@showSelectedAuthList');
+		Route::get('siptrunk/allauthlist','SiptrunkController@showAllAuthList');
+		 //ip Access
+		Route::get('siptrunk/removeip/{sipTrunkId}/{sipTrunkIpId}','SiptrunkController@removeIpAccess');
+		Route::post('siptrunk/createTrunkIp','SiptrunkController@createIpAndAddIpToTrunks');
+		Route::get('siptrunk/selectediplist','SiptrunkController@showSelectedIpAccessList');
+		Route::get('siptrunk/alliplist','SiptrunkController@showAllIpAccessList');
+		
+		 //orgination
+		Route::post('siptrunk/createorigin','SiptrunkController@createOrigination');
+		Route::post('siptrunk/editorigin/{trunkId}','SiptrunkController@editOrigination');
+		
 		
 		//Pricing
 		Route::get('pricing','PricingController@index');

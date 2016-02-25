@@ -9,7 +9,6 @@ use App\Http\Controllers\Controller;
 use App\Http;
 use App\Model\Numberapi;
 use App\Libraries\Classes\Ossbss;
-use Psy\Util\Json;
 /**
  * @author WY
  *
@@ -24,6 +23,7 @@ class NumbersController extends Controller
 	protected $_perNums=2;
     public function index(Request $request)
     {
+    	
     	if(null == $request->only('page'))
     	{
     		$inputs=$request->only('page');
@@ -35,15 +35,20 @@ class NumbersController extends Controller
     		$page=1;
     	}
     	$offset=($page-1)*$this->_perNums;
-    	$numberapi=new Numberapi();
-    	$res=$numberapi->numberlist($offset,$this->_perNums);
+    	$data['offset']=$offset;
+    	$data['limit']=$this->_perNums;
+    	$ossbss=new Ossbss();
+    	$res=$ossbss->getInfo("numbers.showList",$data);
+    	$res=unsetParam($res,'paging');
+    	$res['data']=isset($res['data'])?$res['data']:array();
     	$pagelist="";
-    	if($res) $pagelist=pagesLink($res['paging']->total,$page,$this->_perNums);
+    	if(isset($res['paging'])) $pagelist=pagesLink($res['paging']->total,$page,$this->_perNums);
         return view("number/listing",array(
                 "active"=>"menu_number , menu_number_listing",
                 "pagetitle"=>"Numbers Listing",
         		'listDatas'=>$res['data'],
-        		'pagelist'=>$pagelist
+        		'pagelist'=>$pagelist,
+        		
             )
         ); 
     }
@@ -56,12 +61,16 @@ class NumbersController extends Controller
     public function getNumberList($page)
     {
     	$inputs=array();
-    	$offset=($page-1).$this->_perNums;
-    	$numberApi=new Numberapi();
-    	$result=$numberApi->searchNumbers($inputs,$offset,$this->_perNums);
-    	$result['pagelist']=pagesLink($result['paging']->total,$page,$this->_perNums);
-    	unset($result['paging']);
-    	return json_encode($result);
+    	$inputs['offset']=($page-1).$this->_perNums;
+    	$inputs['limit']=$this->_perNums;
+    	$ossbss=new Ossbss();
+    	$res=$ossbss->getInfo("numbers.showList",$inputs);
+    	if(isset($res['paging']))
+	    	$res['pagelist']=pagesLink($result['paging']->total,$page,$this->_perNums);
+    /*	$numberApi=new Numberapi();
+    	$result=$numberApi->searchNumbers($inputs,$offset,$this->_perNums);*/
+    	unset($res['paging']);
+    	return $res($result);
     }
    /**
     * display the search numbers list by ajax request
@@ -88,9 +97,11 @@ class NumbersController extends Controller
     		$time=trim($inputs['purchasedDate'])." 00:00:00";
     		$inputs['purchasedDate']=date("Y-m-d H:i:s",strtotime($time));
     	}
-    	$numberApi=new Numberapi();
-    	$result=$numberApi->searchNumbers($inputs);
-    	unset($result['paging']);
+    	$ossbss=new Ossbss();
+    	$result=$ossbss->getInfo("numbers.showList",$inputs);
+  /*  	$numberApi=new Numberapi();
+    	$result=$numberApi->searchNumbers($inputs);*/
+    	$result=unsetParam($result,'paging');
     	return json_encode($result);
     	
     }
@@ -136,10 +147,12 @@ class NumbersController extends Controller
      */
     public function edit($number)
     {
-    	
-        $details=$this->showNumberDetails($number);
+    	/*$details=array();
+        $details=$this->showNumberDetails($number);*/
+    	$ossbss=new Ossbss();
+    	$details=$ossbss->getInfo("numbers.showDetails",null,$number);
+        if( $details['flag']== 'error') return redirect('/numbers');
         $alltrunks=$this->getAllTrunks();
-//         dd($alltrunks);
         $allserverapps=$this->getAllServerApps();
         return view("number/edit",array(
                 "active"=>"menu_number , menu_number_listing",
@@ -157,21 +170,21 @@ class NumbersController extends Controller
      */
     protected function getAllTrunks()
     {
-    	$url="/v2/sip_trunks";
-    	$numberApi=new Numberapi();
-    	$response=$numberApi->getInfo($url);
-    	if($response)
-    		return $response->data;
-    	return json_encode(array());
+    	/*$numberApi=new Numberapi();
+    	$response=$numberApi->getInfo("trunks.showList");*/
+    	$ossbss=new Ossbss();
+    	$response=$ossbss->getInfo("trunks.showList");
+    	$response=unsetParam($response,'paging');
+    	return json_encode($response);
     }
     protected function getAllServerApps()
     {
-    	$url="/v2/server_apps";
-    	$numberApi=new Numberapi();
-    	$response=$numberApi->getInfo($url);
-    	if($response)
-    		return $response->data;
-    	return json_encode(array());
+    	/*$numberApi=new Numberapi();
+    	$response=$numberApi->getInfo("serverApps.showList");*/
+    	$ossbss=new Ossbss();
+    	$response=$ossbss->getInfo("serverApps.showList");
+    	$response=unsetParam($response,'paging');
+    	return json_encode($response);
     	
     }
     /**update the number's configure
@@ -181,29 +194,30 @@ class NumbersController extends Controller
     public function saveConfig(Request $request)
     {
     	$inputs=$request->except('_token');
+//     	return json_encode($inputs);
     	$data=array();
     	$data['number']=$inputs['number'];
     	if($inputs['voice'] != null)  
     		$voice=$inputs['voice'];
-    	$data['bind_voice_type']=(isset($voice['type']))?$voice['type']:null;
-    	if(!empty($data['bind_voice_type']))
+    	$data['voice_bind_type']=(isset($voice['type']))?$voice['type']:null;
+    	if(!empty($data['voice_bind_type']))
     	{
-    		if($data['bind_voice_type'] == "SERVER_APP")
+    		if($data['voice_bind_type'] == "SERVER_APP")
     		{
-    			$data['voice_servapp']=$voice['setting']["SERVER_APP"];
-    			if(empty($data['voice_servapp']))
+    			$data['voice_application_id']=$voice['setting']["SERVER_APP"];
+    			if(empty($data['voice_application_id']))
     			{
-    				unset($data['voice_servapp']);
-    				unset($data['bind_voice_type']);
+    				unset($data['voice_application_id']);
+    				unset($data['voice_bind_type']);
     			}
     		}
-	    	if($data['bind_voice_type'] == "SIPTRUNK")
+	    	if($data['voice_bind_type'] == "SIPTRUNK")
 	    	{
-	    		$data['siptrunk_id']=$voice['setting']["SIPTRUNK"];
-	    		if(empty($data['siptrunk_id']))
+	    		$data['sip_trunk_id']=$voice['setting']["SIPTRUNK"];
+	    		if(empty($data['sip_trunk_id']))
 	    		{
-	    			unset($data['siptrunk_id']);
-	    			unset($data['bind_voice_type']);
+	    			unset($data['sip_trunk_id']);
+	    			unset($data['voice_bind_type']);
 	    		}
 	    	}
     	}else
@@ -213,29 +227,41 @@ class NumbersController extends Controller
     	
     	if($inputs['message'] != null)  
     		$message=$inputs['message'];
-    	$data['bind_msg_type']=(isset($message['type'] ))?$message['type']:null;
-    	if(!empty($data['bind_msg_type']))
+    	$data['message_bind_type']=(isset($message['type'] ))?$message['type']:null;
+    	if(!empty($data['message_bind_type'] ))
     	{
-    		if($data['bind_msg_type'] == 'server_sms')
-	    		$data['msg_servapp']=$message['setting']["server_sms"];
-    		$data['bind_msg_type']=="SERVER_APP";
-    		if(empty($data['msg_servapp']))
+    		if($data['message_bind_type'] == 'server_sms')
     		{
-    			unset($data['msg_servapp']);
-    			unset($data['bind_msg_type']);
+    			$data['message_bind_type']="SERVER_APP";
+    			$data['message_application_id']=$message['setting']['server_sms'];
+    		}
+    		if(empty($data['message_application_id']))
+    		{
+    			unset($data['message_application_id']);
+    			unset($data['message_bind_type']);
     		}
     	}else
     	{
-    		unset($data['bind_msg_type']);
+    		unset($data['message_bind_type']);
     	}
     	if(count($data) <= 1) 
     		return json_encode(array("flag"=>'error','error'=>"Please choose config"));
-    	$url="/v2/developer_numbers/".$data['number'];
-    	$numberApi=new Numberapi();
-    	$response=$numberApi->putInfo($url, $data);
-    	if($response)
-    		return json_encode(array("flag"=>'success','success'=>"Configure successfully"));
-    	return json_encode(array("flag"=>'error','error'=>"Configure faild"));
+    	
+    	/*$numberApi=new Numberapi();
+    	$response=$numberApi->putInfo("numbers.editNumber", $data,$data['number']);
+*/
+    	$ossbss=new Ossbss();
+    	$response=$ossbss->putInfo("numbers.editNumber",$data,$data['number']);
+    	$response=unsetParam($response,'paging','data');
+    	if($response['flag'] == 'success')
+    	{
+	    	$response['msg']="Configure successfully";
+    	}
+		else
+		{
+			$response['msg']="Configure faild";
+		}			
+    	return json_encode($response);
     }
 	
     /**
@@ -257,12 +283,15 @@ class NumbersController extends Controller
      */
     public function release(Request $request,$number,$type)
     {
-    	$url="/v2/developer_numbers/".$number;
-    	$numberApi=new Numberapi();
+//    	$url="/v2/PurchasedPhoneNumbers/".$number;
     	$inputs['number']=$number;
     	$inputs['capabilities']=$type;
-    	$result=$numberApi->deleteInfo($url,$inputs);
-    	return $result;
+//    	$numberApi=new Numberapi();
+//    	$result=$numberApi->deleteInfo("numbers.doReleased",$inputs,$number);
+    	$ossbss=new Ossbss();
+    	$result=$ossbss->deleteInfo("numbers.doReleased",$inputs,$number);
+    	$result=unsetParam($result,'data','paging');
+    	return json_encode($result);
     }
 
 
@@ -272,14 +301,18 @@ class NumbersController extends Controller
       */
      public function buy()
     {
-        $selectedNumbers=$this->showSelectedNumbers();
-        $selectedNumbers=!empty($selectedNumbers)?json_decode($selectedNumbers):array();
+    	$account_info=Session::get('account_info');
+        $res=json_decode($this->showSelectedNumbers());
+//        $selectedNumbers=$selectedNumbers->data;
+        $selectedNumbers=($res->flag== 'success')?($res->data):array();
         $style=empty($selectedNumbers)?"style='display: none'":"";
+//         dd($selectedNumbers);
         return view("number/buy",array(
                 "active"=>"menu_number , menu_number_new",
                 "pagetitle"=>"Buy new phone number",
         		"selectedNumbers"=>$selectedNumbers,
         		'style'=>$style,
+        		"blance"=>$account_info->current_balance,
             )
         );
     }
@@ -293,10 +326,14 @@ class NumbersController extends Controller
 	{
 		$inputs=$requst->except("_token");
 		if(empty($inputs['number'])) unset($inputs['number']);
-		$numberApi=new Numberapi();
+
+	/*	$numberApi=new Numberapi();
 		$result=$numberApi->buySearch($inputs);
-		$data=$result->body->data;
-		return json_encode($data);
+*/
+		$ossbss=new Ossbss();
+		$res=$ossbss->getInfo("numbers.showIdleList",$inputs);
+		$res=unsetParam($res,'paging');
+		return json_encode($res);
 	}
 	
 	/**
@@ -310,22 +347,25 @@ class NumbersController extends Controller
 		
 		$inputs['number']=$number;
 		if(empty($inputs['number'])) return false;
-		$inputs['developer_id']=Session::get('account_id');
-		$numberApi=new Numberapi();
-		$result=$numberApi->setNumberSelected($inputs);
-		return $result;
-		
+		$inputs['developer_id']=Session::get('account_sid');
+		$ossbss=new Ossbss();
+		$result=$ossbss->putInfo("numbers.doSelected",$inputs,$inputs['number']);
+		$result=unsetParam($result,'data','paging');
+		return json_encode($result);
 	}
 	/**
 	 * get all selected numbers by ajax request
-	 * @return integer|json 0|json
+	 * @return json 
 	 */
 	public function showSelectedNumbers()
 	{
-		$numberApi=new Numberapi();
 		$inputs['developer_id']=Session::get('account_id');
-		$result=$numberApi->showSelectedNumbers($inputs);
-		return $result;
+	/*	$numberApi=new Numberapi();
+		$result=$numberApi->showSelectedNumbers($inputs);*/
+		$ossbss=new Ossbss();
+		$result=$ossbss->getInfo("numbers.showSelectedList",$inputs);
+		$result=unsetParam($result,'paging');
+		return json_encode($result);
 	}
 	/**
 	 * remove the number's  selected status  
@@ -338,9 +378,10 @@ class NumbersController extends Controller
 		$inputs['number']=$number;
 		if(empty($inputs['number'])) return false;
 		$inputs['developer_id']=Session::get('account_sid');
-		$numberApi=new Numberapi();
-		$result=$numberApi->removeSeletectedNumber($inputs);
-		return $result;
+		$ossbss=new Ossbss();
+		$result=$ossbss->deleteInfo("numbers.doRemoved",$inputs,$number);
+		$result=unsetParam($result,'data','paging');
+		return json_encode($result);
 	}
 	/**
 	 * pay for selected numbers.
@@ -364,22 +405,35 @@ class NumbersController extends Controller
 			$data[$i]['period_type']="MONTH";
 			$i++;
 		}
-// 		return json_encode($data);
-		$numberApi=new Numberapi();
-		$result=$numberApi->comfirmPurchase($data);
-		return $result;
+		$ossbss=new Ossbss();
+		$result=$ossbss->postInfo("numbers.buyNumbers",$data);
+		$result=unsetParam($result,'paging');
+// 		return json_encode($result);
+		$data=isset($result['data'])?$result['data']:array();
+		if($data && $data->failure)
+		{
+			$result['flag']="error";
+			$failed_list=json_encode($data->failed_list);
+			$str="";
+			foreach (json_decode($failed_list,true) as $key=>$v)
+			{
+				$str .=$key.",";
+			}
+			$result['msg']=$str."purchased Faild";
+			unset($result['data']);
+		}
+
+		return json_encode($result);
 	}
 	protected function showNumberDetails($number)
 	{
-		$numberApi=new Numberapi();
 		$inputs['number']=$number;
 		$inputs['developer_id']=Session::get('account_sid');
-		$result=$numberApi->getInfo("/v2/developer_numbers/".$number,$inputs);
-		if($result)
-		{
-			return $result;
-		}
-		return false;
-		
+		$numberApi=new Numberapi();
+		$result=$numberApi->getInfo("numbers.showDetails",$inputs,$number);
+		$ossbss=new Ossbss();
+		$res=$ossbss->getInfo("numbers.showDetails",$inputs,$number);
+		$res=unsetParam($res,'paging');
+		return json_encode($res);
 	}
 }

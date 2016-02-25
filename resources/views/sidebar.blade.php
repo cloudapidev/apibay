@@ -49,7 +49,7 @@
             </li>
 						
 						<li class="treeview menu_user">
-              <a href="index.php">
+              <a href="{{ url('/') }}">
                 <i class="fa fa-user-plus"></i> <span>{{ trans('layout.Users') }}</span>
 								<i class="fa fa-angle-left pull-right"></i>
               </a>
@@ -60,7 +60,7 @@
             </li>
 						
 						<li class="treeview menu_serverapp">
-              <a href="index.php">
+              <a href="url('/')">
                 <i class="fa fa-server"></i> <span>{{ trans('layout.Server Apps') }}</span>
 								<i class="fa fa-angle-left pull-right"></i>
               </a>
@@ -71,20 +71,20 @@
             </li>
 						
 						<li class="treeview menu_siptrunk">
-              <a href="index.php">
+              <a href="url('/')">
                 <i class="fa fa-whatsapp"></i> <span>{{ trans('layout.Sip Trunk') }}</span>
 								<i class="fa fa-angle-left pull-right"></i>
               </a>
 							<ul class="treeview-menu">
                 <li class="menu_siptrunk_listing"><a href="{{url("siptrunk")}}">{{ trans('layout.Listing') }}</a></li>
-                <li class="menu_siptrunk_new"><a href="{{url("siptrunk/add")}}">{{ trans('layout.Create New') }}</a></li>
+<!--                 <li class="menu_siptrunk_new"><a href="{{url("siptrunk/add")}}">{{ trans('layout.Create New') }}</a></li> -->
 							</ul>
             </li>
             
             
             
             <li class="treeview menu_clientapp">
-              <a href="index.php">
+              <a href="url('/')">
                 <i class="fa fa-server"></i> <span>{{ trans('layout.Client Apps') }}</span>
 								<i class="fa fa-angle-left pull-right"></i>
               </a>
@@ -95,7 +95,7 @@
             </li>
 						
 						<li class="treeview menu_pricing">
-              <a href="index.php">
+              <a href="url('/')">
                 <i class="fa fa-object-ungroup"></i> <span>{{ trans('layout.Pricing') }}</span>
 								<i class="fa fa-angle-left pull-right"></i>
 								<ul class="treeview-menu">
@@ -105,7 +105,7 @@
             </li>
 						
 						<li class="treeview menu_extra">
-              <a href="index.php">
+              <a href="url('/')">
                 <i class="fa fa-object-ungroup"></i> <span>{{ trans('layout.Extras') }}</span>
 								<i class="fa fa-angle-left pull-right"></i>
 								<ul class="treeview-menu">
@@ -116,7 +116,7 @@
             </li>
 						
 						<li class="treeview">
-              <a href="index.php">
+              <a href="url('/')">
                 <i class="fa fa-bar-chart"></i> <span>{{ trans('layout.Billing & Reports') }}</span>
 								<i class="fa fa-angle-left pull-right"></i>
 								<ul class="treeview-menu">
@@ -129,7 +129,7 @@
             </li>
 						
 						<li class="treeview menu_setting">
-              <a href="index.php">
+              <a href="url('/')">
                 <i class="fa fa-gear"></i> <span>{{ trans('layout.Settings') }}</span>
 								<i class="fa fa-angle-left pull-right"></i>
 								<ul class="treeview-menu">
@@ -141,18 +141,18 @@
             </li>
 						
 						<li class="treeview">
-              <a href="index.php">
+              <a href="url('/')">
                 <i class="fa fa-gears"></i> <span>{{ trans('layout.System(Admin Only)') }}</span>
 								<i class="fa fa-angle-left pull-right"></i>
               </a>
 							<ul class="treeview-menu">
-                <li class="aaaa"><a href="index.php">{{ trans('layout.Manage Numbers') }}</a></li>
-                <li class="aaaa"><a href="index.php">{{ trans('layout.Manage Accounts') }}</a></li>
-                <li class="aaaa"><a href="index.php">{{ trans('layout.Manage Administrators') }}</a></li>
-                <li class="aaaa"><a href="index.php">{{ trans('layout.Manage Countries') }}</a></li>
-                <li class="aaaa"><a href="index.php">{{ trans('layout.Manage Topups') }}</a></li>
-                <li class="aaaa"><a href="index.php">{{ trans('layout.Manage SIP Trunks') }}</a></li>
-                <li class="aaaa"><a href="index.php">{{ trans('layout.Manage Rate Table') }}</a></li>
+                <li class="aaaa"><a href="url('/')">{{ trans('layout.Manage Numbers') }}</a></li>
+                <li class="aaaa"><a href="url('/')">{{ trans('layout.Manage Accounts') }}</a></li>
+                <li class="aaaa"><a href="url('/')">{{ trans('layout.Manage Administrators') }}</a></li>
+                <li class="aaaa"><a href="url('/')">{{ trans('layout.Manage Countries') }}</a></li>
+                <li class="aaaa"><a href="url('/')">{{ trans('layout.Manage Topups') }}</a></li>
+                <li class="aaaa"><a href="url('/')">{{ trans('layout.Manage SIP Trunks') }}</a></li>
+                <li class="aaaa"><a href="url('/')">{{ trans('layout.Manage Rate Table') }}</a></li>
               </ul>
             </li>
 						

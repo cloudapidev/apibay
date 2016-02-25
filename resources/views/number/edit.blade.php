@@ -33,30 +33,17 @@
 							<dd>{{$details->expired_date}}</dd>
 							<dt>{{trans('numbers.Configure With')}}</dt>
 							
-							<?php if(!empty($details->bind_voice_type)):?>
-							<dd>Voic: <!--  --></dd>
+							<?php if(!empty($details->voice_bind_type)):?>
+							<dd id="voice_type" data-value="{{$details->voice_bind_type}}">Voic: <!--  --></dd>
 							<?php endif;?>
-							<?php if(!empty($details->bind_msg_type)):?>
-							<dd>Message:<!--  --></dd>
+							<?php if(!empty($details->message_bind_type)):?>
+							<dd id="smg_type" data-value="{{$details->message_bind_type}}">Message:<!--  --></dd>
 							<?php endif;?>
 						</dl>
 					</div><!-- /.box-body -->
 				</div><!-- /.box -->
 			</div>
 		</div>
-		<?php var_dump($details)?>
-		<?php 
-		$SERVER_APP=false;
-		$SIPTRUNK=false;
-		$F2NUMBER=false;
-		$BINDTOUSER=false;
-		if(!empty($details->bind_voice_type))
-		{
-			$tmp=$details->bind_voice_type;
-			$$tmp=true;
-		}	
-		var_dump($SIPTRUNK);
-		?>
 		<div class="row">	
 			<div class="col-md-8">
 					<div class="box box-solid">
@@ -73,7 +60,7 @@
 							<div class="col-sm-2">
 								<div class="radio">
 									<label>
-										<input type="radio" checked={{$SERVER_APP}} name="voice[type]" value="SERVER_APP"> {{trans('numbers.Server App')}}
+										<input type="radio"  name="voice[type]" value="SERVER_APP"> {{trans('numbers.Server App')}}
 									</label>
 								</div>
 							</div>
@@ -96,12 +83,12 @@
 							<div class="col-sm-2">
 								<div class="radio">
 									<label>
-										<input type="radio"  name="voice[type]" value="SIPTRUNK"> {{trans('numbers.SIP Trunk')}}
+										<input type="radio"   name="voice[type]" value="SIPTRUNK"> {{trans('numbers.SIP Trunk')}}
 									</label>
 								</div>
 							</div>
 						</div> 
-						<div class="row SIPTRUNK" style="display:none;">
+						<div class="row SIPTRUNK" style="display:none">
 							<div class="col-md-6">
 								<div class="box-body">		
 									<div class="form-group">
@@ -109,7 +96,11 @@
 											<select id="select-sip" class="form-control" name="voice[setting][SIPTRUNK]">
 												<option value="0">- Select -</option>
 												<?php if(!empty($siptrunks)) foreach ($siptrunks as $trunk):?>
-												<option value="{{$trunk->id}}">{{$trunk->name}}</option>
+													<?php if(isset($details->voice_config_with->id) && $trunk->id == $details->voice_config_with->id):?>
+													<option selected value="{{$trunk->id}}">{{$trunk->name}}</option>
+													<?php else:?>
+													<option value="{{$trunk->id}}">{{$trunk->name}}</option>
+													<?php endif;?>
 												<?php endforeach;?>
 											</select>
 									</div>
@@ -153,7 +144,11 @@
 												<select id='select-server' class="form-control" name="voice[setting][SERVER_APP]" >
 													<option value="0">- Select -</option>
 													<?php if(!empty($serverapps)) foreach($serverapps as $app):	?>
+														<?php if(isset($details->voice_config_with->id) && $app->id == $details->voice_config_with->id):?>
+														<option selected value="{{$app->id}}">{{$app->name}}</option>
+														<?php else:?>
 														<option value="{{$app->id}}">{{$app->name}}</option>
+														<?php endif;?>
 													<?php endforeach;?>
 														
 												</select>
@@ -170,13 +165,13 @@
 				<div class="box box-solid">
 					<div class="box-header with-border">
 					<?php 
-					$SERVER_APP=false;
+					/* $SERVER_APP=false;
 					$SIPTRUNK=false;
 					if(!empty($details->bind_msg_type))
 					{
 						$tmp=$details->bind_msg_type;
 						$$tmp=true;
-					}	
+					} */	
 					?>
 						<h3 class="box-title">{{trans('numbers.Messaging')}}</h3>
 					</div><!-- /.box-header -->
@@ -195,7 +190,7 @@
 								<div class="col-sm-3">
 									<div class="radio">
 										<label>
-											<input type="radio" checked={{$SERVER_APP}} name="message[type]" value="server_sms"> {{trans('numbers.Server App')}}
+											<input type="radio"  name="message[type]" value="server_sms"> {{trans('numbers.Server App')}}
 										</label>
 										
 									</div>
@@ -219,7 +214,11 @@
 											<select id='select-server' class="form-control" name="message[setting][server_sms]" >
 												<option value="">- Select -</option>
 												<?php if(!empty($serverapps)) foreach($serverapps as $app):	?>
+														<?php if(isset($details->message_config_with->id) && $app->id == $details->message_config_with->id):?>
+														<option selected value="{{$app->id}}">{{$app->name}}</option>
+														<?php else:?>
 														<option value="{{$app->id}}">{{$app->name}}</option>
+														<?php endif;?>
 												<?php endforeach;?>
 											</select>
 										</div>
@@ -245,6 +244,7 @@
 <div class="alert alert-success alert-dismissable" style="display: none" >
 				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 				<h4><i class="icon fa fa-info"></i> Notice</h4>
+				<p></p>
 </div>
 <div class="alert alert-danger alert-dismissable" style="display: none" >
 				<button type="button" class="close" data-dismiss="alert"
@@ -252,7 +252,7 @@
 				<h4>
 					<i class="icon fa fa-ban"></i> Notice !
 				</h4>
-				
+				<p></p>
 </div>
 
  @endsection
