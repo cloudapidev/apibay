@@ -1,4 +1,5 @@
-@extends('admin_template') @section('content')
+@extends('admin_template')
+@section('content')
 
 <div class="row">
 	<div class="col-md-12">
@@ -250,6 +251,7 @@
 				<p></p>
 </div>
 
-@endsection @section('afterfooter')
+@endsection
+@section('afterfooter')
 <script type="text/javascript" src="{{ asset("/bower_components/admin-lte/myjs/numbers/buyNumber.js") }}"></script> 
 @endsection

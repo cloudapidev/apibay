@@ -272,8 +272,6 @@ class SiptrunkController extends Controller
 		$result=unsetParam($result,"paging",'data');
 		return json_encode($result);
 	}
-
-	
 	/**
 	 * show all Auth list
 	 * @param Request $request
@@ -374,15 +372,12 @@ class SiptrunkController extends Controller
 	 */
 	public function editIpAcess(Request $request)
 	{
-		
 		$inputs=$request->except('_token');
 		$ossbss=new Ossbss();
 		$result=$ossbss->putInfo('trunks.editIp',$inputs,$inputs['id']);
 		$result=unsetParam($result,"paging",'data');
 		return json_encode($result);
 	}
-	
-	
 	/**
 	 * show all Ip Access List
 	 * @param Request $request
@@ -396,7 +391,6 @@ class SiptrunkController extends Controller
 		$result=unsetParam($result,'msg','paging','flag');
 		return json_encode($result);
 	}
-	
 	/**
 	 * create new Origination
 	 * @param Request $request
@@ -412,7 +406,6 @@ class SiptrunkController extends Controller
 		$result=unsetParam($result,'paging','data');
 		return json_encode($result);
 	}
-	
 	/**
 	 * edit the Origination
 	 * @param Request $request
@@ -445,11 +438,5 @@ class SiptrunkController extends Controller
 		$result=$ossbss->getInfo("trunks.showAllOriginList",$inputs,$params);
 		return json_encode($result);
 	}
-	
-	
-	
-	
-	
-	
 	
 }

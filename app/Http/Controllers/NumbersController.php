@@ -66,11 +66,11 @@ class NumbersController extends Controller
     	$ossbss=new Ossbss();
     	$res=$ossbss->getInfo("numbers.showList",$inputs);
     	if(isset($res['paging']))
-	    	$res['pagelist']=pagesLink($result['paging']->total,$page,$this->_perNums);
+	    	$res['pagelist']=pagesLink($res['paging']->total,$page,$this->_perNums);
     /*	$numberApi=new Numberapi();
     	$result=$numberApi->searchNumbers($inputs,$offset,$this->_perNums);*/
     	unset($res['paging']);
-    	return $res($result);
+    	return $res;
     }
    /**
     * display the search numbers list by ajax request
