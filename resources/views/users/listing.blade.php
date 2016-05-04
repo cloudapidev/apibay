@@ -65,7 +65,7 @@
 																</div>
 														
 																<div class="box-body table-responsive">
-																	<table id="example1" class="datatasble table table-bordered table-striped table-condensed cf">
+																	<table id="example1" class="display">
 																		<thead>
 																			<tr>
 																				<th>#</th>
@@ -83,21 +83,21 @@
 																		</thead>
 																		<tbody>
 																			
-																			<?php $cnt=0; foreach(openCSV("user-listing") as $key=>$item){ ++$cnt;?>
+
 																			<tr>
-																				<td><?=$cnt ?></td>
-																				<td><?=$item['login']?></td>
-																				<td><?=$item['fullname']?></td>
-																				<td><?=$item['email']?></td>
-																				<td><?=$item['external_id']?></td>
-																				<td><?=$item['facebook']?></td>
-																				<td><?=$item['twitter']?></td>
-																				<td><?=$item['tag']?></td>
-																				<td><?=$item['lastsignin']?></td>
-																				<td><?=$item['date_create']?></td>
-																				<td><a href="{{url('users/edit',['id'=>$item['id']])}}" class="btn btn-block btn-default">Edit</a></td>
+																				<td>$cnt </td>
+																				<td>$item['login']</td>
+																				<td>$item['fullname']</td>
+																				<td>$item['email']</td>
+																				<td>$item['external_id']</td>
+																				<td>$item['facebook']</td>
+																				<td>$item['twitter']</td>
+																				<td>$item['tag']</td>
+																				<td>$item['lastsignin']</td>
+																				<td>$item['date_create']</td>
+																				<td><a href="url('users/edit',['id'=>$item['id']])" class="btn btn-block btn-default">Edit</a></td>
 																			</tr>
-																			<?php } ?>
+
 																		</tbody>
 																		<tfoot>
 																			<tr>
@@ -144,7 +144,8 @@
 
 @endsection
 @section('afterfooter')
- <script>
+	<script type="text/javascript" src="{{ asset("/bower_components/admin-lte/myjs/users/listUsers.js") }}"></script>
+	<script>
  
 	$('.checkall').on('ifChecked', function(event){
 			$('input[type=checkbox]').iCheck('check');

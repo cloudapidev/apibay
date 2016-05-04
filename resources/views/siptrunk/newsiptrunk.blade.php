@@ -4,6 +4,7 @@
 <div class="row editTrunk" >
 <p id="url" style="display: none">{{url('/')}}</p>
 <div class="col-md-12">
+
 <!--  <form class="form-horizontal" onsubmit="return false;">-->
 	<!-- start custom tab -->
 	<div class="nav-tabs-custom">
@@ -53,7 +54,7 @@
 						<select id="selectAuth" name="sipTrunkAuthId">
 							<option value="0">---Select---</option>
 							<?php if(!empty($allAuthList)): foreach ($allAuthList as $auth):?>
-							<option value="{{$auth->id}}">{{$auth->user_name}}</option>
+							<option value="{{$auth->id}}" type="{{$auth->password}}">{{$auth->user_name}}</option>
 							<?php endforeach;endif;?>
 						</select>&nbsp;
 						<a href="#"  id="user_submit" name="commit" type="submit" value="Add user" data-toggle="modal" data-target="#myModalauth">Add credential authentication</a><br />
@@ -67,12 +68,15 @@
 								</tr>
 							</thead>
 							<tbody>
-							<?php $index=1; if(!empty($selectedAuthList)):foreach ($selectedAuthList as $auth):?>
+							<?php $index=1; if(!empty($AuthList)):foreach ($AuthList as $key=> $auth):?>
 								<tr>
-									<td>{{$index}}</td>
-									<td>{{$auth->user_name}}</td>
-									<td>********</td>
-									<td><a href="#" data-authid="{{$auth->id}}"  id="user_submit" name="commit" type="submit" value="Add user" data-toggle="modal" data-target="#myModalauth">Edit</a></td>
+									<td>{{$key+1}}</td>
+									<td class="usn{{$auth->id}}">{{$auth->user_name}}</td>
+									<td >**************</td>
+									<td>
+										<a href="#" data-pwd="{{$auth->password}}" data-authid="{{$auth->id}}" id="auth_submit" class="edit" name="commit" type="commit" value="Edit user" data-toggle="modal" data-target="#myModalauth">Edit</a>
+									</td>
+
 								</tr>
 							<?php endforeach;endif;?>
 							</tbody>
@@ -93,10 +97,10 @@
 					<select id="selectIpcontrol" name="sipTrunkIpId">
 							<option value="0">---Select---</option>
 							<?php if(!empty($allIpAccess)): foreach ($allIpAccess as $ipAccess):?>
-							<option value="{{$ipAccess->id}}">{{$ipAccess->description}}</option>
+							<option value="{{$ipAccess->id}}" type="{{$ipAccess->ip}}">{{$ipAccess->description}}</option>
 							<?php endforeach;endif;?>
 						</select>&nbsp;
-						<a href="#"  id="user_submit" name="commit" type="submit" value="Add user" data-toggle="modal" data-target="#myModalip">Add IP Access</a><br />
+						<a href="#"  id="getAddipType" name="commit" type="submit" value="Add user" data-toggle="modal" data-target="#myModalip">Add IP Access</a><br />
 						<table id="IpAccessList" class="table table-bordered table-striped table-condensed cf">
 							<thead>
 								<tr>
@@ -110,9 +114,10 @@
 							<?php $index=1; if(!empty($selectedIpAccess)):foreach ($selectedIpAccess as $ipAccess):?>
 								<tr>
 									<td>{{$index}}</td>
-									<td>{{$ipAccess->description}}</td>
-									<td>{{$ipAccess->ip}}</td>
-									<td><a href="#" data-ipaccess="{{$ipAccess->id}}"  id="user_submit" name="commit" type="submit" value="Add user" data-toggle="modal" data-target="#myModalip">Edit</a></td>
+									<td class="des{{$ipAccess->id}}">{{$ipAccess->description}}</td>
+									<td class="ip{{$ipAccess->id}}">{{$ipAccess->ip}}</td>
+
+									<td><a href="#" data-ipaccess="{{$ipAccess->id}}"  id="ip_submit" name="commit" type="submit" value="Add user" data-toggle="modal" data-target="#myModalip">Edit</a></td>
 								</tr>
 							<?php $index++; endforeach;endif; ?>
 							</tbody>
@@ -132,29 +137,35 @@
 			</div>
 			<!-- End termination -->
 			<!-- Start origination -->
-			<div class="tab-pane" id="tab_3">
-				<div class="form-group">
-					<label class="control-label col-sm-2" for="user_full_name">Origination IP</label>
-					<div class="col-xs-3">
-							<input type="text" class="form-control" placeholder="IP Address / Domain" value="">
+			<div class="tab-pane origination" id="tab_3">
+				<form id="saveOriginationForm" class="form-horizontal"  action="#" method="post" >
+					<input type="hidden" name="_token" value="{{ csrf_token() }}">
+					<input type='hidden' name="sipTrunkId" value="{{$trunkInfo->id}}">
+					<input type='hidden' name="id" value="<?php if(!empty($originationList)){echo $originationList[0]->id;}?>">
+					<input type='hidden' name="origination" value="origination">
+					<div class="form-group">
+						<label class="control-label col-sm-2" for="user_full_name">Origination IP</label>
+						<div class="col-xs-3">
+								<input type="text" class="form-control" placeholder="IP Address / Domain" value="<?php  if(!empty($originationList)){echo $originationList[0]->origination_ip;}?>" name="origination_ip">
+							</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-sm-2" for="user_full_name">Origination Port</label>
+						<div class="col-xs-2">
+							<input type="text" class="form-control" placeholder="Port" value="<?php  if(!empty($originationList)){echo $originationList[0]->origination_port;}?>" name="origination_port">
 						</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-sm-2" for="user_full_name">Origination Port</label>
-					<div class="col-xs-2">
-						<input type="text" class="form-control" placeholder="Port" value="">
 					</div>
-				</div>			
-				<div class="form-group">
-					<label class="control-label col-sm-2" for="user_full_name">Origination Prefix</label>
-					<div class="col-xs-3">
-						<input type="text" class="form-control" placeholder="Prefix" value="">
+					<div class="form-group">
+						<label class="control-label col-sm-2" for="user_full_name">Origination Prefix</label>
+						<div class="col-xs-3">
+							<input type="text" class="form-control" placeholder="Prefix" value="<?php  if(!empty($originationList)){echo $originationList[0]->origination_prefix;}?>" name="origination_prefix">
+						</div>
 					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-sm-2" for="user_full_name"> No. of channel</label>
-					<label class="control-label col-sm-2" style="text-align:left;" for="user_full_name"></label>
-				</div>
+					<div class="form-group">
+						<label class="control-label col-sm-2" for="user_full_name"> No. of channel</label>
+						<label class="control-label col-sm-2" style="text-align:left;" for="user_full_name"></label>
+					</div>
+				</form>
 			</div>
 			<!-- End origination -->
 			<!-- Start number -->
@@ -162,10 +173,12 @@
 				<div class="table-responsive">
 					<div class="box box-solid container-fluid">
 						<div class="pull-right">
-							<a href="#" class="pull-right btn bg-red btn-flat margin ">Delete assigned number</a>
+							<a href="#" class="pull-right btn bg-red btn-flat margin " id="deleteAssigndnum">Delete assigned number</a>
 							<a href="#" data-toggle="modal" data-target="#myModalassign" class="pull-left btn bg-green btn-flat margin ">Assign new number from existing</a>
 						</div>
-						<table id="example1" class="datatable table table-bordered table-striped table-condensed cf">
+						<input type="hidden" name="_token" value="{{ csrf_token() }}" id="getToken">
+						<input type='hidden' name="sipTrunkId" value="{{$trunkInfo->id}}" id="siptrunkId">
+						<table id="example1" class="display">
 							<thead>
 								<tr>
 									<th>#</th>
@@ -178,30 +191,20 @@
 									</th>
 								</tr>
 							</thead>
-							<tbody>
-								<?php $cnt=0; foreach(openCSV("number-listing") as $key=>$item){ ++$cnt;?>
+							<tbody class="seletedNum">
 								<tr>
-									<td><?=$cnt ?></td>
-									<td><?=$item['number']?></td>
-									<td><?=$item['country']?></td>
-									<td><?=$item['area']?></td>
-									<td><?=$item['capability']?></td>
+									<td> </td>
+									<td id="assignedNumber"></td>
+									<td></td>
+									<td></td>
+									<td></td>
 									<td>
 										<input type="checkbox">
 									</td>
 								</tr>
-								<?php } ?>
+
 							</tbody>
-							<tfoot>
-								<tr>
-									<th>#</th>
-									<th>Number</th>
-									<th>Country</th>
-									<th>Area</th>
-									<th>Capabilities</th>
-									<th></th>
-							 </tr>
-							</tfoot>
+
 						</table>
 						<div class="overlay" style="display:none;" >
 								<i class="fa fa-refresh fa-spin"></i>
@@ -247,7 +250,8 @@
 						 <div class="box-header with-border">
 								<h3 class="box-title">Search & Filter</h3>
 							</div><!-- /.box-header -->
-								<form class="form-horizontal">
+								<form class="form-horizontal" id="idleNum" method="post" action="">
+									<input type="hidden" name="_token" value="{{ csrf_token() }}">
 									<div class="box-body">
 											
 											
@@ -255,9 +259,8 @@
 											<label for="inputPassword3" class="col-sm-1 control-label">Country</label>
 											
 											<div class="col-sm-3">
-												<select class="form-control">
-													<option>(+1) United States</option>
-													<option>(+65) Singapore</option>
+												<select class="form-control" name="country" id="country">
+													<option value="sg">(+65) Singapore</option>
 												</select>
 											</div>
 											
@@ -272,12 +275,12 @@
 												<input type="text" class="form-control">
 											</div>
 							
-											<label for="inputPassword3" class="col-sm-1 control-label">Capabilities</label>
+											<label for="inputPassword3" class="col-sm-1 control-label" >Capabilities</label>
 											<div class="col-sm-2">
-													<select class="form-control">
-														<option>Voice</option>
-														<option>SMS</option>
-														<option>Voice + SMS</option>
+													<select class="form-control" name="capabilities" id="capabilities">
+														<option value="VOICE">Voice</option>
+														<option value="SMS">SMS</option>
+														<option value="VOICE_SMS">Voice + SMS</option>
 													</select>
 											</div>
 											
@@ -286,7 +289,7 @@
 										<div class="box-footer">
 											
 											<div class="pull-right">
-													<a href="#" class="btn bg-maroon btn-flat kpsubmit">Search</a>
+													<a href="#" class="btn bg-maroon btn-flat kpsubmit" id="searchNum">Search</a>
 											</div>	
 
 										</div>
@@ -297,7 +300,7 @@
 
 					
 						</div>
-							
+
 			
 					<div class="row kpsearch" style="display:none;">
 									<div class="col-md-12">
@@ -307,7 +310,7 @@
 											<h3 class="box-title">Search Results</h3>
 										</div><!-- /.box-header -->
 											<div class="box-body buytable table-responsive" >
-												<table class="table kptable table-striped" style="display:none;">
+												<table id="example2"class="display kptable" style="display:none;" >
 													<thead>
 														<tr>
 															<th>No</th>
@@ -315,74 +318,29 @@
 															<th>Area</th>
 															<th>Number</th>
 															<th>Capabilities</th>
-															<th><input type="checkbox" class="mcheckall" ></th>
+															<th><input type="checkbox" class="mcheckall" name="checkedNum"></th>
 														</tr>
 													</thead>
-													<tbody>
+													<tfoot>
+
 														<tr>
-															<td>1</td>
-															<td>Malaysia</td>
-															<td>Johor</td>
-															<td>+6012345664</td>
-															<td>Voice</td>
-															<td>
+															<th>No</th>
+															<th>Country</th>
+															<th>Area</th>
+															<th>Number</th>
+															<th>Capabilities</th>
+															<th>
 																<input type="checkbox">
-															</td>
+															</th>
 														</tr>
-														<tr>
-															<td>2</td>
-															<td>Singapore</td>
-															<td>-</td>
-															<td>+65612345664</td>
-															<td>SMS</td>
-															<td>
-																<input type="checkbox">
-															</td>
-														</tr>
-														<tr>
-															<td>3</td>
-															<td>Singapore</td>
-															<td>-</td>
-															<td>+65612345667</td>
-															<td>Voice+SMS</td>
-															<td>
-																<input type="checkbox">
-															</td>
-														</tr>
-														<tr>
-															<td>4</td>
-															<td>China</td>
-															<td>Cheng Du</td>
-															<td>+86612345664</td>
-															<td>Voice</td>
-															<td>
-																<input type="checkbox">
-															</td>
-														</tr>
-													</tbody>
+
+
+													</tfoot>
 												</table>
 											</div>
 											<div class="overlay" >
 													<i class="fa fa-refresh fa-spin"></i>
 											</div>
-										
-											<div class="row">
-												<div class="col-md-12">
-													<nav class="pull-right">
-														<ul class="pagination">
-															<li class="default"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-															<li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-															<li class="default"><a href="#">2 <span class="sr-only">(current)</span></a></li>
-															<li class="default"><a href="#">3 <span class="sr-only">(current)</span></a></li>
-															<li class="default"><a href="#">4 <span class="sr-only">(current)</span></a></li>
-															<li class="default"><a href="#">5 <span class="sr-only">(current)</span></a></li>
-															<li class="disabled"><a href="#">6 <span class="sr-only">(current)</span></a></li>
-														</ul>
-													</nav>
-												</div>
-											</div>
-											
-					
 										</div>
 									</div>
 								</div>
@@ -392,7 +350,7 @@
 	
 			<div class="modal-footer">
 				<button type="button" class="btn closes btn-default" data-dismiss="modal">Close</button>
-				<button type="button" class="btn buy btn-primary" data-dismiss="modal">Add</button>
+				<button id="add2list"  type="button" class="btn buy btn-primary" data-dismiss="modal">Add</button>
 			</div>
 		</div>
 	</div>
@@ -496,11 +454,12 @@
 								<div class="form-group">
 									<label class="control-label col-sm-2" for="user_full_name">Number associated</label>
 									<div class="col-sm-8">
+
 										<select class="form-control select2" multiple="multiple" data-placeholder="Select from unassign number" style="width: 100%;">
-										
-											<?php $cnt=0; foreach(openCSV("number-listing") as $key=>$item){ ++$cnt;?>
-												<option><?=$item["number"]?> (<?=$item["country"]?>)</option>
-											<?php } ?>
+
+											<?php foreach($assignedNumber as $key=>$item){?>
+												<option>{{$item["number"]}}  {{$item["country"] }}</option>
+										    <?php  }?>
 			
 										</select>
 									</div>
@@ -617,21 +576,27 @@
 				<h4 class="modal-title" id="myModalLabel">Manage Credential Authentication</h4>
 			</div>
 			<div class="modal-body">
-			
+
 				<form id="addAuthForm" class="form-horizontal">
 					<input type="hidden" name="_token" value="{{ csrf_token() }}">
-					<input type="hidden" name="trunkId" value="{{ $trunkId }}">
+					<input type="hidden" name="trunkId" value="{{ $trunkId }}" id="getTrunkId">
+					<input type="hidden" name="authId"  id="getAuthId">
+					<input type="hidden" id="getType" value="">
 						<div class="box-body">
 							<div class="form-group">
-								<label class="col-xs-3">Enter username</label>
+								<label class="col-xs-3">
+
+									Enter username
+
+								</label>
 								<div class="col-xs-4">
-									<input type="text" name="user_name" class="form-control" placeholder="Enter ...">
+									<input type="text" name="user_name" class="form-control" placeholder="Enter ..." id="uu" >
 								</div>
 							</div>
 							<div class="form-group margin">
 								<label class="col-xs-3">Enter password</label>
 								<div class="col-xs-4">
-									<input type="password" name="password" class="form-control" placeholder="Enter ...">
+									<input type="password" name="password" class="form-control" placeholder="Enter ..." id="pp">
 								</div>
 							</div>
 						</div>
@@ -643,7 +608,7 @@
 					</div>	
 					
 					<div class="pull-right">
-							<a href="#" class="btn btn-danger margin" data-dismiss="modal">Delete</a>
+							<a href="#" class="btn btn-danger margin" id="deleteAuthBtn" data-dismiss="modal">Delete</a>
 					</div>
 			</div>
 		</div>
@@ -665,18 +630,20 @@
 			
 				<form id="addIPAccessForm" class="form-horizontal">
 					<input type="hidden" name="_token" value="{{csrf_token()}}" />
-					<input type="hidden" name="trunkId" value="{{$trunkId}}" />
+					<input type="hidden" name="trunkId" value="{{$trunkId}}" id="getTrunkId2" />
+					<input type="hidden" name="id" value="" id="getId">
+					<input type="hidden" id="getIpType" value="">
 						<div class="box-body">
 							<div class="form-group">
 								<label class="col-xs-3">Enter name</label>
 								<div class="col-xs-4">
-									<input type="text" name="description" class="form-control" placeholder="Enter ..." value="GR PBX">
+									<input type="text" name="description" class="form-control" placeholder="Enter ..." value="" id="ipDes">
 								</div>
 							</div>
 							<div class="form-group margin">
 								<label class="col-xs-3">Enter IP Address</label>
 								<div class="col-xs-4">
-									<input type="text" name="ip" class="form-control" placeholder="Enter ..." value="145.24.21.111">
+									<input type="text" name="ip" class="form-control" placeholder="Enter ..." value="" id="ipNum">
 								</div>
 							</div>
 						</div>
@@ -687,12 +654,14 @@
 							<a href="#" id="addIpAccess" class="btn bg-maroon btn-flat margin" data-dismiss="modal">Save</a>
 					</div>	
 					<div class="pull-right">
-							<a href="#" class="btn btn-danger margin" data-dismiss="modal">Delete</a>
+							<a href="#" class="btn btn-danger margin" data-dismiss="modal" id="deleteIpAccess">Delete</a>
 					</div>
 			</div>
 		</div>
 	</div>
 </div>
+
+
 <!-- End ip access -->
 <div id="success" class="alert alert-success alert-dismissable" style="display: none" >
 				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>

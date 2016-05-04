@@ -1,6 +1,7 @@
 @extends('admin_template')
 
 @section('content')
+	<span id="rootUrl" style="display: none">{{url("/")}}</span>
 <div class="row">
 					<div class="col-md-12">
 						<form class="form-horizontal" onsubmit="return false;">
@@ -99,46 +100,43 @@
 																<div class="box-header with-border">
 																	<h3 class="box-title">Results</h3>
 																</div>
-														
-																<div class="box-body table-responsive">
-																	<table id="example1" class="datastable table table-bordered table-striped table-condensed cf">
+
+															 <div class="box-body table-responsive">
+																 <table id="example1" class="display">
 																		<thead>
 																			<tr>
 																				<th>#</th>
 																				<th>Name</th>
 																				<th>Date create</th>
-																				<th>Type</th>
+
 																				<th>Description</th>
-																				<th>Number associated</th>
+
 																				<th>Status</th>
 																				<th></th>
 																			</tr>
 																		</thead>
-																		<tbody>
-																			
-																			<?php $cnt=0; foreach(openCSV("serverapp-listing") as $key=>$item){ ++$cnt;?>
+																	{{--	<tbody>
+
 																			<tr>
-																				<td><?=$cnt ?></td>
+																				<td>{{$cnt}}</td>
 																				<td>
-																						<?=$item['name']?>
+																						{{$sList->name}}
 																				</td>
-																				<td><?=$item['date_create']?></td>
-																				<td><?=$item['type']?></td>
-																				<td><?=$item['description']?></td>
-																				<td><?=$item['number_associated']?></td>
-																				<td><?=$item['status']?></td>
-																				<td><a href='{{url("serverapps/edit",['id'=>$item['id']])}}' class="btn btn-block btn-default">Edit</a></td>
+																				<td>{{$sList->create_on}}</td>
+
+																				<td>{{$sList->description}}</td>
+																				<td>--}}{{--{{$sList->number_associated}}--}}{{--</td>
+																				<td>{{$sList->status}}</td>
+																				<td><a href='{{url("serverapps/edit",['id'=>$sList->id])}}' class="btn btn-block btn-default">Edit</a></td>
 																			</tr>
-																			<?php } ?>
-																		</tbody>
+																		</tbody>--}}
 																		<tfoot>
 																			<tr>
 																				<th>#</th>
 																				<th>Name</th>
 																				<th>Date create</th>
-																				<th>Type</th>
 																				<th>Description</th>
-																				<th>Number associated</th>
+
 																				<th>Status</th>
 																				<th></th>
 																		 </tr>
@@ -156,7 +154,7 @@
 					<div class="row">
 						<div class="col-xs-12">
 							<nav class="pull-right">
-								<ul class="pagination">
+								{{--<ul class="pagination">
 									<li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
 									<li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
 									<li class="default"><a href="#">2 <span class="sr-only">(current)</span></a></li>
@@ -164,19 +162,58 @@
 									<li class="default"><a href="#">4 <span class="sr-only">(current)</span></a></li>
 									<li class="default"><a href="#">5 <span class="sr-only">(current)</span></a></li>
 									<li class="default"><a href="#">6 <span class="sr-only">(current)</span></a></li>
-								</ul>
+								</ul>--}}
 							</nav>
 						</div>
 					</div>
+<div id="success" class="alert alert-success alert-dismissable" style="display: none" >
+	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+	<h4><i class="icon fa fa-info"></i> Notice</h4>
+	<p></p>
+</div>
+<div id="error" class="alert  alert-danger alert-dismissable" style="display: none" >
+	<button type="button" class="close" data-dismiss="alert"
+			aria-hidden="true">×</button>
+	<h4>
+		<i class="icon fa fa-ban"></i> Notice !
+	</h4>
+	<p></p>
+</div>
 @endsection
 @section('afterfooter')
   <script>
- 
+
 	$('.checkall').on('ifChecked', function(event){
 			$('input[type=checkbox]').iCheck('check');
 	});
 	$('.checkall').on('ifUnchecked', function(event){
 			$('input[type=checkbox]').iCheck('uncheck');
 	});
+ </script>
+ <script>
+	 $(function () {
+		url=$("#rootUrl").html();
+		 $("#example1").DataTable({
+			 "paging": true,
+			 "select": true,
+			 "processing": true,
+			 "serverSide": true,
+			 "ajax": "serverapps/get",
+			 "lengthChange": false,
+			 "searching": false,
+			 "ordering": false,
+			 "info": true,
+			 "autoWidth": false,
+			    "columns": [
+				    {"data": "index"},
+				    {"data": "name"},
+				    {"data": "create_on"},
+				    {"data": "description"},
+
+			        {"data": "status"},
+			        {"data":"edit","render":function(data,type,full,meta){return '<a href="'+url+"/serverapps/edit/"+data+'" class="btn btn-block btn-default" type="button">Edit</a>'}}
+			  ]
+		 });
+	 });
  </script>
  @endsection

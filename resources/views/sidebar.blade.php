@@ -158,7 +158,28 @@
                 <li class="aaaa"><a href="url('/')">{{ trans('layout.Manage Rate Table') }}</a></li>
               </ul>
             </li>
-						
+
+              <li class="treeview menu_newone">
+              <a href="url('/')">
+                  <i class="fa fa-gears"></i> <span>NewOne</span>
+                  <i class="fa fa-angle-left pull-right"></i>
+                  <ul class="treeview-menu">
+                      <li class="menu_siptrunk_test"><a href="{{url("test")}}">Test</a></li>
+
+                  </ul>
+              </a>
+              </li>
+
+              <li class="treeview menu_test">
+                  <a href="url('/')">
+                      <i class="fa fa-gears"></i> <span>Test</span>
+                      <i class="fa fa-angle-left pull-right"></i>
+                      <ul class="treeview-menu">
+                          <li class="menu_siptrunk_test"><a href="{{url("test2")}}">Testing</a></li>
+
+                      </ul>
+                  </a>
+              </li>
             <!--<li class="treeview">
               <a href="#">
                 <i class="fa fa-files-o"></i>

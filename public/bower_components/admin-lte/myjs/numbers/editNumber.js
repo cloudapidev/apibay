@@ -66,20 +66,22 @@ $(function(){
 	
 	$("."+msgType).show();				
 	url=$('#sbuyUrl').html();			
-	$("#editForm").delegate('.releasebtn','click',releaseNumber);		
-	$("#editForm").delegate('.savebtn','click',saveConfig);		
+	$("#editForm").delegate('.releasebtn','click',releaseNumber);
+	$("#editForm").delegate('.savebtn','click',saveConfig);
 	
 	function releaseNumber(e)
 	{
+
 		e.preventDefault();
-		var number=$("#number").html();
-		var capabilities=$("#capabilities").html();
+		var data=$("#editForm").serialize();
 		$.ajax({
-			url:url+"/numbers/release/"+number+"/"+capabilities,
-			type:'get',
+			url:url+"/numbers/release",
+			type:'post',
+			data:data,
 			success:function(res)
 			{
-				res=dealResult(res);
+				console.log(res);
+				res=JSON.parse(res);
 				if(res.flag == "success")
 				{
 					showSuccessNotice("Release successfully");
@@ -96,19 +98,21 @@ $(function(){
 	function saveConfig()
 	{
 		var data=$("#editForm").serialize();
+		console.log(data);
 		$.ajax({
 			url:url+"/numbers/save",
+
 			type:"post",
 			data:data,
 			success:function(res)
 			{
-				res=dealResult(res);
+				res=JSON.parse(res);
 				if(res.flag == 'success')
 				{
-					showSuccessNotice(res.success);
+					showSuccessNotice(res.msg);
 				}else
 				{
-					showErrorNotice(res.error);
+					showErrorNotice(res.msg);
 					
 				}
 			}

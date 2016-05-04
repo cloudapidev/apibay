@@ -111,7 +111,8 @@ $(function(){
 			"<td name='price'>"+"$"+this.price+"</td>"+
 			"<td><input type='number' name='month["+this.number+"]' class='totalmonth' min='1' max='12' value=1></td>"+
 			"<td name='subtotal'><span class='subtotal' >"+"$"+this.price+"</span></td>"+
-			'<td><a name='+this.number+'  class="removebtn btn btn-default">Remove</a></td>';
+
+			'<td><a name='+this.number+'  class="removebtn btn btn-default">Remove</a></td>'+
 			"</tr>";
 			tbody.append($(str)); 
 		});     
@@ -174,7 +175,11 @@ $(function(){
 	function wetherShowAlert(e)
 	{
 		var self=$("#afterCredit");
-		var value=parseInt(self.html().substring(1));
+		var value=self.html().substring(1);
+		console.log(value);
+	/*	$('#alertDanger').hide();
+		$('.kp-topup').hide();
+		$('.kpconfirm-purchase').show();*/
 		if(value < 0)
 		{
 			$('#alertDanger').show();
@@ -211,6 +216,7 @@ $(function(){
 					//buy successfully.
 					showSuccessNotice(res.msg);
 					showSelectedNumbers();
+					window.location.reload()
 				}
 		
 					

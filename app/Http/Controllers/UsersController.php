@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Libraries\Classes\Ossbss;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http;
+use Log;
 class UsersController extends Controller
 {
 	
@@ -40,5 +41,27 @@ class UsersController extends Controller
 				'data'=>$data
 		)
 		);
+	}
+	/*get  tableInfo for Datatables
+	@return string
+	*/
+	public function getTable()
+	{
+		$draw = $_GET['draw'];
+		$start = $_GET['start'];//从多少开始
+		$length = $_GET['length'];//数据长度
+		$recordsTotal = 0;
+		$list=json_decode($this->showList());
+	}
+	public function showList()
+	{
+		$ossbss=new Ossbss();
+		$start=$_GET['start'];
+		$length=$_GET['length'];
+		$inputs['offset']=$start;
+		$inputs['limit']=$length;
+		$result=$ossbss->getInfo('',$inputs);
+		$result=unsetParam($result,"msg");
+		return json_encode($result);
 	}
 }

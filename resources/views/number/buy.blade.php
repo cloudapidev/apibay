@@ -86,6 +86,7 @@
 							<th>Number</th>
 							<th>Capabilities</th>
 							<th>Price</th>
+
 							<th></th>
 						</tr>
 					</thead>
@@ -156,6 +157,8 @@
 								<th>price</th>
 								<th>TotalMonth</th>
 								<th>Subtotal</th>
+								<th>auto_renew</th>
+								<th></th>
 							</tr>
 						</thead>
 						<tbody class="kpselectedtable">
@@ -169,6 +172,7 @@
 								<td name='price'>$<?=$numbers->price?></td>
 								<td><input type='number' name='month[<?=$numbers->number?>]' class='totalmonth' min='1' max='12' value=1></td>
 								<td name='subtotal'><span class='subtotal' ><?="$".$numbers->price?></span></td>
+								<td><input name='auto_renew' type='radio'  value='Y'/></td>
 								<td><a name='<?=$numbers->number?>'  class="removebtn btn btn-default">Remove</a></td>
 							</tr>
 						<?php endforeach;?>

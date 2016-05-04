@@ -1,7 +1,3 @@
-<?php
-// 	$data = @getData("number-listing",$id);
-?>
-
 @extends('admin_template')
 
 @section('content')
@@ -10,8 +6,11 @@
 	<div class="col-md-12">
 		<form id="editForm" action="{{url('/numbers/release')}}" method="post">
 		<input type="hidden" name="_token" value="{{ csrf_token() }}">
-		<input type="hidden" name="number" value="{{$details->number}}">
-		<div class="row">	
+		<input type="hidden" name="number" value="{{$details['data']->number}}">
+		<input type="hidden" name="developer_id" value="{{$details['data']->developer_id}}">
+		<input type="hidden" name="capabilities" value="{{$details['data']->capabilities}}">
+		<input type="hidden" name="id" value="{{$details['data']->id}}">
+		<div class="row">
 			<div class="col-md-8">
 				<div class="box box-solid box-default">
 					<div class="box-header with-border">
@@ -20,24 +19,24 @@
 					<div class="box-body">
 						<dl class="dl-horizontal">
 							<dt>{{trans('Phone Number')}}</dt>
-							<dd id="number">{{$details->number}}</dd>
+							<dd id="number">{{$details['data']->number}}</dd>
 							<dt>{{trans('numbers.Country')}}</dt>
-							<dd>{{$details->country}}</dd>
+							<dd>{{$details['data']->country}}</dd>
 							<dt >{{trans('numbers.Capabilities')}}</dt>
-							<dd id="capabilities">{{$details->capabilities}}</dd>
+							<dd id="capabilities">{{$details['data']->capabilities}}</dd>
 							<dt>{{trans('numbers.Price')}}</dt>
-							<dd>{{$details->price}} per month</dd>
+							<dd>{{$details['data']->price}} per month</dd>
 							<dt>{{trans('numbers.Date Purchased')}}</dt>
-							<dd>{{$details->purchased_date}}</dd>
+							<dd>{{$details['data']->purchased_date}}</dd>
 							<dt>{{trans('numbers.Date Expired')}}</dt>
-							<dd>{{$details->expired_date}}</dd>
+							<dd>{{$details['data']->expired_date}}</dd>
 							<dt>{{trans('numbers.Configure With')}}</dt>
 							
-							<?php if(!empty($details->voice_bind_type)):?>
-							<dd id="voice_type" data-value="{{$details->voice_bind_type}}">Voic: <!--  --></dd>
+							<?php if(!empty($details['data']->voice_bind_type)):?>
+							<dd id="voice_type" data-value="{{$details['data']->voice_bind_type}}">Voic: {{isset($details['data']->voice_bind_type)?($details['data']->voice_bind_type):null }}</dd>
 							<?php endif;?>
-							<?php if(!empty($details->message_bind_type)):?>
-							<dd id="smg_type" data-value="{{$details->message_bind_type}}">Message:<!--  --></dd>
+							<?php if(!empty($details['data']->message_bind_type)):?>
+							<dd id="smg_type" data-value="{{$details['data']->message_bind_type}}">Message:{{isset($details['data']->message_bind_type)?($details['data']->message_bind_type) : null}}</dd>
 							<?php endif;?>
 						</dl>
 					</div><!-- /.box-body -->
@@ -87,7 +86,8 @@
 									</label>
 								</div>
 							</div>
-						</div> 
+						</div>
+
 						<div class="row SIPTRUNK" style="display:none">
 							<div class="col-md-6">
 								<div class="box-body">		
@@ -95,11 +95,11 @@
 										<label>{{trans('numbers.Select a SIP Trunk Profile')}}</label>
 											<select id="select-sip" class="form-control" name="voice[setting][SIPTRUNK]">
 												<option value="0">- Select -</option>
-												<?php if(!empty($siptrunks)) foreach ($siptrunks as $trunk):?>
-													<?php if(isset($details->voice_config_with->id) && $trunk->id == $details->voice_config_with->id):?>
-													<option selected value="{{$trunk->id}}">{{$trunk->name}}</option>
+												<?php if(!empty($siptrunks['data'])) foreach ($siptrunks['data'] as $trunk):?>
+													<?php if(isset($details['data']->voice_config_with) && $trunk['id'] == $details['data']->voice_config_with->id):?>
+													<option selected value="{{$trunk['id']}}">{{$trunk['name']}}</option>
 													<?php else:?>
-													<option value="{{$trunk->id}}">{{$trunk->name}}</option>
+													<option value="{{$trunk['id']}}">{{$trunk['name']}}</option>
 													<?php endif;?>
 												<?php endforeach;?>
 											</select>
@@ -142,15 +142,16 @@
 										<div class="form-group">
 												<label>{{trans('numbers.Select a server app')}}</label>
 												<select id='select-server' class="form-control" name="voice[setting][SERVER_APP]" >
-													<option value="0">- Select -</option>
-													<?php if(!empty($serverapps)) foreach($serverapps as $app):	?>
-														<?php if(isset($details->voice_config_with->id) && $app->id == $details->voice_config_with->id):?>
-														<option selected value="{{$app->id}}">{{$app->name}}</option>
-														<?php else:?>
-														<option value="{{$app->id}}">{{$app->name}}</option>
-														<?php endif;?>
-													<?php endforeach;?>
-														
+													<?php if(!empty($serverapps['data'])){
+													foreach($serverapps['data'] as $app){	?>
+													<?php if(isset($details['data']->message_config_with) ){?>
+													<option selected value="{{$app['id']}}">{{$app['name']}}</option>
+													<?php }else{?>
+													<option value="{{$app['id']}}">{{$app['name']}}</option>
+													<?php }
+													}
+													}?>
+
 												</select>
 										</div>
 									</div>
@@ -213,13 +214,16 @@
 											<label>{{trans('numbers.Select a server app')}}</label>
 											<select id='select-server' class="form-control" name="message[setting][server_sms]" >
 												<option value="">- Select -</option>
-												<?php if(!empty($serverapps)) foreach($serverapps as $app):	?>
-														<?php if(isset($details->message_config_with->id) && $app->id == $details->message_config_with->id):?>
-														<option selected value="{{$app->id}}">{{$app->name}}</option>
-														<?php else:?>
-														<option value="{{$app->id}}">{{$app->name}}</option>
-														<?php endif;?>
-												<?php endforeach;?>
+
+											<?php if(!empty($serverapps['data'])){
+													foreach($serverapps['data'] as $app){	?>
+												<?php if(isset($details['data']->message_config_with) ){?>
+												<option selected value="{{$app['id']}}">{{$app['name']}}</option>
+												<?php }else{?>
+												<option value="{{$app['id']}}">{{$app['name']}}</option>
+												<?php }
+												}
+												}?>
 											</select>
 										</div>
 									</div>
@@ -228,7 +232,7 @@
 					</div>
 					<div class="box-footer">
 							<div class="pull-left">
-									<a href="#" class="savebtn btn bg-maroon btn-flat margin">{{trans('numbers.Save')}}</a>
+									<a href="#" class="savebtn btn bg-maroon btn-flat margin" >{{trans('numbers.Save')}}</a>
 							</div>	
 							<div class="pull-right">
 									<a href="#" class="releasebtn btn btn-danger margin">{{trans('numbers.Release Number')}}</a>

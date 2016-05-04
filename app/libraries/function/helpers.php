@@ -1,4 +1,9 @@
 <?php
+
+
+
+
+
 function getAuthorization()
 {
 	/* $apikey="otbw53s4dlg9uA7op2PTtzeOiyIE4S19";
@@ -12,12 +17,16 @@ function getAuthorization()
 	$nonce=substr(str_shuffle($str),10);
 	$hash=base64_encode(md5($apikey.$secretkey.$ts.$nonce));
 	return  "api_key=$apikey,ts=$ts,nonce=$nonce, X-Security-Sign=$hash";
-	// 		dd($tes);
+
+	//	dd($tes);
 }
 function setApiUrl($doUrl,$params=null)
 {
 	$apiUrl=Config('api.apiUrl');
+
+
 	$url=Config("api.".$doUrl);
+
 	if($url)
 	{
 		
@@ -189,34 +198,10 @@ function unsetParam()
 
 
 
-	function openCSV($database){
-// 		echo public_path();
-	 	$file = app_path()."/Http/database/{$database}.csv";
-		 $csv = array_map('str_getcsv', file($file));
-	    $headers = $csv[0];
-	    unset($csv[0]);
-	    $rowsWithKeys = array();
-	    foreach ($csv as $row) {
-	        $newRow = array();
-					$id = "";
-	        foreach ($headers as $k => $key) {
-	
-							if($k == "id")
-								$id = $row[$k];
-								
-	            $newRow[$key] = $row[$k];
-	        }
-					
-	        $rowsWithKeys[$id] = $newRow;
-	    }
-			
-			if(count($rowsWithKeys))
-	    return $rowsWithKeys;
-	}
 
 
-	function getData($database,$id=1){
+	/*function getData($database,$id=1){
 		$data = openCSV($database);
 		return $data[$id];
 	
-}
+}*/

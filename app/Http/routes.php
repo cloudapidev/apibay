@@ -50,6 +50,7 @@
 
 		//Number
 		Route::get('numbers', 'NumbersController@index');
+		Route::get('numbers/get', 'NumbersController@getTable');
 		Route::post('numbers/search', 'NumbersController@searchNumbers');
 		Route::get('numbers/list/{page}', 'NumbersController@getNumberList');
 		
@@ -61,36 +62,58 @@
 		Route::post('numbers/purchase', 'NumbersController@comfirmPurchase');
 
 		Route::get('numbers/edit/{number}', 'NumbersController@edit'); 
-		Route::get('numbers/release/{number}/{type}', 'NumbersController@release'); 
-		Route::post('numbers/save', 'NumbersController@saveConfig'); 
+		Route::get('numbers/release/{number}/{type}', 'NumbersController@release');
+		Route::post('numbers/release', 'NumbersController@releaseNum');
+		Route::post('numbers/save', 'NumbersController@saveConfig');
 		
 		//User
 		Route::get('users','UsersController@index');
 		Route::get('users/add','UsersController@create');
 		Route::get('users/edit/{id}','UsersController@edit');
-		
+		Route::get('users/get','UsersController@getTable');
+
 		//Serverapps
 		Route::get('serverapps','ServerappsController@index');
-		Route::get('serverapps/add','ServerappsController@create');
+		Route::get('serverapps/add','ServerappsController@add');
+		Route::post('serverapps/create','ServerappsController@create');
+		Route::post('serverapps/update','ServerappsController@update');
 		Route::get('serverapps/edit/{id}','ServerappsController@edit');
+		Route::get('serverapps/get','ServerappsController@getTable');
+		Route::get('serverapps/getnum','ServerappsController@getNum');
+		Route::get('serverapps/remove','ServerappsController@removeApp');
+
 		
 		//Clientapps
 		Route::get('clientapps','ClientappsController@index');
-		Route::get('clientapps/add','ClientappsController@create');
+		Route::get('clientapps/add','ClientappsController@add');
+		Route::post('clientapps/create','ClientappsController@create');
 		Route::get('clientapps/edit','ClientappsController@edit');
+		Route::get('clientapps/get','ClientappsController@getTable');
 
 		//Siptrunk
 		Route::get('siptrunk','SiptrunkController@index');
+		Route::get('siptrunk/get','SiptrunkController@getTable');
+
+
 		Route::get('siptrunk/add','SiptrunkController@add');
 		Route::get('siptrunk/edit/{id}','SiptrunkController@edit');
+
 		Route::post('siptrunk/search','SiptrunkController@searchTrunks');
 		Route::post('siptrunk/create','SiptrunkController@create');
 		Route::post('siptrunk/saveInfo','SiptrunkController@saveInfo');
-		
+		Route::post('siptrunk/searchNum','SiptrunkController@searchNum');
+		Route::get('siptrunk/getNumTable','SiptrunkController@getNumTable');
+		Route::post('siptrunk/assignedNum','SiptrunkController@assignedSelectedNum');
+		Route::get('siptrunk/assignedNumlist/{sipTrunkId}','SiptrunkController@showAssignedSelectedNum');
+		Route::post('siptrunk/deleteAssignedNum','SiptrunkController@deleteAssignedNum');
+
 		 //auth
 		Route::post('siptrunk/createauth','SiptrunkController@createAndAddAuthentication');
+
+		Route::post('siptrunk/addtoauthlist','SiptrunkController@addToAuthList');
 		Route::get('siptrunk/removeAuth/{sipTrunkId}/{sipTrunkAuthId}','SiptrunkController@removeAuthentication');
-		Route::post('siptrunk/editeauth','SiptrunkController@editAuthentication');
+		Route::post('siptrunk/editeauth/{authId}','SiptrunkController@editAuthentication');
+		Route::get('siptrunk/getauth/{authId}','SiptrunkController@getAuthentication');
 		Route::get('siptrunk/selectedauthlist/{sipTrunkId}','SiptrunkController@showSelectedAuthList');
 		Route::get('siptrunk/allauthlist','SiptrunkController@showAllAuthList');
 		 //ip Access
@@ -98,6 +121,8 @@
 		Route::post('siptrunk/createTrunkIp','SiptrunkController@createIpAndAddIpToTrunks');
 		Route::get('siptrunk/selectediplist','SiptrunkController@showSelectedIpAccessList');
 		Route::get('siptrunk/alliplist','SiptrunkController@showAllIpAccessList');
+		Route::post('siptrunk/editip/{id}','SiptrunkController@editIpAcess');
+		Route::post('siptrunk/addtoiplist','SiptrunkController@addToIpList');
 		
 		 //orgination
 		Route::post('siptrunk/createorigin','SiptrunkController@createOrigination');
@@ -134,6 +159,16 @@
 		
 		//Documentation
 		Route::resource('documentation', 'DocumentationController');
+
+		//Test
+		Route::resource('test','NewoneController');
+		Route::resource('newone/edit','NewoneController@edit');
+
+		//Test2
+		Route::resource('test2','TestController@index');
+
+
+
 
 
 });

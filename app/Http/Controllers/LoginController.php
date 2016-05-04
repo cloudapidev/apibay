@@ -135,6 +135,7 @@ class LoginController  {
 	 */
 	public static function isLogin(){
 		$user = Session::get('account_sid');
+
 		if (empty($user)) {
 			return 0;
 		} else {

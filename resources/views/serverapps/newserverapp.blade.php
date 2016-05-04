@@ -1,6 +1,7 @@
 @extends('admin_template')
 
 @section('content')
+	<span id="rootUrl" style="display: none">{{url("/")}}</span>
   <div class="row">
 					<div class='col-md-12'>
 
@@ -11,31 +12,35 @@
 							<div class="col-md-8">
 								<div class="panel panel-default">
 									<div class="panel-heading">Edit Server Apps</div>
+									<form id="saveAppsInfo"   action="#" method="post" >
 									<div class="panel-body">
 									
 										<div class="row">
 										<div class="col-md-12">
 
+												<input type="hidden" name="_token" value="{{ csrf_token() }}">
+												<input type="hidden" name="id" value="<?=isset($data->id)?$data->id:null?>" id="appId">
 											<div class="form-group">
-												<label class="col-sm-3 control-label" for="application_title">Server App Name</label>
+												<label class="col-sm-3 control-label" >Server App Name</label>
 												<div class="col-md-9">
-												<input class="form-control valid" focus="focus" id="application_title" name="application[title]" onfocus="this.value = this.value;" required="required" size="30" type="text" value="<?=isset($data['name'])?$data['name']:null?>" aria-required="true" aria-invalid="false">
+												<input class="form-control valid" focus="focus" id="application_title" name="name" onfocus="this.value = this.value;" required="required" size="30" type="text" value="<?=isset($data->name)?$data->name:null?>" aria-required="true" aria-invalid="false">
 												</div>
 												<div class='clearfix'></div>
 											</div>
 											<div class="form-group">
-												<label class="col-sm-3 control-label" for="application_url">App Status</label>
+												<label class="col-sm-3 control-label" >App Status</label>
 												<div class="col-md-6">
-													<select class="form-control">
-														<option>Development</option>
-														<option>Production</option>
+													<?php $status=isset($data->status)?$data->status:null ?>
+													<select class="form-control" name="status">
+														<option value="INACTIVE"<?php if($status=='INACTIVE'){echo "selected='selected '";}?>>Development</option>
+														<option value="ACTIVE" <?php if($status=='ACTIVE'){echo "selected='selected '";}?>>Production</option>
 													</select>
 												</div>
 												<div class='clearfix'></div>
 											</div>
 										
 											<div class="form-group">
-												<label class="col-sm-3 control-label" for="application_type">Type</label>
+											{{--	<label class="col-sm-3 control-label" for="application_type">Type</label>
 												<div class="col-md-6">
 													<select class="form-control" id="application_type" name="application[type]" required="required" aria-required="true"><option value="Other" selected="selected">Other</option>
 													<option value="Game">Game</option>
@@ -62,31 +67,31 @@
 													<option value="Sports">Sports</option>
 													<option value="Travel">Travel</option>
 													<option value="Utilities">Utilities</option></select>
-												</div>
+												</div>--}}
 												<div class='clearfix'></div>
 											</div>
 											<div class="form-group">
-												<label class="col-sm-3 control-label" for="application_description">Description</label>
+												<label class="col-sm-3 control-label">Description</label>
 												<div class="col-md-8">
-													<textarea class="form-control" cols="40" id="application_description" name="application[description]" rows="4"><?=isset($data['description'])?$data['description']:null?></textarea>
+													<textarea class="form-control" cols="40" id="application_description"  name="description" rows="4"><?=isset($data->description)?$data->description:null?></textarea>
 												</div>
 												<div class='clearfix'></div>
 											</div>
 											<div class="form-group">
 												<label class="col-sm-3 control-label" for="facebook_key">Voice Script URL</label>
 												<div class="col-md-6">
-													<input class="form-control" id="facebook_key" name="facebook[key]" size="30" type="text" value="<?=isset($data['voice_script'])?$data['voice_script']:null?>">
+													<input class="form-control" id="facebook_key" name="uris[0]" size="30" type="text" value="<?=isset($data->voice_script)?$data->voice_script:null?>">
 												</div>
 												<div class='clearfix'></div>
 											</div>
 											<div class="form-group">
 												<label class="col-sm-3 control-label" for="facebook_secret">SMS Script URL</label>
 												<div class="col-md-6">
-													<input class="form-control" id="facebook_secret" name="facebook[secret]" size="30" type="text" value="<?=isset($data['sms_script'])?$data['sms_script']:null?>">
+													<input class="form-control" id="facebook_secret" name="uris[1]" size="30" type="text" value="<?=isset($data->sms_script)?$data->sms_script:null?>">
 												</div>
 												<div class='clearfix'></div>
 											</div>
-										
+
 										</div>
 										</div>
 										<div class="row">
@@ -97,12 +102,12 @@
 														
 															<?php if(!isset($edit)){ ?>
 											
-																<a href="serverapp-new.php?edit&id=1" class="btn btn-success" name="button" type="submit">Save</a>
+																<a href="#" class="btn btn-success create" name="button"  id="saveinfo">Save</a>
 														
 															<?php }else{ ?>
 																<a href="serverapp-listing.php"  class="btn btn-default">Cancel</a>
-																<a href="serverapp-new.php?edit&id=1" class="btn btn-success" name="button" type="submit">Update</a>
-																<a href="serverapp-listing.php" class="btn btn-danger pull-right" >Remove app
+																<a href="#" id="updateInfo" class="btn btn-success" name="update" >Update</a>
+																<a href="#" class="btn btn-danger pull-right" id="removeApp">Remove app
 															<?php } ?>
 
 															</a>
@@ -112,6 +117,7 @@
 										</div>
 
 									</div>
+									</form>
 								</div>
 							</div>
 						</div>
@@ -126,8 +132,8 @@
 											<div class="panel panel-default">
 												<div class="panel-heading">Number associated</div>
 												<div class="panel-body">
-													
-													<table id="example1" class="datatabsle table table-bordered table-striped table-condensed cf">
+
+														<table id="example2" class="display">
 																			<thead>
 																				<tr>
 																					<th>#</th>
@@ -143,24 +149,7 @@
 																			</thead>
 																			<tbody>
 																				
-																				<?php $cnt=0; foreach(openCSV("number-listing") as $key=>$item){ ++$cnt;?>
-																				<tr>
-																					<td><?=$cnt ?></td>
-																					<td><?=$item['number']?></td>
-																					<td><?=$item['country']?></td>
-																					<td><?=$item['area']?></td>
-																					<td><?=$item['capability']?></td>
-																					<td><?=$item['date_purchase']?></td>
-																					<td><?=$item['date_expire']?></td>
-																					<td><?=$item['price']?></td>
-																					<td>
-																						<a href="{{url('serverapps/edit',['id'=>$item['id']])}}" class="btn btn-default">Manage</a>
-																					</td>
-																				
-																				</tr>
-																				<?php } ?>
-																			
-																				
+
 																				
 																			 
 																			</tbody>
@@ -174,7 +163,7 @@
 																					<th>Date Purchased</th>
 																					<th>Date Expired</th>
 																					<th>Price / month</th>
-																					
+																					<th>Action</th>
 																			 </tr>
 																			</tfoot>
 																		</table>
@@ -185,11 +174,27 @@
 							<?php } ?>
 			</div>
 	</div>
-					
+
+
+  <div id="success" class="alert alert-success alert-dismissable" style="display: none" >
+	  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+	  <h4><i class="icon fa fa-info"></i> Notice</h4>
+	  <p></p>
+  </div>
+  <div id="error" class="alert  alert-danger alert-dismissable" style="display: none" >
+	  <button type="button" class="close" data-dismiss="alert"
+			  aria-hidden="true">×</button>
+	  <h4>
+		  <i class="icon fa fa-ban"></i> Notice !
+	  </h4>
+	  <p></p>
+  </div>
 				
 @endsection
 @section('afterfooter')
- <script>
+
+	<script type="text/javascript" src="{{ asset("/bower_components/admin-lte/myjs/server apps/editServerApps.js") }}"></script>
+	<script>
 	$(function(){
 		$('.kpsubmit').click(function(){
 			$('.kpsearch').show();
@@ -226,4 +231,5 @@
 		
 	})
 </script>
+
  @endsection

@@ -16,6 +16,7 @@ $(function(){
 		var data=$("#searchForm").serialize();
 		$.ajax({
 			url:url+"/siptrunk/search",
+
 			type:'post',
 			data:data,
 			success:function(res)
@@ -56,7 +57,7 @@ $(function(){
 		
 	}
 	//show the trunks list
-	function showTrunksList(data)
+/*	function showTrunksList(data)
 	{
 		if(data.length == 0) return false;
 		var tbody=$("#example1").find('tbody');
@@ -72,10 +73,45 @@ $(function(){
 			"</tr>";
 		});
 		tbody.append($(str));
-	}
+	}*/
 	function dealResult(res)
 	{
 		res=eval('('+res+')');
 		return res;
 	}
 });
+
+
+	$(function () {
+		url=$("#rootUrl").html();
+		$("#example1").DataTable({
+			"paging": true,
+			"select": true,
+			"processing": true,
+			"serverSide": true,
+			"ajax": "siptrunk/get",
+			"lengthChange": false,
+			"searching": false,
+			"ordering": false,
+			"info": true,
+			"autoWidth": false,
+			"columns": [
+				{"data": "index"},
+				{"data": "name"},
+				{"data": "termination_uri"},
+				{"data": "origination_uri"},
+				{"data": "channel"},
+				{"data":"edit","render":function(data,type,full,meta){return '<a href="'+url+"/siptrunk/edit/"+data+'" class="btn btn-block btn-default" type="button">Edit</a>'}}
+/*				{"data": "edit",  "defaultContent": "<a href='' class='btn btn-block btn-default' type='button' onclick='test(' +  +')'>Edit</a>"}*/
+			]
+		});
+		$("#example1").on("click",".btn btn-block btn-default");
+		$('#example2').DataTable({
+			"paging": true,
+			"lengthChange": false,
+			"searching": false,
+			"ordering": true,
+			"info": true,
+			"autoWidth": false
+		});
+	});

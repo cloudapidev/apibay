@@ -1,7 +1,5 @@
 @extends('admin_template')
-
 @section('content')
-
 <!-- Filter -->
 <span style="display: none" id="sbuyUrl">{{url('/')}}</span>
 <div class="row">
@@ -91,7 +89,7 @@
 		
 		
 		
-			<table id="example1" class="datatabsle table table-bordered table-striped table-condensed cf">
+			<table id="example2" class="display">
 				<thead>
 					<tr>
 						<th>#</th>
@@ -101,31 +99,17 @@
 						<th>{{trans('numbers.Date Purchased')}}</th>
 						<th>{{trans('numbers.Date Expired')}}</th>
 						<th>{{trans('numbers.Price ( Monthly )')}}</th>
-						<th>{{trans('numbers.Configuration')}}</th>
+
 						<th></th>
 						<!--<th>
 								<input type="checkbox" class="checkall" >
 						</th>-->
 						</tr>
 					</thead>
-					<tbody>
-						<?php 
-						if(!empty($listDatas)):
-						$cnt=0; 
-						//var_dump($listDatas[0]);
-						foreach($listDatas as $key=>$item){ ++$cnt;?>
-						<tr>
-							<td><?=$cnt ?></td>
-							<td><?=$item->number?></td>
-							<td><?=$item->country?></td>
-							<td><?=$item->capabilities?></td>
-							<td><?=$item->purchased_date?></td>
-							<td><?=$item->expired_date?></td>
-							<td><?=$item->price?></td>
-							<td>
-								<?php echo "<b>Voice</b> : <i>Forward to number :</i> ";
-									echo "<br /><b>Messaging :</b> <i>URL</i>: ";?>
-								<?php 
+
+						<?php /*echo "<b>Voice</b> : <i>Forward to number :</i> ";
+									echo "<br /><b>Messaging :</b> <i>URL</i>: ";*/?>
+								<?php
 									/* if($item->configure_with == "Forward to number")
 										echo "<b>Voice</b> : <i>Forward to number :</i> {$item->bind_number}";
 									if($item->configure_with == "SIP Trunk")
@@ -139,14 +123,8 @@
 									if($item->messaging_server)
 									echo "<br /><b>Messaging :</b> <i>Server App</i> : {$item->messaging_server}"; */
 								?>
-							</td> 
-							<td><a href="{{url('numbers/edit',['number'=>$item->number])}}" class="btn btn-block btn-default">{{trans('numbers.Edit')}}</a></td>
-							<!--<td>
-								<input type="checkbox">
-							</td>-->
-						</tr>
-						<?php } endif; ?>
-					</tbody>
+
+						{{--	<td><a href="{{url('numbers/edit',['number'=>$item->number])}}" class="btn btn-block btn-default">{{trans('numbers.Edit')}}</a></td>--}}
 					<tfoot>
 						<tr>
 							<th>#</th>
@@ -156,10 +134,10 @@
 							<th>{{trans('numbers.Date Purchased')}}</th>
 							<th>{{trans('numbers.Date Expired')}}</th>
 							<th>{{trans('numbers.Price ( Monthly )')}}</th>
-							<th>{{trans('numbers.Configuration')}}</th>
+
 							<th></th>
 							<!--<th></th>-->
-						</tr> 
+						</tr>
 					</tfoot>
 				</table>
 				
@@ -172,6 +150,7 @@
     </div><!-- /.col -->
   </div><!-- /.row -->
 <div class="pageLink row">
+
 	<?=$pagelist ?>
 </div>
   @endsection

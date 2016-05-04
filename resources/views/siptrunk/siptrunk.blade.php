@@ -47,7 +47,7 @@
 					<h3 class="box-title">Results</h3>
 				</div>
 				<div class="box-body table-responsive">
-					<table id="example1" class="datatable table table-bordered table-striped table-condensed cf">
+					<table id="example1" class="display">
 						<thead>
 							<tr>
 								<th>#</th>
@@ -58,22 +58,7 @@
 								<th></th>
 							</tr>
 						</thead>
-						<tbody>
-							<?php $cnt=0; if(!empty($allTrunks)):?>
-							<?php  foreach($allTrunks as $key=>$item): ++$cnt;
-							
-							?>
-							<tr>
-								<td><?=$cnt ?></td>
-								<td><?=$item->name?></td>
-								<td><?=$item->termination_uri?>.pstn.apibay.com</td>
-								<td></td>
-								<td></td>
-								<td><a href='{{url("siptrunk/edit",["id"=>$item->id])}}' class="btn btn-block btn-default">Edit</a></td>
-							</tr>
-							<?php endforeach;  ?>
-							<?php endif;?>
-						</tbody>
+
 						<tfoot>
 							<tr>
 								<th>#</th>

@@ -1,6 +1,7 @@
 @extends('admin_template')
 @section('content')
 <div class="row">
+	<p id="url" style="display: none">{{url('/')}}</p>
 					<div class="col-md-12">
 						<form class="form-horizontal" onsubmit="return false;">
 						<div class="box box-solid box-default">
@@ -100,7 +101,7 @@
 																</div>
 														
 																<div class="box-body table-responsive">
-																	<table id="example1" class="datastable table table-bordered table-striped table-condensed cf">
+																	<table id="example1" class="display">
 																		<thead>
 																			<tr>
 																				<th>#</th>
@@ -115,24 +116,22 @@
 																		</thead>
 																		<tbody>
 																			
-																			<?php $cnt=0; foreach(openCSV("clientapp-listing") as $key=>$item){ ++$cnt;?>
+
 																			<tr>
-																				<td data-title="Monday"><?=$cnt ?></td>
+																				<td data-title="Monday"></td>
 																				<td style="width:20px;" data-title="Monday">
 																					<div class="icon">
-																						<span class="info-box-icon <?=$item['background']?>"><i class="fa <?=$item['icon']?>"></i></span> 
+																						<span class="info-box-icon item['background']"><i class="fa $item['icon']"></i></span>
 																					</div>
 																				</td>
-																				<td>
-																						<?=$item['name']?>
-																				</td>
-																				<td data-title="Monday"><?=$item['date_create']?></td>
-																				<td data-title="Monday"><?=$item['type']?></td>
-																				<td data-title="Monday"><?=$item['description']?></td>
-																				<td data-title="Monday"><?=$item['no_user']?></td>
-																				<td><a href='{{url('clientapps/edit')}}' class="btn btn-block btn-default">Edit</a></td>
+																				<td>$item['name']</td>
+																				<td data-title="Monday">$item['date_create']</td>
+																				<td data-title="Monday">$item['type']</td>
+																				<td data-title="Monday">$item['description']</td>
+																				<td data-title="Monday">$item['no_user']</td>
+																				<td><a href="url('clientapps/edit')" class="btn btn-block btn-default">Edit</a></td>
 																			</tr>
-																			<?php } ?>
+
 																		</tbody>
 																		<tfoot>
 																			<tr>
@@ -174,7 +173,8 @@
 					</div>
 @endsection
 @section('afterfooter')
- <script>
+	<script type="text/javascript" src="{{ asset("/bower_components/admin-lte/myjs/clientapps/listClientapps.js") }}"></script>
+	<script>
  
 	$('.checkall').on('ifChecked', function(event){
 			$('input[type=checkbox]').iCheck('check');

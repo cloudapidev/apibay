@@ -4,13 +4,13 @@ $(function(){
 		 onClose: function( selectedDate ) {
              $( "#expiredDate" ).datepicker( "option", "minDate", selectedDate );
          }
-	})
+	});
 	
 	$('#expiredDate').datepicker({
 		 onClose: function( selectedDate ) {
              $( "#purchasedDate" ).datepicker( "option", "maxDate", selectedDate );
          }
-	})
+	});
 	
 	$('.form-horizontal').delegate('.searchbtn','click',searchNumbers);
 	$('.pageLink').delegate('a','click',refreshPage);
@@ -25,7 +25,7 @@ $(function(){
 					res=dealResult(res);
 					if(res.flag == 'success')
 					{
-						showNumbersL ist(res.data);
+						showNumbersList(res.data);
 					}
 					
 				},
@@ -77,7 +77,34 @@ $(function(){
 		pagelist.empty();
 		pagelist.append($(obj));
 	}
-	function dealResult(res)
-	{
-		return eval("("+res+")");
+	function dealResult(res) {
+		return eval("(" + res + ")");
+	}
+});
+$(function () {
+	url=$("#sbuyUrl").html();
+	$("#example2").DataTable({
+		"paging": true,
+		"select": true,
+		"processing": true,
+		"serverSide": true,
+		"ajax": "numbers/get",
+		"lengthChange": false,
+		"searching": false,
+		"ordering": false,
+		"info": true,
+		"autoWidth": false,
+		"columns": [
+			{"data": "index"},
+			{"data": "number"},
+			{"data": "country"},
+			{"data": "capabilities"},
+			{"data": "purchased_date"},
+			{"data": "expired_date"},
+			{"data": "price"},
+			{"data":"edit","render":function(data,type,full,meta){return '<a href="'+url+"/numbers/edit/"+data+'" class="btn btn-block btn-default" type="button">Edit</a>'}}
+			]
+
+	});
+
 });
